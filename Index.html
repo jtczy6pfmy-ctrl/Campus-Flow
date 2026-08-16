@@ -3,165 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Campus Flow">
-
-<meta name="theme-color" content="#111827">
+<meta name="theme-color" content="#0b0f14">
 
 <title>Campus Flow</title>
 
 <style>
-
 *{
   box-sizing:border-box;
 }
 
 :root{
-  color-scheme:light dark;
-
   --bg:#eef1f5;
   --card:#fff;
-  --border:#dce2e8;
+  --border:#dfe3e8;
   --text:#17202a;
   --muted:#68727d;
-
   --input:#fff;
-  --input-border:#c8ced6;
-
-  --primary:#111827;
-  --primary-text:#fff;
-
-  --secondary:#e7ebef;
-  --secondary-text:#17202a;
-
-  --blue:#2563eb;
-  --green:#16834b;
-  --orange:#c56a00;
-  --red:#b42318;
-  --purple:#6d3fc0;
-
-  --shadow:0 5px 20px rgba(15,23,42,.08);
+  --accent:#17202a;
+  --accent-text:#fff;
+  --secondary:#e5e8ec;
+  --success:#16834b;
+  --danger:#b42318;
+  --shadow:0 4px 18px rgba(15,23,42,.08);
 }
 
-html,
-body{
+html,body{
   margin:0;
   min-height:100%;
   background:var(--bg);
   color:var(--text);
-}
-
-body{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 
 header{
-  background:linear-gradient(
-    180deg,
-    #18202c,
-    #0b1017
-  );
-
+  background:linear-gradient(180deg,#15191e,#080a0d);
   color:#fff;
-
-  padding:
-    calc(17px + env(safe-area-inset-top))
-    18px
-    17px;
-
+  padding:18px 16px;
   text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
+}
 
+.header-title{
   font-size:24px;
-  font-weight:850;
+  font-weight:800;
+}
 
-  position:sticky;
-  top:0;
-  z-index:50;
-
-  box-shadow:
-    0 2px 12px rgba(0,0,0,.18);
+.header-subtitle{
+  margin-top:4px;
+  font-size:13px;
+  opacity:.7;
 }
 
 .app{
-  width:min(1150px,100%);
+  width:min(900px,100%);
   margin:auto;
-
-  padding:
-    15px
-    12px
-    calc(50px + env(safe-area-inset-bottom));
-}
-
-
-/* NAV */
-
-.nav{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-
-  margin-bottom:15px;
-}
-
-.nav button{
-  margin:0;
-  min-height:45px;
-  font-size:13px;
-}
-
-.nav button.active{
-  background:var(--blue);
-  color:#fff;
-}
-
-
-/* DASHBOARD */
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:10px;
-  margin-bottom:15px;
-}
-
-.stat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:13px;
-  box-shadow:var(--shadow);
-}
-
-.stat-label{
-  color:var(--muted);
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.stat-value{
-  margin-top:4px;
-  font-size:24px;
-  font-weight:900;
-}
-
-
-/* SECTIONS */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
+  padding:16px 12px 50px;
 }
 
 .card{
@@ -169,39 +69,62 @@ header{
   border:1px solid var(--border);
   border-radius:16px;
   padding:18px;
-  margin-bottom:15px;
+  margin-bottom:14px;
   box-shadow:var(--shadow);
 }
 
 .card h2{
   margin:0 0 16px;
-  font-size:19px;
-  font-weight:850;
-
-  display:flex;
-  align-items:center;
-  gap:9px;
+  font-size:20px;
+  font-weight:800;
 }
 
 .card h2::before{
   content:"";
-
+  display:inline-block;
   width:4px;
-  height:20px;
-
-  border-radius:4px;
-
-  background:var(--primary);
+  height:21px;
+  border-radius:5px;
+  background:var(--accent);
+  vertical-align:-3px;
+  margin-right:9px;
 }
 
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
 
-/* FORM */
+.stat{
+  padding:14px 8px;
+  border-radius:12px;
+  background:var(--secondary);
+  text-align:center;
+}
+
+.stat-number{
+  font-size:25px;
+  font-weight:850;
+}
+
+.stat-label{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 
 label{
   display:block;
-  margin:11px 0 6px;
-
-  font-size:13px;
+  margin:13px 0 6px;
+  font-size:14px;
   font-weight:750;
 }
 
@@ -209,3088 +132,1197 @@ input,
 select,
 textarea{
   width:100%;
-
+  min-height:49px;
   padding:12px 13px;
-
-  border:1px solid var(--input-border);
+  border:1px solid #c8ced6;
   border-radius:10px;
-
   background:var(--input);
   color:var(--text);
-
-  font-family:inherit;
-  font-size:16px;
-
+  font:inherit;
+  font-size:17px;
   outline:none;
-}
-
-textarea{
-  min-height:95px;
-  resize:vertical;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
-  border-color:var(--blue);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(37,99,235,.12);
+  border-color:#68727d;
+  box-shadow:0 0 0 3px rgba(104,114,125,.13);
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+textarea{
+  min-height:100px;
+  resize:vertical;
 }
-
-.form-grid.three{
-  grid-template-columns:repeat(3,1fr);
-}
-
-
-/* BUTTONS */
 
 button{
   width:100%;
-
+  min-height:50px;
+  margin-top:15px;
   border:0;
   border-radius:10px;
-
-  min-height:46px;
-
-  padding:11px 14px;
-
-  margin-top:9px;
-
-  background:var(--primary);
-  color:var(--primary-text);
-
-  font-family:inherit;
-  font-size:14px;
+  background:var(--accent);
+  color:var(--accent-text);
+  font:inherit;
+  font-size:15px;
   font-weight:800;
-
   cursor:pointer;
+}
 
-  -webkit-tap-highlight-color:transparent;
+button.secondary{
+  background:var(--secondary);
+  color:var(--text);
+}
+
+button.danger{
+  background:var(--danger);
+  color:#fff;
 }
 
 button:active{
   transform:scale(.985);
 }
 
-button.blue{
-  background:var(--blue);
-  color:#fff;
-}
-
-button.green{
-  background:var(--green);
-  color:#fff;
-}
-
-button.orange{
-  background:var(--orange);
-  color:#fff;
-}
-
-button.red{
-  background:var(--red);
-  color:#fff;
-}
-
-button.purple{
-  background:var(--purple);
-  color:#fff;
-}
-
-button.secondary{
-  background:var(--secondary);
-  color:var(--secondary-text);
-}
-
-
-/* TWO COLUMN */
-
-.two{
+.quick-actions{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-
-/* TABLE */
-
-.table-wrap{
-  overflow-x:auto;
-  border:1px solid var(--border);
-  border-radius:11px;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
-}
-
-th,
-td{
-  padding:11px;
-  text-align:left;
-  border-bottom:1px solid var(--border);
-  font-size:13px;
-}
-
-th{
-  background:var(--secondary);
-  font-weight:850;
-}
-
-tr:last-child td{
-  border-bottom:0;
-}
-
-
-/* STUDENT */
-
-.student-name{
-  font-size:24px;
-  font-weight:900;
-}
-
-.student-meta{
-  color:var(--muted);
-  line-height:1.7;
-  margin-top:5px;
-}
-
-.badge{
-  display:inline-block;
-
-  padding:5px 9px;
-
-  margin:8px 4px 0 0;
-
-  border-radius:999px;
-
-  background:var(--secondary);
-
-  font-size:11px;
-  font-weight:800;
-}
-
-
-/* TIMELINE */
-
-.timeline{
-  position:relative;
-  padding-left:22px;
-}
-
-.timeline::before{
-  content:"";
-
-  position:absolute;
-
-  left:6px;
-  top:5px;
-  bottom:5px;
-
-  width:2px;
-
-  background:var(--border);
-}
-
-.event{
-  position:relative;
-
-  padding:11px 13px;
-
-  margin-bottom:9px;
-
-  border-radius:10px;
-
-  background:
-    color-mix(
-      in srgb,
-      var(--secondary) 65%,
-      transparent
-    );
-}
-
-.event::before{
-  content:"";
-
-  position:absolute;
-
-  left:-20px;
-  top:17px;
-
-  width:10px;
-  height:10px;
-
-  border-radius:50%;
-
-  background:var(--blue);
-
-  border:2px solid var(--card);
-}
-
-.event-title{
-  font-weight:850;
-}
-
-.event-detail{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:3px;
-}
-
-.event-time{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:5px;
-}
-
-
-/* SEARCH RESULTS */
-
-.results{
-  display:grid;
-  gap:8px;
-  margin-top:12px;
-}
-
-.result{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  grid-template-columns:repeat(3,1fr);
   gap:10px;
-
-  padding:12px;
-
-  border:1px solid var(--border);
-  border-radius:11px;
 }
 
-.result-name{
-  font-weight:850;
-}
-
-.result-info{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:3px;
-}
-
-.result button{
-  width:auto;
-  min-width:78px;
+.quick-actions button{
   margin:0;
 }
 
-
-/* EMPTY */
-
-.empty{
-  color:var(--muted);
-  text-align:center;
-  padding:20px 10px;
-  font-size:14px;
+.student-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
 
+.student{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:10px;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
 
-/* HIDDEN */
+.student-name{
+  font-weight:800;
+}
+
+.student-info{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.status{
+  padding:7px 9px;
+  border-radius:8px;
+  background:var(--secondary);
+  font-size:12px;
+  font-weight:800;
+}
+
+.status.onsite{
+  color:var(--success);
+}
+
+.status.iss{
+  color:#9a6700;
+}
+
+.status.oss{
+  color:var(--danger);
+}
+
+.status.detention{
+  color:#6b46c1;
+}
+
+.activity{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.activity-item{
+  display:grid;
+  grid-template-columns:70px 1fr;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.activity-time{
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+}
+
+.activity-text{
+  font-size:14px;
+}
 
 .hidden{
   display:none !important;
 }
 
-
-/* MOBILE */
-
-@media(max-width:850px){
-
-  .dashboard-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(5px);
 }
 
-@media(max-width:650px){
+.modal-overlay.show{
+  display:flex;
+}
 
-  .nav{
+.modal{
+  width:min(430px,100%);
+  background:var(--card);
+  color:var(--text);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.modal h3{
+  margin:0 0 8px;
+  font-size:21px;
+}
+
+.modal p{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.modal-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.modal-actions button{
+  margin-top:8px;
+}
+
+@media(max-width:600px){
+
+  .dashboard{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .two,
-  .form-grid,
-  .form-grid.three{
+  .row{
+    grid-template-columns:1fr;
+    gap:2px;
+  }
+
+  .quick-actions{
     grid-template-columns:1fr;
   }
 
-}
-
-@media(max-width:500px){
-
-  .dashboard-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
   .app{
-    padding:10px 9px 40px;
-  }
-
-  .card{
-    padding:15px;
-  }
-
-  header{
-    font-size:22px;
+    padding:12px 10px 40px;
   }
 
 }
-
-
-/* DARK */
 
 @media(prefers-color-scheme:dark){
 
   :root{
-
     --bg:#0b0f14;
     --card:#171d24;
-
-    --border:#2c3540;
-
+    --border:#2b333d;
     --text:#f4f6f8;
     --muted:#a7b0ba;
-
     --input:#0f141a;
-    --input-border:#3b4550;
+    --accent:#f4f6f8;
+    --accent-text:#11161c;
+    --secondary:#242c35;
+    --success:#51d98c;
+    --danger:#ff6b6b;
+  }
 
-    --primary:#f4f6f8;
-    --primary-text:#11161c;
-
-    --secondary:#29323c;
-    --secondary-text:#f4f6f8;
-
+  input,
+  select,
+  textarea{
+    border-color:#3b4550;
   }
 
   header{
     background:#000;
   }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-
 <header>
-  Campus Flow
+  <div class="header-title">Campus Flow</div>
+  <div class="header-subtitle">
+    Student Attendance • Security • Movement
+  </div>
 </header>
-
 
 <main class="app">
 
+  <!-- DASHBOARD -->
 
-<!-- NAVIGATION -->
+  <section class="card">
 
-<nav class="nav">
+    <h2>Dashboard</h2>
 
-  <button
-    class="active"
-    data-page="dashboard"
-  >
-    DASHBOARD
-  </button>
+    <div class="dashboard">
 
-  <button
-    data-page="students"
-  >
-    STUDENTS
-  </button>
+      <div class="stat">
+        <div class="stat-number" id="totalStudents">0</div>
+        <div class="stat-label">Students</div>
+      </div>
 
-  <button
-    data-page="attendance"
-  >
-    ATTENDANCE
-  </button>
+      <div class="stat">
+        <div class="stat-number" id="onCampus">0</div>
+        <div class="stat-label">On Campus</div>
+      </div>
 
-  <button
-    data-page="movement"
-  >
-    MOVEMENT
-  </button>
+      <div class="stat">
+        <div class="stat-number" id="issCount">0</div>
+        <div class="stat-label">ISS</div>
+      </div>
 
-</nav>
+      <div class="stat">
+        <div class="stat-number" id="ossCount">0</div>
+        <div class="stat-label">OSS</div>
+      </div>
 
+    </div>
+
+  </section>
 
 
-<!-- =========================
-     DASHBOARD
-========================= -->
+  <!-- QUICK ACTIONS -->
 
-<section
-  id="dashboard"
-  class="page active"
+  <section class="card">
+
+    <h2>Quick Actions</h2>
+
+    <div class="quick-actions">
+
+      <button onclick="showStudentScreen()">
+        STUDENT
+      </button>
+
+      <button onclick="showMovementScreen()">
+        MOVEMENT
+      </button>
+
+      <button onclick="showDisciplineScreen()">
+        DISCIPLINE
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- STUDENT SCREEN -->
+
+  <section class="card" id="studentScreen">
+
+    <h2>Student</h2>
+
+    <div class="row">
+
+      <div>
+        <label for="studentId">
+          Student ID
+        </label>
+
+        <input
+          id="studentId"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          autocomplete="off"
+          placeholder="Scan or enter ID"
+        >
+      </div>
+
+      <div>
+        <label for="studentName">
+          Student Name
+        </label>
+
+        <input
+          id="studentName"
+          placeholder="Last, First"
+          autocomplete="off"
+        >
+      </div>
+
+    </div>
+
+    <label for="studentGrade">
+      Grade
+    </label>
+
+    <select id="studentGrade">
+
+      <option>9</option>
+      <option>10</option>
+      <option>11</option>
+      <option>12</option>
+
+    </select>
+
+    <button id="addStudent">
+      ADD STUDENT
+    </button>
+
+  </section>
+
+
+  <!-- MOVEMENT -->
+
+  <section class="card hidden" id="movementScreen">
+
+    <h2>Student Movement</h2>
+
+    <label for="movementStudent">
+      Student ID
+    </label>
+
+    <input
+      id="movementStudent"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      placeholder="Scan or enter ID"
+    >
+
+    <label for="movementType">
+      Movement
+    </label>
+
+    <select id="movementType">
+
+      <option value="ENTRY">
+        Building Entry
+      </option>
+
+      <option value="EXIT">
+        Building Exit
+      </option>
+
+      <option value="CLASSROOM">
+        Classroom
+      </option>
+
+      <option value="RESTROOM">
+        Restroom
+      </option>
+
+      <option value="LUNCH">
+        Lunch
+      </option>
+
+      <option value="OFFICE">
+        Main Office
+      </option>
+
+    </select>
+
+    <button id="recordMovement">
+      RECORD MOVEMENT
+    </button>
+
+  </section>
+
+
+  <!-- DISCIPLINE -->
+
+  <section class="card hidden" id="disciplineScreen">
+
+    <h2>Discipline / Attendance</h2>
+
+    <label for="disciplineStudent">
+      Student ID
+    </label>
+
+    <input
+      id="disciplineStudent"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      placeholder="Scan or enter ID"
+    >
+
+    <label for="disciplineType">
+      Status
+    </label>
+
+    <select id="disciplineType">
+
+      <option value="ISS">
+        ISS — In-School Suspension
+      </option>
+
+      <option value="OSS">
+        OSS — Out-of-School Suspension
+      </option>
+
+      <option value="DETENTION">
+        Detention
+      </option>
+
+    </select>
+
+    <label for="disciplineNote">
+      Note
+    </label>
+
+    <textarea
+      id="disciplineNote"
+      placeholder="Optional note..."
+    ></textarea>
+
+    <button id="recordDiscipline">
+      RECORD STATUS
+    </button>
+
+  </section>
+
+
+  <!-- STUDENT LIST -->
+
+  <section class="card">
+
+    <h2>Students</h2>
+
+    <div
+      class="student-list"
+      id="studentList"
+    ></div>
+
+    <div
+      id="noStudents"
+      style="color:var(--muted);text-align:center;padding:10px;"
+    >
+      No students added yet.
+    </div>
+
+  </section>
+
+
+  <!-- ACTIVITY -->
+
+  <section class="card">
+
+    <h2>Recent Activity</h2>
+
+    <div
+      class="activity"
+      id="activity"
+    >
+      <div style="color:var(--muted);">
+        No activity recorded.
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- RESET -->
+
+  <section class="card">
+
+    <button
+      class="danger"
+      id="resetDay"
+    >
+      RESET DEMO DATA
+    </button>
+
+  </section>
+
+</main>
+
+
+<!-- CONFIRMATION -->
+
+<div
+  class="modal-overlay"
+  id="confirmModal"
 >
 
-<div class="dashboard-grid">
+  <div class="modal">
 
-  <div class="stat">
-    <div class="stat-label">
-      Students
-    </div>
-    <div
-      class="stat-value"
-      id="statStudents"
-    >0</div>
-  </div>
+    <h3>Reset Campus Flow?</h3>
 
-  <div class="stat">
-    <div class="stat-label">
-      Present
-    </div>
-    <div
-      class="stat-value"
-      id="statPresent"
-    >0</div>
-  </div>
+    <p>
+      This will remove the current demo students,
+      movements and discipline records.
+    </p>
 
-  <div class="stat">
-    <div class="stat-label">
-      Absent
-    </div>
-    <div
-      class="stat-value"
-      id="statAbsent"
-    >0</div>
-  </div>
-
-  <div class="stat">
-    <div class="stat-label">
-      Tardy
-    </div>
-    <div
-      class="stat-value"
-      id="statTardy"
-    >0</div>
-  </div>
-
-  <div class="stat">
-    <div class="stat-label">
-      Out
-    </div>
-    <div
-      class="stat-value"
-      id="statOut"
-    >0</div>
-  </div>
-
-  <div class="stat">
-    <div class="stat-label">
-      Discipline
-    </div>
-    <div
-      class="stat-value"
-      id="statDiscipline"
-    >0</div>
-  </div>
-
-</div>
-
-
-
-<div class="two">
-
-
-<!-- QUICK LOOKUP -->
-
-<section class="card">
-
-  <h2>
-    Student Lookup
-  </h2>
-
-  <label for="globalSearch">
-    Student ID / Name / Grade / Room
-  </label>
-
-  <input
-    id="globalSearch"
-    placeholder="Scan ID or search..."
-    autocomplete="off"
-  >
-
-  <div
-    id="searchResults"
-    class="results"
-  ></div>
-
-</section>
-
-
-
-<!-- RECENT ACTIVITY -->
-
-<section class="card">
-
-  <h2>
-    Recent Activity
-  </h2>
-
-  <div
-    id="recentActivity"
-    class="timeline"
-  ></div>
-
-</section>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================
-     STUDENTS
-========================= -->
-
-<section
-  id="students"
-  class="page"
->
-
-<section class="card">
-
-  <h2>
-    Student Management
-  </h2>
-
-
-  <div class="form-grid">
-
-    <div>
-
-      <label>
-        Search Students
-      </label>
-
-      <input
-        id="studentSearch"
-        placeholder="Name, ID, grade or room"
-      >
-
-    </div>
-
-
-    <div>
-
-      <label>
-        Action
-      </label>
+    <div class="modal-actions">
 
       <button
-        id="newStudentButton"
-        class="blue"
+        class="secondary"
+        id="cancelReset"
       >
-        ADD STUDENT
+        CANCEL
+      </button>
+
+      <button
+        class="danger"
+        id="confirmReset"
+      >
+        RESET
       </button>
 
     </div>
 
   </div>
 
-
-  <div
-    id="studentTable"
-    style="margin-top:15px"
-  ></div>
-
-</section>
-
-
-<section
-  id="studentFormCard"
-  class="card hidden"
->
-
-  <h2>
-    Student Record
-  </h2>
-
-
-  <div class="form-grid three">
-
-    <div>
-
-      <label>
-        Student ID
-      </label>
-
-      <input
-        id="newStudentId"
-        inputmode="numeric"
-      >
-
-    </div>
-
-
-    <div>
-
-      <label>
-        Student Name
-      </label>
-
-      <input
-        id="newStudentName"
-      >
-
-    </div>
-
-
-    <div>
-
-      <label>
-        Grade
-      </label>
-
-      <input
-        id="newStudentGrade"
-      >
-
-    </div>
-
-  </div>
-
-
-  <label>
-    Homeroom
-  </label>
-
-  <input
-    id="newStudentRoom"
-  >
-
-
-  <div class="two">
-
-    <button
-      id="saveStudent"
-      class="green"
-    >
-      SAVE STUDENT
-    </button>
-
-
-    <button
-      id="cancelStudent"
-      class="secondary"
-    >
-      CANCEL
-    </button>
-
-  </div>
-
-</section>
-
-</section>
-
-
-
-<!-- =========================
-     ATTENDANCE
-========================= -->
-
-<section
-  id="attendance"
-  class="page"
->
-
-<section class="card">
-
-  <h2>
-    Attendance
-  </h2>
-
-
-  <label>
-    Find Student
-  </label>
-
-  <input
-    id="attendanceSearch"
-    placeholder="Student ID or name..."
-  >
-
-
-  <div
-    id="attendanceResults"
-    class="results"
-  ></div>
-
-</section>
-
-
-<section class="card">
-
-  <h2>
-    Today's Attendance Records
-  </h2>
-
-
-  <div
-    id="attendanceTable"
-  ></div>
-
-</section>
-
-</section>
-
-
-
-<!-- =========================
-     MOVEMENT
-========================= -->
-
-<section
-  id="movement"
-  class="page"
->
-
-<section class="card">
-
-  <h2>
-    Student Movement
-  </h2>
-
-
-  <label>
-    Find Student
-  </label>
-
-  <input
-    id="movementSearch"
-    placeholder="Student ID or name..."
-  >
-
-
-  <div
-    id="movementResults"
-    class="results"
-  ></div>
-
-</section>
-
-
-<section class="card">
-
-  <h2>
-    Active Passes
-  </h2>
-
-
-  <div
-    id="activePasses"
-  ></div>
-
-</section>
-
-
-<section class="card">
-
-  <h2>
-    Movement History
-  </h2>
-
-
-  <div
-    id="movementTable"
-  ></div>
-
-</section>
-
-</section>
-
-
-
-<!-- =========================
-     STUDENT DETAIL
-========================= -->
-
-<section
-  id="studentDetail"
-  class="page"
->
-
-<section class="card">
-
-  <button
-    id="backToStudents"
-    class="secondary"
-  >
-    ← BACK
-  </button>
-
-
-  <div
-    id="detailStudent"
-    style="margin-top:15px"
-  ></div>
-
-</section>
-
-
-<div class="two">
-
-
-<section class="card">
-
-  <h2>
-    Attendance
-  </h2>
-
-
-  <div class="action-grid">
-
-    <button
-      class="green"
-      data-attendance="Present"
-    >
-      PRESENT
-    </button>
-
-    <button
-      class="orange"
-      data-attendance="Tardy"
-    >
-      TARDY
-    </button>
-
-    <button
-      class="red"
-      data-attendance="Absent"
-    >
-      ABSENT
-    </button>
-
-    <button
-      class="secondary"
-      data-attendance="Early Dismissal"
-    >
-      EARLY DISMISSAL
-    </button>
-
-  </div>
-
-</section>
-
-
-
-<section class="card">
-
-  <h2>
-    Discipline
-  </h2>
-
-
-  <div class="action-grid">
-
-    <button
-      class="orange"
-      data-discipline="Detention"
-    >
-      DETENTION
-    </button>
-
-    <button
-      class="red"
-      data-discipline="ISS"
-    >
-      ISS
-    </button>
-
-    <button
-      class="red"
-      data-discipline="OSS"
-    >
-      OSS
-    </button>
-
-    <button
-      class="secondary"
-      data-discipline="Discipline Note"
-    >
-      NOTE
-    </button>
-
-  </div>
-
-</section>
-
 </div>
-
-
-<section class="card">
-
-  <h2>
-    Student Timeline
-  </h2>
-
-
-  <div
-    id="detailTimeline"
-    class="timeline"
-  ></div>
-
-</section>
-
-
-<section class="card">
-
-  <h2>
-    Staff Note
-  </h2>
-
-
-  <textarea
-    id="detailNote"
-    placeholder="Enter note..."
-  ></textarea>
-
-
-  <button
-    id="saveDetailNote"
-  >
-    SAVE NOTE
-  </button>
-
-</section>
-
-</section>
-
-
-
-</main>
-
 
 
 <script>
 
+(() => {
+
 "use strict";
 
 
-/*
-==================================================
- CAMPUS FLOW
- BUILD 4
-==================================================
+/* DATA */
 
- Local data architecture.
-
- Future adapter:
-
- Browser Storage
-       ↓
- Data Layer
-       ↓
- SQL Server / API
-
-==================================================
-*/
+let students = [];
+let activity = [];
 
 
-/* ================================================
-   DEFAULT DATA
-================================================ */
+/* DOM */
 
-const defaultStudents = [
+const studentId =
+  document.getElementById("studentId");
 
-  {
-    id:"100001",
-    name:"Alex Johnson",
-    grade:"8",
-    room:"204",
-    active:true
-  },
+const studentName =
+  document.getElementById("studentName");
 
-  {
-    id:"100002",
-    name:"Jordan Smith",
-    grade:"10",
-    room:"112",
-    active:true
-  },
+const studentGrade =
+  document.getElementById("studentGrade");
 
-  {
-    id:"100003",
-    name:"Taylor Brown",
-    grade:"6",
-    room:"301",
-    active:true
-  },
+const studentList =
+  document.getElementById("studentList");
 
-  {
-    id:"100004",
-    name:"Morgan Davis",
-    grade:"9",
-    room:"118",
-    active:true
-  },
+const noStudents =
+  document.getElementById("noStudents");
 
-  {
-    id:"100005",
-    name:"Casey Wilson",
-    grade:"7",
-    room:"207",
-    active:true
-  }
-
-];
+const activityList =
+  document.getElementById("activity");
 
 
-let students =
-  load(
-    "campusFlowStudents",
-    defaultStudents
-  );
+/* SCREEN NAVIGATION */
+
+function showStudentScreen(){
+
+  document.getElementById(
+    "studentScreen"
+  ).classList.remove("hidden");
+
+  document.getElementById(
+    "movementScreen"
+  ).classList.add("hidden");
+
+  document.getElementById(
+    "disciplineScreen"
+  ).classList.add("hidden");
+
+}
 
 
-let records =
-  load(
-    "campusFlowRecords",
-    []
-  );
+function showMovementScreen(){
+
+  document.getElementById(
+    "studentScreen"
+  ).classList.add("hidden");
+
+  document.getElementById(
+    "movementScreen"
+  ).classList.remove("hidden");
+
+  document.getElementById(
+    "disciplineScreen"
+  ).classList.add("hidden");
+
+}
 
 
-let audit =
-  load(
-    "campusFlowAudit",
-    []
-  );
+function showDisciplineScreen(){
+
+  document.getElementById(
+    "studentScreen"
+  ).classList.add("hidden");
+
+  document.getElementById(
+    "movementScreen"
+  ).classList.add("hidden");
+
+  document.getElementById(
+    "disciplineScreen"
+  ).classList.remove("hidden");
+
+}
 
 
-let selectedStudent = null;
+/* ADD STUDENT */
 
+document.getElementById(
+  "addStudent"
+).addEventListener(
+  "click",
+  () => {
 
+    const id =
+      studentId.value.trim();
 
-/* ================================================
-   STORAGE
-================================================ */
+    const name =
+      studentName.value.trim();
 
-function load(
-  key,
-  fallback
-){
+    const grade =
+      studentGrade.value;
 
-  try{
+    if(!id){
 
-    const data =
-      localStorage.getItem(
-        key
+      alert("Enter or scan a student ID.");
+
+      studentId.focus();
+
+      return;
+
+    }
+
+    if(!name){
+
+      alert("Enter the student's name.");
+
+      studentName.focus();
+
+      return;
+
+    }
+
+    if(
+      students.some(
+        student => student.id === id
+      )
+    ){
+
+      alert(
+        "That student ID is already in the system."
       );
 
-    return data
-      ?
-      JSON.parse(data)
-      :
-      fallback;
+      studentId.focus();
 
-  }catch{
+      return;
 
-    return fallback;
+    }
 
-  }
+    students.push({
 
-}
+      id,
+      name,
+      grade,
+      status:"On Campus"
 
+    });
 
-
-function save(){
-
-  localStorage.setItem(
-    "campusFlowStudents",
-    JSON.stringify(
-      students
-    )
-  );
-
-
-  localStorage.setItem(
-    "campusFlowRecords",
-    JSON.stringify(
-      records
-    )
-  );
-
-
-  localStorage.setItem(
-    "campusFlowAudit",
-    JSON.stringify(
-      audit
-    )
-  );
-
-}
-
-
-
-/* ================================================
-   UTILITIES
-================================================ */
-
-function escapeHtml(
-  value
-){
-
-  return String(value)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
+    addActivity(
+      "Student added: " +
+      name +
+      " (" +
+      id +
+      ")"
     );
 
-}
+    studentId.value = "";
+    studentName.value = "";
+
+    render();
+
+    studentId.focus();
+
+  }
+);
 
 
+/* MOVEMENT */
 
-function today(){
+document.getElementById(
+  "recordMovement"
+).addEventListener(
+  "click",
+  () => {
 
-  return new Date()
-    .toDateString();
+    const id =
+      document.getElementById(
+        "movementStudent"
+      ).value.trim();
 
-}
+    const movement =
+      document.getElementById(
+        "movementType"
+      ).value;
 
+    const student =
+      findStudent(id);
 
+    if(!student){
 
-function isToday(
-  timestamp
-){
+      alert(
+        "Student ID was not found."
+      );
 
-  return new Date(
-    timestamp
-  ).toDateString()
-    ===
-    today();
+      return;
 
-}
-
-
-
-function time(
-  timestamp
-){
-
-  return new Date(
-    timestamp
-  ).toLocaleTimeString(
-    [],
-    {
-      hour:"numeric",
-      minute:"2-digit"
     }
+
+    const movementNames = {
+
+      ENTRY:"entered the building",
+
+      EXIT:"left the building",
+
+      CLASSROOM:"entered a classroom",
+
+      RESTROOM:"went to the restroom",
+
+      LUNCH:"went to lunch",
+
+      OFFICE:"went to the main office"
+
+    };
+
+    student.status =
+      movement === "EXIT"
+        ? "Off Campus"
+        : "On Campus";
+
+    addActivity(
+      student.name +
+      " — " +
+      movementNames[movement]
+    );
+
+    document.getElementById(
+      "movementStudent"
+    ).value = "";
+
+    render();
+
+  }
+);
+
+
+/* DISCIPLINE */
+
+document.getElementById(
+  "recordDiscipline"
+).addEventListener(
+  "click",
+  () => {
+
+    const id =
+      document.getElementById(
+        "disciplineStudent"
+      ).value.trim();
+
+    const type =
+      document.getElementById(
+        "disciplineType"
+      ).value;
+
+    const note =
+      document.getElementById(
+        "disciplineNote"
+      ).value.trim();
+
+    const student =
+      findStudent(id);
+
+    if(!student){
+
+      alert(
+        "Student ID was not found."
+      );
+
+      return;
+
+    }
+
+    if(type === "ISS"){
+
+      student.status = "ISS";
+
+    }else if(type === "OSS"){
+
+      student.status = "OSS";
+
+    }else{
+
+      student.status = "Detention";
+
+    }
+
+    addActivity(
+      student.name +
+      " — " +
+      student.status +
+      (note ? " — " + note : "")
+    );
+
+    document.getElementById(
+      "disciplineStudent"
+    ).value = "";
+
+    document.getElementById(
+      "disciplineNote"
+    ).value = "";
+
+    render();
+
+  }
+);
+
+
+/* FIND STUDENT */
+
+function findStudent(id){
+
+  return students.find(
+    student => student.id === id
   );
 
 }
 
 
+/* ACTIVITY */
 
-/* ================================================
-   AUDIT
-================================================ */
+function addActivity(text){
 
-function auditLog(
-  action,
-  student,
-  detail=""
-){
+  const now =
+    new Date();
 
-  audit.unshift({
+  activity.unshift({
 
-    id:Date.now(),
+    time:
+      now.toLocaleTimeString(
+        [],
+        {
+          hour:"numeric",
+          minute:"2-digit"
+        }
+      ),
 
-    action,
-
-    studentId:
-      student
-      ?
-      student.id
-      :
-      "",
-
-    studentName:
-      student
-      ?
-      student.name
-      :
-      "",
-
-    detail,
-
-    timestamp:
-      new Date()
-        .toISOString()
+    text
 
   });
 
-}
+  if(activity.length > 50){
 
-
-
-/* ================================================
-   RECORD
-================================================ */
-
-function addRecord(
-  student,
-  category,
-  action,
-  detail=""
-){
-
-  if(!student){
-
-    return;
+    activity.length = 50;
 
   }
 
-
-  const record = {
-
-    id:
-      Date.now(),
-
-    studentId:
-      student.id,
-
-    studentName:
-      student.name,
-
-    category,
-
-    action,
-
-    detail,
-
-    timestamp:
-      new Date()
-        .toISOString()
-
-  };
-
-
-  records.unshift(
-    record
-  );
-
-
-  auditLog(
-    action,
-    student,
-    detail
-  );
-
-
-  save();
-
-
-  refreshAll();
-
 }
 
 
+/* RENDER */
 
-/* ================================================
-   NAVIGATION
-================================================ */
+function render(){
 
-document
-  .querySelectorAll(
-    "[data-page]"
-  )
-  .forEach(
-    button => {
+  studentList.innerHTML = "";
 
-      button.addEventListener(
-        "click",
-        () => {
+  noStudents.style.display =
+    students.length
+      ? "none"
+      : "block";
 
-          showPage(
-            button.dataset.page
-          );
 
-        }
+  students.forEach(student => {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "student";
+
+
+    const info =
+      document.createElement("div");
+
+    const name =
+      document.createElement("div");
+
+    name.className =
+      "student-name";
+
+    name.textContent =
+      student.name;
+
+    const details =
+      document.createElement("div");
+
+    details.className =
+      "student-info";
+
+    details.textContent =
+      "ID: " +
+      student.id +
+      " • Grade " +
+      student.grade;
+
+
+    info.appendChild(name);
+    info.appendChild(details);
+
+
+    const status =
+      document.createElement("div");
+
+    status.className =
+      "status";
+
+
+    const statusLower =
+      student.status.toLowerCase();
+
+
+    if(statusLower === "on campus"){
+
+      status.classList.add(
+        "onsite"
       );
 
     }
-  );
+
+    if(statusLower === "iss"){
+
+      status.classList.add(
+        "iss"
+      );
+
+    }
+
+    if(statusLower === "oss"){
+
+      status.classList.add(
+        "oss"
+      );
+
+    }
+
+    if(statusLower === "detention"){
+
+      status.classList.add(
+        "detention"
+      );
+
+    }
 
 
-
-function showPage(
-  page
-){
-
-  document
-    .querySelectorAll(
-      ".page"
-    )
-    .forEach(
-      section =>
-        section.classList.remove(
-          "active"
-        )
-    );
+    status.textContent =
+      student.status;
 
 
-  const target =
-    document.getElementById(
-      page
-    );
+    item.appendChild(info);
+    item.appendChild(status);
+
+    studentList.appendChild(item);
+
+  });
 
 
-  if(target){
-
-    target.classList.add(
-      "active"
-    );
-
-  }
+  activityList.innerHTML = "";
 
 
-  document
-    .querySelectorAll(
-      "[data-page]"
-    )
-    .forEach(
-      button =>
-        button.classList.toggle(
-          "active",
-          button.dataset.page
-            ===
-            page
-        )
-    );
+  if(!activity.length){
+
+    activityList.innerHTML =
+      '<div style="color:var(--muted);">No activity recorded.</div>';
+
+  }else{
+
+    activity.forEach(entry => {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "activity-item";
 
 
-  refreshAll();
+      const time =
+        document.createElement("div");
 
-}
+      time.className =
+        "activity-time";
 
-
-
-/* ================================================
-   FIND STUDENTS
-================================================ */
-
-function findStudents(
-  query
-){
-
-  query =
-    query
-      .trim()
-      .toLowerCase();
+      time.textContent =
+        entry.time;
 
 
-  if(!query){
+      const text =
+        document.createElement("div");
 
-    return [];
+      text.className =
+        "activity-text";
 
-  }
-
-
-  return students.filter(
-    student =>
-
-      student.id
-        .toLowerCase()
-        .includes(query)
-
-      ||
-
-      student.name
-        .toLowerCase()
-        .includes(query)
-
-      ||
-
-      student.grade
-        .toLowerCase()
-        .includes(query)
-
-      ||
-
-      student.room
-        .toLowerCase()
-        .includes(query)
-
-  );
-
-}
+      text.textContent =
+        entry.text;
 
 
+      item.appendChild(time);
+      item.appendChild(text);
 
-/* ================================================
-   RENDER RESULTS
-================================================ */
+      activityList.appendChild(item);
 
-function renderResults(
-container,
-results
-){
-
-  if(!results.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-        No students found.
-      </div>
-
-    `;
-
-    return;
+    });
 
   }
 
 
-  container.innerHTML =
-    results
-      .map(
-        student => `
-
-          <div class="result">
-
-            <div>
-
-              <div class="result-name">
-
-                ${escapeHtml(
-                  student.name
-                )}
-
-              </div>
-
-              <div class="result-info">
-
-                ID:
-                ${escapeHtml(
-                  student.id
-                )}
-
-                · Grade
-                ${escapeHtml(
-                  student.grade
-                )}
-
-                · Room
-                ${escapeHtml(
-                  student.room
-                )}
-
-              </div>
-
-            </div>
+  document.getElementById(
+    "totalStudents"
+  ).textContent =
+    students.length;
 
 
-            <button
-              class="blue"
-              data-select="${escapeHtml(
-                student.id
-              )}"
-            >
-              SELECT
-            </button>
-
-          </div>
-
-        `
-      )
-      .join("");
-
-
-  container
-    .querySelectorAll(
-      "[data-select]"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            selectStudent(
-              button.dataset.select
-            );
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-
-/* ================================================
-   SELECT STUDENT
-================================================ */
-
-function selectStudent(
-id
-){
-
-  selectedStudent =
-    students.find(
+  document.getElementById(
+    "onCampus"
+  ).textContent =
+    students.filter(
       student =>
-        student.id === id
-    );
+        student.status === "On Campus"
+    ).length;
 
 
-  if(!selectedStudent){
-
-    return;
-
-  }
-
-
-  renderDetail();
-
-
-  showPage(
-    "studentDetail"
-  );
-
-}
-
-
-
-/* ================================================
-   STUDENT DETAIL
-================================================ */
-
-function renderDetail(){
-
-  if(!selectedStudent){
-
-    return;
-
-  }
-
-
-  document
-    .getElementById(
-      "detailStudent"
-    )
-    .innerHTML = `
-
-      <div class="student-name">
-
-        ${escapeHtml(
-          selectedStudent.name
-        )}
-
-      </div>
-
-
-      <div class="student-meta">
-
-        Student ID:
-        <b>
-          ${escapeHtml(
-            selectedStudent.id
-          )}
-        </b>
-
-        <br>
-
-        Grade:
-        <b>
-          ${escapeHtml(
-            selectedStudent.grade
-          )}
-        </b>
-
-        <br>
-
-        Homeroom:
-        <b>
-          ${escapeHtml(
-            selectedStudent.room
-          )}
-        </b>
-
-      </div>
-
-
-      <span class="badge">
-        ${selectedStudent.active
-          ?
-          "ACTIVE"
-          :
-          "INACTIVE"
-        }
-      </span>
-
-    `;
-
-
-  renderDetailTimeline();
-
-}
-
-
-
-/* ================================================
-   DETAIL TIMELINE
-================================================ */
-
-function renderDetailTimeline(){
-
-  const container =
-    document.getElementById(
-      "detailTimeline"
-    );
-
-
-  if(!selectedStudent){
-
-    return;
-
-  }
-
-
-  const list =
-    records.filter(
-      record =>
-        record.studentId
-          ===
-        selectedStudent.id
-    );
-
-
-  if(!list.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-        No activity recorded.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    list
-      .map(
-        record => `
-
-          <div class="event">
-
-            <div class="event-title">
-
-              ${escapeHtml(
-                record.action
-              )}
-
-            </div>
-
-
-            ${
-              record.detail
-              ?
-              `
-              <div class="event-detail">
-
-                ${escapeHtml(
-                  record.detail
-                )}
-
-              </div>
-              `
-              :
-              ""
-            }
-
-
-            <div class="event-time">
-
-              ${time(
-                record.timestamp
-              )}
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join("");
-
-}
-
-
-
-/* ================================================
-   GLOBAL SEARCH
-================================================ */
-
-const globalSearch =
   document.getElementById(
-    "globalSearch"
-  );
+    "issCount"
+  ).textContent =
+    students.filter(
+      student =>
+        student.status === "ISS"
+    ).length;
 
 
-globalSearch.addEventListener(
-  "input",
+  document.getElementById(
+    "ossCount"
+  ).textContent =
+    students.filter(
+      student =>
+        student.status === "OSS"
+    ).length;
+
+}
+
+
+/* RESET */
+
+document.getElementById(
+  "resetDay"
+).addEventListener(
+  "click",
   () => {
 
-    renderResults(
+    document.getElementById(
+      "confirmModal"
+    ).classList.add("show");
+
+  }
+);
+
+
+document.getElementById(
+  "cancelReset"
+).addEventListener(
+  "click",
+  () => {
+
+    document.getElementById(
+      "confirmModal"
+    ).classList.remove("show");
+
+  }
+);
+
+
+document.getElementById(
+  "confirmReset"
+).addEventListener(
+  "click",
+  () => {
+
+    students = [];
+    activity = [];
+
+    document.getElementById(
+      "confirmModal"
+    ).classList.remove("show");
+
+    render();
+
+  }
+);
+
+
+/* ENTER KEY */
+
+studentId.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      studentName.focus();
+
+    }
+
+  }
+);
+
+
+studentName.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
 
       document.getElementById(
-        "searchResults"
-      ),
+        "addStudent"
+      ).click();
 
-      findStudents(
-        globalSearch.value
-      )
-
-    );
+    }
 
   }
 );
 
 
+/* START */
 
-/* ================================================
-   STUDENT SEARCH
-================================================ */
+render();
 
-const studentSearch =
-  document.getElementById(
-    "studentSearch"
-  );
-
-
-studentSearch.addEventListener(
-  "input",
-  () => {
-
-    renderStudentTable();
-
-  }
-);
-
-
-
-/* ================================================
-   STUDENT TABLE
-================================================ */
-
-function renderStudentTable(){
-
-  const query =
-    studentSearch.value;
-
-
-  const list =
-    query
-    ?
-    findStudents(
-      query
-    )
-    :
-    students;
-
-
-  const container =
-    document.getElementById(
-      "studentTable"
-    );
-
-
-  if(!list.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-        No students found.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              ID
-            </th>
-
-            <th>
-              Name
-            </th>
-
-            <th>
-              Grade
-            </th>
-
-            <th>
-              Room
-            </th>
-
-            <th>
-              Status
-            </th>
-
-            <th>
-              Action
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${list
-            .map(
-              student => `
-
-                <tr>
-
-                  <td>
-                    ${escapeHtml(
-                      student.id
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      student.name
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      student.grade
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      student.room
-                    )}
-                  </td>
-
-                  <td>
-                    ${student.active
-                      ?
-                      "Active"
-                      :
-                      "Inactive"
-                    }
-                  </td>
-
-                  <td>
-
-                    <button
-                      class="blue"
-                      style="width:auto;margin:0"
-                      data-open-student="${escapeHtml(
-                        student.id
-                      )}"
-                    >
-                      OPEN
-                    </button>
-
-                  </td>
-
-                </tr>
-
-              `
-            )
-            .join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-
-  container
-    .querySelectorAll(
-      "[data-open-student]"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            selectStudent(
-              button.dataset.openStudent
-            );
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-
-/* ================================================
-   ADD STUDENT
-================================================ */
-
-document
-  .getElementById(
-    "newStudentButton"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "studentFormCard"
-        )
-        .classList.remove(
-          "hidden"
-        );
-
-
-      document
-        .getElementById(
-          "newStudentId"
-        )
-        .focus();
-
-    }
-  );
-
-
-
-document
-  .getElementById(
-    "cancelStudent"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "studentFormCard"
-        )
-        .classList.add(
-          "hidden"
-        );
-
-    }
-  );
-
-
-
-document
-  .getElementById(
-    "saveStudent"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      const id =
-        document
-          .getElementById(
-            "newStudentId"
-          )
-          .value
-          .trim();
-
-
-      const name =
-        document
-          .getElementById(
-            "newStudentName"
-          )
-          .value
-          .trim();
-
-
-      const grade =
-        document
-          .getElementById(
-            "newStudentGrade"
-          )
-          .value
-          .trim();
-
-
-      const room =
-        document
-          .getElementById(
-            "newStudentRoom"
-          )
-          .value
-          .trim();
-
-
-      if(
-        !id ||
-        !name
-      ){
-
-        alert(
-          "Student ID and name are required."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        students.some(
-          student =>
-            student.id === id
-        )
-      ){
-
-        alert(
-          "That Student ID already exists."
-        );
-
-        return;
-
-      }
-
-
-      const student = {
-
-        id,
-
-        name,
-
-        grade,
-
-        room,
-
-        active:true
-
-      };
-
-
-      students.push(
-        student
-      );
-
-
-      auditLog(
-        "Student Created",
-        student
-      );
-
-
-      save();
-
-
-      document
-        .getElementById(
-          "newStudentId"
-        )
-        .value = "";
-
-      document
-        .getElementById(
-          "newStudentName"
-        )
-        .value = "";
-
-      document
-        .getElementById(
-          "newStudentGrade"
-        )
-        .value = "";
-
-      document
-        .getElementById(
-          "newStudentRoom"
-        )
-        .value = "";
-
-
-      document
-        .getElementById(
-          "studentFormCard"
-        )
-        .classList.add(
-          "hidden"
-        );
-
-
-      renderStudentTable();
-
-      refreshAll();
-
-    }
-  );
-
-
-
-/* ================================================
-   ATTENDANCE SEARCH
-================================================ */
-
-const attendanceSearch =
-  document.getElementById(
-    "attendanceSearch"
-  );
-
-
-attendanceSearch.addEventListener(
-  "input",
-  () => {
-
-    renderResults(
-
-      document.getElementById(
-        "attendanceResults"
-      ),
-
-      findStudents(
-        attendanceSearch.value
-      )
-
-    );
-
-  }
-);
-
-
-
-/* ================================================
-   MOVEMENT SEARCH
-================================================ */
-
-const movementSearch =
-  document.getElementById(
-    "movementSearch"
-  );
-
-
-movementSearch.addEventListener(
-  "input",
-  () => {
-
-    renderResults(
-
-      document.getElementById(
-        "movementResults"
-      ),
-
-      findStudents(
-        movementSearch.value
-      )
-
-    );
-
-  }
-);
-
-
-
-/* ================================================
-   ATTENDANCE ACTION
-================================================ */
-
-document
-  .querySelectorAll(
-    "[data-attendance]"
-  )
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          if(!selectedStudent){
-
-            return;
-
-          }
-
-
-          addRecord(
-
-            selectedStudent,
-
-            "Attendance",
-
-            button.dataset.attendance
-
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-
-/* ================================================
-   DISCIPLINE ACTION
-================================================ */
-
-document
-  .querySelectorAll(
-    "[data-discipline]"
-  )
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          if(!selectedStudent){
-
-            return;
-
-          }
-
-
-          const reason =
-            prompt(
-              "Reason / details:"
-            );
-
-
-          addRecord(
-
-            selectedStudent,
-
-            "Discipline",
-
-            button.dataset.discipline,
-
-            reason || ""
-
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-
-/* ================================================
-   NOTE
-================================================ */
-
-document
-  .getElementById(
-    "saveDetailNote"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      if(!selectedStudent){
-
-        return;
-
-      }
-
-
-      const note =
-        document
-          .getElementById(
-            "detailNote"
-          )
-          .value
-          .trim();
-
-
-      if(!note){
-
-        alert(
-          "Enter a note first."
-        );
-
-        return;
-
-      }
-
-
-      addRecord(
-
-        selectedStudent,
-
-        "Note",
-
-        "Staff Note",
-
-        note
-
-      );
-
-
-      document
-        .getElementById(
-          "detailNote"
-        )
-        .value = "";
-
-    }
-  );
-
-
-
-/* ================================================
-   ATTENDANCE TABLE
-================================================ */
-
-function renderAttendance(){
-
-  const list =
-    records.filter(
-      record =>
-        record.category ===
-        "Attendance"
-        &&
-        isToday(
-          record.timestamp
-        )
-    );
-
-
-  const container =
-    document.getElementById(
-      "attendanceTable"
-    );
-
-
-  if(!list.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-        No attendance records today.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              Time
-            </th>
-
-            <th>
-              Student
-            </th>
-
-            <th>
-              ID
-            </th>
-
-            <th>
-              Status
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${list
-            .map(
-              record => `
-
-                <tr>
-
-                  <td>
-                    ${time(
-                      record.timestamp
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      record.studentName
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      record.studentId
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      record.action
-                    )}
-                  </td>
-
-                </tr>
-
-              `
-            )
-            .join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-
-/* ================================================
-   MOVEMENT TABLE
-================================================ */
-
-function renderMovement(){
-
-  const list =
-    records.filter(
-      record =>
-        record.category ===
-        "Movement"
-    );
-
-
-  const container =
-    document.getElementById(
-      "movementTable"
-    );
-
-
-  if(!list.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-        No movement records.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              Time
-            </th>
-
-            <th>
-              Student
-            </th>
-
-            <th>
-              Destination
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${list
-            .map(
-              record => `
-
-                <tr>
-
-                  <td>
-                    ${time(
-                      record.timestamp
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      record.studentName
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      record.detail
-                    )}
-                  </td>
-
-                </tr>
-
-              `
-            )
-            .join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-
-/* ================================================
-   ACTIVE PASSES
-================================================ */
-
-function renderActivePasses(){
-
-  const movements =
-    records.filter(
-      record =>
-        record.category ===
-        "Movement"
-    );
-
-
-  const active = [];
-
-
-  movements.forEach(
-    movement => {
-
-      const returned =
-        records.some(
-          record =>
-
-            record.studentId ===
-              movement.studentId
-
-            &&
-
-            record.action ===
-              "Return to Class"
-
-            &&
-
-            new Date(
-              record.timestamp
-            ) >
-
-            new Date(
-              movement.timestamp
-            )
-
-        );
-
-
-      if(!returned){
-
-        active.push(
-          movement
-        );
-
-      }
-
-    }
-  );
-
-
-  const container =
-    document.getElementById(
-      "activePasses"
-    );
-
-
-  if(!active.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-        No students are currently out.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              Student
-            </th>
-
-            <th>
-              Destination
-            </th>
-
-            <th>
-              Started
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${active
-            .map(
-              record => `
-
-                <tr>
-
-                  <td>
-                    ${escapeHtml(
-                      record.studentName
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(
-                      record.detail
-                    )}
-                  </td>
-
-                  <td>
-                    ${time(
-                      record.timestamp
-                    )}
-                  </td>
-
-                </tr>
-
-              `
-            )
-            .join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-
-/* ================================================
-   RECENT ACTIVITY
-================================================ */
-
-function renderRecentActivity(){
-
-  const container =
-    document.getElementById(
-      "recentActivity"
-    );
-
-
-  const list =
-    audit.slice(
-      0,
-      10
-    );
-
-
-  if(!list.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-        No activity yet.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    list
-      .map(
-        item => `
-
-          <div class="event">
-
-            <div class="event-title">
-
-              ${escapeHtml(
-                item.action
-              )}
-
-            </div>
-
-
-            ${
-              item.studentName
-              ?
-              `
-              <div class="event-detail">
-
-                ${escapeHtml(
-                  item.studentName
-                )}
-
-                ${
-                  item.detail
-                  ?
-                  " — " +
-                  escapeHtml(
-                    item.detail
-                  )
-                  :
-                  ""
-                }
-
-              </div>
-              `
-              :
-              ""
-            }
-
-
-            <div class="event-time">
-
-              ${time(
-                item.timestamp
-              )}
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join("");
-
-}
-
-
-
-/* ================================================
-   DASHBOARD
-================================================ */
-
-function renderDashboard(){
-
-  const todayRecords =
-    records.filter(
-      record =>
-        isToday(
-          record.timestamp
-        )
-    );
-
-
-  const present =
-    todayRecords.filter(
-      record =>
-        record.category ===
-        "Attendance"
-        &&
-        record.action ===
-        "Present"
-    ).length;
-
-
-  const absent =
-    todayRecords.filter(
-      record =>
-        record.category ===
-        "Attendance"
-        &&
-        record.action ===
-        "Absent"
-    ).length;
-
-
-  const tardy =
-    todayRecords.filter(
-      record =>
-        record.category ===
-        "Attendance"
-        &&
-        record.action ===
-        "Tardy"
-    ).length;
-
-
-  const movements =
-    records.filter(
-      record =>
-        record.category ===
-        "Movement"
-    );
-
-
-  const returns =
-    records.filter(
-      record =>
-        record.action ===
-        "Return to Class"
-    );
-
-
-  let out = 0;
-
-
-  movements.forEach(
-    movement => {
-
-      const returned =
-        returns.some(
-          record =>
-
-            record.studentId ===
-              movement.studentId
-
-            &&
-
-            new Date(
-              record.timestamp
-            ) >
-
-            new Date(
-              movement.timestamp
-            )
-
-        );
-
-
-      if(!returned){
-
-        out++;
-
-      }
-
-    }
-  );
-
-
-  const discipline =
-    todayRecords.filter(
-      record =>
-        record.category ===
-        "Discipline"
-    ).length;
-
-
-  document
-    .getElementById(
-      "statStudents"
-    )
-    .textContent =
-      students.length;
-
-
-  document
-    .getElementById(
-      "statPresent"
-    )
-    .textContent =
-      present;
-
-
-  document
-    .getElementById(
-      "statAbsent"
-    )
-    .textContent =
-      absent;
-
-
-  document
-    .getElementById(
-      "statTardy"
-    )
-    .textContent =
-      tardy;
-
-
-  document
-    .getElementById(
-      "statOut"
-    )
-    .textContent =
-      out;
-
-
-  document
-    .getElementById(
-      "statDiscipline"
-    )
-    .textContent =
-      discipline;
-
-}
-
-
-
-/* ================================================
-   BACK
-================================================ */
-
-document
-  .getElementById(
-    "backToStudents"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      showPage(
-        "students"
-      );
-
-    }
-  );
-
-
-
-/* ================================================
-   REFRESH EVERYTHING
-================================================ */
-
-function refreshAll(){
-
-  renderDashboard();
-
-  renderStudentTable();
-
-  renderAttendance();
-
-  renderMovement();
-
-  renderActivePasses();
-
-  renderRecentActivity();
-
-
-  if(selectedStudent){
-
-    renderDetail();
-
-  }
-
-}
-
-
-
-/* ================================================
-   START
-================================================ */
-
-save();
-
-refreshAll();
+})();
 
 </script>
 
