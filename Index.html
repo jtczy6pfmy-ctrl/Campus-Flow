@@ -22,16 +22,16 @@
   color-scheme:light dark;
 
   --bg:#eef1f5;
-  --card:#ffffff;
+  --card:#fff;
   --border:#dce2e8;
   --text:#17202a;
   --muted:#68727d;
 
-  --input:#ffffff;
+  --input:#fff;
   --input-border:#c8ced6;
 
   --primary:#111827;
-  --primary-text:#ffffff;
+  --primary-text:#fff;
 
   --secondary:#e7ebef;
   --secondary-text:#17202a;
@@ -66,38 +66,60 @@ body{
 header{
   background:linear-gradient(
     180deg,
-    #18202c 0%,
-    #0b1017 100%
+    #18202c,
+    #0b1017
   );
 
-  color:white;
+  color:#fff;
 
   padding:
-    calc(18px + env(safe-area-inset-top))
+    calc(17px + env(safe-area-inset-top))
     18px
-    18px;
+    17px;
 
   text-align:center;
 
-  font-size:25px;
-  font-weight:800;
-
-  box-shadow:
-    0 2px 12px rgba(0,0,0,.18);
+  font-size:24px;
+  font-weight:850;
 
   position:sticky;
   top:0;
   z-index:50;
+
+  box-shadow:
+    0 2px 12px rgba(0,0,0,.18);
 }
 
 .app{
-  width:min(1100px,100%);
+  width:min(1150px,100%);
   margin:auto;
 
   padding:
-    16px
-    14px
+    15px
+    12px
     calc(50px + env(safe-area-inset-bottom));
+}
+
+
+/* NAV */
+
+.nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+
+  margin-bottom:15px;
+}
+
+.nav button{
+  margin:0;
+  min-height:45px;
+  font-size:13px;
+}
+
+.nav button.active{
+  background:var(--blue);
+  color:#fff;
 }
 
 
@@ -105,74 +127,56 @@ header{
 
 .dashboard-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:12px;
-
-  margin-bottom:16px;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+  margin-bottom:15px;
 }
 
 .stat{
   background:var(--card);
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:15px;
-
-  padding:15px;
-
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px;
   box-shadow:var(--shadow);
 }
 
 .stat-label{
   color:var(--muted);
-
-  font-size:12px;
-  font-weight:700;
-
+  font-size:10px;
+  font-weight:800;
   text-transform:uppercase;
-
-  letter-spacing:.04em;
 }
 
 .stat-value{
-  margin-top:5px;
-
-  font-size:27px;
-  font-weight:850;
+  margin-top:4px;
+  font-size:24px;
+  font-weight:900;
 }
 
 
-/* CARDS */
+/* SECTIONS */
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
 
 .card{
   background:var(--card);
-
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:16px;
-
-  padding:19px;
-
-  margin-bottom:16px;
-
+  padding:18px;
+  margin-bottom:15px;
   box-shadow:var(--shadow);
 }
 
 .card h2{
-  margin:
-    0
-    0
-    17px;
-
-  font-size:20px;
-  font-weight:800;
+  margin:0 0 16px;
+  font-size:19px;
+  font-weight:850;
 
   display:flex;
   align-items:center;
@@ -183,7 +187,7 @@ header{
   content:"";
 
   width:4px;
-  height:21px;
+  height:20px;
 
   border-radius:4px;
 
@@ -191,25 +195,11 @@ header{
 }
 
 
-/* SEARCH */
-
-.search-row{
-  display:grid;
-
-  grid-template-columns:
-    1fr
-    180px;
-
-  gap:10px;
-}
+/* FORM */
 
 label{
   display:block;
-
-  margin:
-    12px
-    0
-    6px;
+  margin:11px 0 6px;
 
   font-size:13px;
   font-weight:750;
@@ -220,12 +210,9 @@ select,
 textarea{
   width:100%;
 
-  padding:13px 14px;
+  padding:12px 13px;
 
-  border:
-    1px solid
-    var(--input-border);
-
+  border:1px solid var(--input-border);
   border-radius:10px;
 
   background:var(--input);
@@ -237,19 +224,29 @@ textarea{
   outline:none;
 }
 
+textarea{
+  min-height:95px;
+  resize:vertical;
+}
+
 input:focus,
 select:focus,
 textarea:focus{
-  border-color:#64748b;
+  border-color:var(--blue);
 
   box-shadow:
     0 0 0 3px
     rgba(37,99,235,.12);
 }
 
-textarea{
-  min-height:110px;
-  resize:vertical;
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.form-grid.three{
+  grid-template-columns:repeat(3,1fr);
 }
 
 
@@ -259,34 +256,53 @@ button{
   width:100%;
 
   border:0;
-
   border-radius:10px;
 
-  padding:13px 15px;
+  min-height:46px;
 
-  min-height:48px;
+  padding:11px 14px;
 
-  margin-top:10px;
+  margin-top:9px;
 
   background:var(--primary);
   color:var(--primary-text);
 
   font-family:inherit;
-
-  font-size:15px;
+  font-size:14px;
   font-weight:800;
 
   cursor:pointer;
 
   -webkit-tap-highlight-color:transparent;
-
-  transition:
-    transform .08s ease,
-    opacity .15s ease;
 }
 
 button:active{
   transform:scale(.985);
+}
+
+button.blue{
+  background:var(--blue);
+  color:#fff;
+}
+
+button.green{
+  background:var(--green);
+  color:#fff;
+}
+
+button.orange{
+  background:var(--orange);
+  color:#fff;
+}
+
+button.red{
+  background:var(--red);
+  color:#fff;
+}
+
+button.purple{
+  background:var(--purple);
+  color:#fff;
 }
 
 button.secondary{
@@ -294,93 +310,74 @@ button.secondary{
   color:var(--secondary-text);
 }
 
-button.blue{
-  background:var(--blue);
+
+/* TWO COLUMN */
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
 }
 
-button.green{
-  background:var(--green);
+
+/* TABLE */
+
+.table-wrap{
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:11px;
 }
 
-button.orange{
-  background:var(--orange);
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
 }
 
-button.red{
-  background:var(--red);
+th,
+td{
+  padding:11px;
+  text-align:left;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
 }
 
-button.purple{
-  background:var(--purple);
+th{
+  background:var(--secondary);
+  font-weight:850;
+}
+
+tr:last-child td{
+  border-bottom:0;
 }
 
 
 /* STUDENT */
 
-.student-layout{
-  display:grid;
-
-  grid-template-columns:
-    1fr
-    1fr;
-
-  gap:16px;
-}
-
 .student-name{
-  font-size:25px;
-  font-weight:850;
-
-  margin-bottom:8px;
+  font-size:24px;
+  font-weight:900;
 }
 
 .student-meta{
   color:var(--muted);
-
-  font-size:15px;
-
-  line-height:1.6;
-}
-
-.badges{
-  margin-top:12px;
+  line-height:1.7;
+  margin-top:5px;
 }
 
 .badge{
   display:inline-block;
 
-  padding:
-    5px
-    9px;
+  padding:5px 9px;
 
-  margin:
-    3px
-    3px
-    0
-    0;
+  margin:8px 4px 0 0;
 
   border-radius:999px;
 
   background:var(--secondary);
 
-  font-size:12px;
-  font-weight:750;
-}
-
-
-/* QUICK ACTIONS */
-
-.action-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:10px;
-}
-
-.action-grid button{
-  margin-top:0;
+  font-size:11px;
+  font-weight:800;
 }
 
 
@@ -388,9 +385,6 @@ button.purple{
 
 .timeline{
   position:relative;
-
-  margin-top:5px;
-
   padding-left:22px;
 }
 
@@ -405,12 +399,17 @@ button.purple{
 
   width:2px;
 
-  background:
-    var(--border);
+  background:var(--border);
 }
 
 .event{
   position:relative;
+
+  padding:11px 13px;
+
+  margin-bottom:9px;
+
+  border-radius:10px;
 
   background:
     color-mix(
@@ -418,12 +417,6 @@ button.purple{
       var(--secondary) 65%,
       transparent
     );
-
-  border-radius:11px;
-
-  padding:11px 13px;
-
-  margin-bottom:10px;
 }
 
 .event::before{
@@ -441,29 +434,60 @@ button.purple{
 
   background:var(--blue);
 
-  border:
-    2px solid
-    var(--card);
+  border:2px solid var(--card);
 }
 
 .event-title{
-  font-weight:800;
+  font-weight:850;
 }
 
 .event-detail{
-  margin-top:3px;
-
-  font-size:14px;
-
   color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
 }
 
 .event-time{
-  margin-top:5px;
-
-  font-size:12px;
-
   color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+
+/* SEARCH RESULTS */
+
+.results{
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+
+.result{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  padding:12px;
+
+  border:1px solid var(--border);
+  border-radius:11px;
+}
+
+.result-name{
+  font-weight:850;
+}
+
+.result-info{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.result button{
+  width:auto;
+  min-width:78px;
+  margin:0;
 }
 
 
@@ -471,11 +495,8 @@ button.purple{
 
 .empty{
   color:var(--muted);
-
   text-align:center;
-
-  padding:22px 10px;
-
+  padding:20px 10px;
   font-size:14px;
 }
 
@@ -489,49 +510,50 @@ button.purple{
 
 /* MOBILE */
 
-@media(max-width:760px){
+@media(max-width:850px){
 
   .dashboard-grid{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .student-layout{
-    grid-template-columns:1fr;
+}
+
+@media(max-width:650px){
+
+  .nav{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .search-row{
+  .two,
+  .form-grid,
+  .form-grid.three{
     grid-template-columns:1fr;
   }
 
 }
 
-@media(max-width:520px){
+@media(max-width:500px){
+
+  .dashboard-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
   .app{
-    padding:
-      12px
-      10px
-      40px;
+    padding:10px 9px 40px;
   }
 
   .card{
-    padding:16px;
-    border-radius:15px;
+    padding:15px;
   }
 
   header{
     font-size:22px;
   }
 
-  .action-grid{
-    grid-template-columns:1fr;
-  }
-
 }
 
 
-/* DARK MODE */
+/* DARK */
 
 @media(prefers-color-scheme:dark){
 
@@ -577,78 +599,118 @@ button.purple{
 <main class="app">
 
 
-<!-- DASHBOARD -->
+<!-- NAVIGATION -->
 
-<section class="dashboard-grid">
+<nav class="nav">
+
+  <button
+    class="active"
+    data-page="dashboard"
+  >
+    DASHBOARD
+  </button>
+
+  <button
+    data-page="students"
+  >
+    STUDENTS
+  </button>
+
+  <button
+    data-page="attendance"
+  >
+    ATTENDANCE
+  </button>
+
+  <button
+    data-page="movement"
+  >
+    MOVEMENT
+  </button>
+
+</nav>
+
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section
+  id="dashboard"
+  class="page active"
+>
+
+<div class="dashboard-grid">
 
   <div class="stat">
-
     <div class="stat-label">
       Students
     </div>
-
     <div
       class="stat-value"
       id="statStudents"
-    >
-      0
-    </div>
-
+    >0</div>
   </div>
 
-
   <div class="stat">
-
     <div class="stat-label">
       Present
     </div>
-
     <div
       class="stat-value"
       id="statPresent"
-    >
-      0
-    </div>
-
+    >0</div>
   </div>
 
-
   <div class="stat">
-
     <div class="stat-label">
-      Active Passes
+      Absent
     </div>
-
     <div
       class="stat-value"
-      id="statPasses"
-    >
-      0
-    </div>
-
+      id="statAbsent"
+    >0</div>
   </div>
 
+  <div class="stat">
+    <div class="stat-label">
+      Tardy
+    </div>
+    <div
+      class="stat-value"
+      id="statTardy"
+    >0</div>
+  </div>
 
   <div class="stat">
+    <div class="stat-label">
+      Out
+    </div>
+    <div
+      class="stat-value"
+      id="statOut"
+    >0</div>
+  </div>
 
+  <div class="stat">
     <div class="stat-label">
       Discipline
     </div>
-
     <div
       class="stat-value"
       id="statDiscipline"
-    >
-      0
-    </div>
-
+    >0</div>
   </div>
 
-</section>
+</div>
 
 
 
-<!-- STUDENT LOOKUP -->
+<div class="two">
+
+
+<!-- QUICK LOOKUP -->
 
 <section class="card">
 
@@ -656,20 +718,74 @@ button.purple{
     Student Lookup
   </h2>
 
+  <label for="globalSearch">
+    Student ID / Name / Grade / Room
+  </label>
 
-  <div class="search-row">
+  <input
+    id="globalSearch"
+    placeholder="Scan ID or search..."
+    autocomplete="off"
+  >
+
+  <div
+    id="searchResults"
+    class="results"
+  ></div>
+
+</section>
+
+
+
+<!-- RECENT ACTIVITY -->
+
+<section class="card">
+
+  <h2>
+    Recent Activity
+  </h2>
+
+  <div
+    id="recentActivity"
+    class="timeline"
+  ></div>
+
+</section>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================
+     STUDENTS
+========================= -->
+
+<section
+  id="students"
+  class="page"
+>
+
+<section class="card">
+
+  <h2>
+    Student Management
+  </h2>
+
+
+  <div class="form-grid">
 
     <div>
 
-      <label for="studentId">
-        Student ID / Barcode
+      <label>
+        Search Students
       </label>
 
       <input
-        id="studentId"
-        inputmode="numeric"
-        autocomplete="off"
-        placeholder="Scan or enter student ID"
+        id="studentSearch"
+        placeholder="Name, ID, grade or room"
       >
 
     </div>
@@ -682,56 +798,105 @@ button.purple{
       </label>
 
       <button
-        id="lookupButton"
+        id="newStudentButton"
         class="blue"
       >
-        LOOK UP STUDENT
+        ADD STUDENT
       </button>
 
     </div>
 
   </div>
 
-</section>
-
-
-
-<!-- STUDENT INFORMATION -->
-
-<section
-  class="student-layout hidden"
-  id="studentArea"
->
-
-
-<!-- STUDENT RECORD -->
-
-<section class="card">
-
-  <h2>
-    Student Record
-  </h2>
 
   <div
-    id="studentRecord"
+    id="studentTable"
+    style="margin-top:15px"
   ></div>
 
 </section>
 
 
-<!-- QUICK STATUS -->
-
-<section class="card">
+<section
+  id="studentFormCard"
+  class="card hidden"
+>
 
   <h2>
-    Current Status
+    Student Record
   </h2>
 
-  <div
-    id="currentStatus"
-    class="empty"
+
+  <div class="form-grid three">
+
+    <div>
+
+      <label>
+        Student ID
+      </label>
+
+      <input
+        id="newStudentId"
+        inputmode="numeric"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Student Name
+      </label>
+
+      <input
+        id="newStudentName"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Grade
+      </label>
+
+      <input
+        id="newStudentGrade"
+      >
+
+    </div>
+
+  </div>
+
+
+  <label>
+    Homeroom
+  </label>
+
+  <input
+    id="newStudentRoom"
   >
-    No status recorded.
+
+
+  <div class="two">
+
+    <button
+      id="saveStudent"
+      class="green"
+    >
+      SAVE STUDENT
+    </button>
+
+
+    <button
+      id="cancelStudent"
+      class="secondary"
+    >
+      CANCEL
+    </button>
+
   </div>
 
 </section>
@@ -740,72 +905,153 @@ button.purple{
 
 
 
-<!-- MOVEMENT -->
+<!-- =========================
+     ATTENDANCE
+========================= -->
 
 <section
-  class="card hidden"
-  id="movementCard"
+  id="attendance"
+  class="page"
 >
+
+<section class="card">
+
+  <h2>
+    Attendance
+  </h2>
+
+
+  <label>
+    Find Student
+  </label>
+
+  <input
+    id="attendanceSearch"
+    placeholder="Student ID or name..."
+  >
+
+
+  <div
+    id="attendanceResults"
+    class="results"
+  ></div>
+
+</section>
+
+
+<section class="card">
+
+  <h2>
+    Today's Attendance Records
+  </h2>
+
+
+  <div
+    id="attendanceTable"
+  ></div>
+
+</section>
+
+</section>
+
+
+
+<!-- =========================
+     MOVEMENT
+========================= -->
+
+<section
+  id="movement"
+  class="page"
+>
+
+<section class="card">
 
   <h2>
     Student Movement
   </h2>
 
 
-  <label for="destination">
-    Destination
+  <label>
+    Find Student
   </label>
 
-  <select id="destination">
-
-    <option>
-      Classroom
-    </option>
-
-    <option>
-      Restroom
-    </option>
-
-    <option>
-      Lunch
-    </option>
-
-    <option>
-      Office
-    </option>
-
-    <option>
-      Nurse
-    </option>
-
-    <option>
-      Library
-    </option>
-
-    <option>
-      Other
-    </option>
-
-  </select>
-
-
-  <button
-    class="blue"
-    id="movementButton"
+  <input
+    id="movementSearch"
+    placeholder="Student ID or name..."
   >
-    RECORD MOVEMENT
-  </button>
+
+
+  <div
+    id="movementResults"
+    class="results"
+  ></div>
+
+</section>
+
+
+<section class="card">
+
+  <h2>
+    Active Passes
+  </h2>
+
+
+  <div
+    id="activePasses"
+  ></div>
+
+</section>
+
+
+<section class="card">
+
+  <h2>
+    Movement History
+  </h2>
+
+
+  <div
+    id="movementTable"
+  ></div>
+
+</section>
 
 </section>
 
 
 
-<!-- ATTENDANCE -->
+<!-- =========================
+     STUDENT DETAIL
+========================= -->
 
 <section
-  class="card hidden"
-  id="attendanceCard"
+  id="studentDetail"
+  class="page"
 >
+
+<section class="card">
+
+  <button
+    id="backToStudents"
+    class="secondary"
+  >
+    ← BACK
+  </button>
+
+
+  <div
+    id="detailStudent"
+    style="margin-top:15px"
+  ></div>
+
+</section>
+
+
+<div class="two">
+
+
+<section class="card">
 
   <h2>
     Attendance
@@ -816,31 +1062,28 @@ button.purple{
 
     <button
       class="green"
-      data-action="Present"
+      data-attendance="Present"
     >
       PRESENT
     </button>
 
-
     <button
       class="orange"
-      data-action="Tardy"
+      data-attendance="Tardy"
     >
       TARDY
     </button>
 
-
     <button
       class="red"
-      data-action="Absent"
+      data-attendance="Absent"
     >
       ABSENT
     </button>
 
-
     <button
       class="secondary"
-      data-action="Early Dismissal"
+      data-attendance="Early Dismissal"
     >
       EARLY DISMISSAL
     </button>
@@ -851,12 +1094,7 @@ button.purple{
 
 
 
-<!-- DISCIPLINE -->
-
-<section
-  class="card hidden"
-  id="disciplineCard"
->
+<section class="card">
 
   <h2>
     Discipline
@@ -867,87 +1105,77 @@ button.purple{
 
     <button
       class="orange"
-      data-action="Detention"
+      data-discipline="Detention"
     >
       DETENTION
     </button>
 
-
     <button
       class="red"
-      data-action="ISS"
+      data-discipline="ISS"
     >
       ISS
     </button>
 
-
     <button
       class="red"
-      data-action="OSS"
+      data-discipline="OSS"
     >
       OSS
     </button>
 
-
     <button
       class="secondary"
-      data-action="Discipline Note"
+      data-discipline="Discipline Note"
     >
-      DISCIPLINE NOTE
+      NOTE
     </button>
 
   </div>
 
 </section>
 
+</div>
 
 
-<!-- NOTES -->
-
-<section
-  class="card hidden"
-  id="notesCard"
->
+<section class="card">
 
   <h2>
-    Staff Notes
+    Student Timeline
+  </h2>
+
+
+  <div
+    id="detailTimeline"
+    class="timeline"
+  ></div>
+
+</section>
+
+
+<section class="card">
+
+  <h2>
+    Staff Note
   </h2>
 
 
   <textarea
-    id="staffNote"
-    placeholder="Enter a note about this student..."
+    id="detailNote"
+    placeholder="Enter note..."
   ></textarea>
 
 
   <button
-    id="saveNote"
+    id="saveDetailNote"
   >
     SAVE NOTE
   </button>
 
 </section>
 
-
-
-<!-- ACTIVITY -->
-
-<section
-  class="card hidden"
-  id="activityCard"
->
-
-  <h2>
-    Student Activity
-  </h2>
-
-
-  <div
-    id="timeline"
-    class="timeline"
-  ></div>
-
 </section>
+
 
 
 </main>
@@ -960,283 +1188,312 @@ button.purple{
 
 
 /*
-  CAMPUS FLOW
-  VERSION 2
+==================================================
+ CAMPUS FLOW
+ BUILD 4
+==================================================
+
+ Local data architecture.
+
+ Future adapter:
+
+ Browser Storage
+       ↓
+ Data Layer
+       ↓
+ SQL Server / API
+
+==================================================
 */
 
 
-/* DEMO STUDENTS */
+/* ================================================
+   DEFAULT DATA
+================================================ */
 
-const students = {
+const defaultStudents = [
 
-  "100001":{
+  {
     id:"100001",
     name:"Alex Johnson",
     grade:"8",
-    homeroom:"204"
+    room:"204",
+    active:true
   },
 
-  "100002":{
+  {
     id:"100002",
     name:"Jordan Smith",
     grade:"10",
-    homeroom:"112"
+    room:"112",
+    active:true
   },
 
-  "100003":{
+  {
     id:"100003",
     name:"Taylor Brown",
     grade:"6",
-    homeroom:"301"
+    room:"301",
+    active:true
+  },
+
+  {
+    id:"100004",
+    name:"Morgan Davis",
+    grade:"9",
+    room:"118",
+    active:true
+  },
+
+  {
+    id:"100005",
+    name:"Casey Wilson",
+    grade:"7",
+    room:"207",
+    active:true
   }
 
-};
+];
 
 
-/* APPLICATION STATE */
-
-let currentStudent = null;
-
-let events = [];
-
-
-
-/* DOM */
-
-const studentId =
-  document.getElementById(
-    "studentId"
-  );
-
-const lookupButton =
-  document.getElementById(
-    "lookupButton"
-  );
-
-const studentArea =
-  document.getElementById(
-    "studentArea"
-  );
-
-const movementCard =
-  document.getElementById(
-    "movementCard"
-  );
-
-const attendanceCard =
-  document.getElementById(
-    "attendanceCard"
-  );
-
-const disciplineCard =
-  document.getElementById(
-    "disciplineCard"
-  );
-
-const notesCard =
-  document.getElementById(
-    "notesCard"
-  );
-
-const activityCard =
-  document.getElementById(
-    "activityCard"
-  );
-
-const studentRecord =
-  document.getElementById(
-    "studentRecord"
-  );
-
-const currentStatus =
-  document.getElementById(
-    "currentStatus"
-  );
-
-const timeline =
-  document.getElementById(
-    "timeline"
+let students =
+  load(
+    "campusFlowStudents",
+    defaultStudents
   );
 
 
-
-/* LOOKUP */
-
-function lookupStudent(){
-
-  const id =
-    studentId.value.trim();
-
-
-  if(!id){
-
-    alert(
-      "Scan or enter a student ID."
-    );
-
-    studentId.focus();
-
-    return;
-
-  }
-
-
-  if(
-    students[id]
-  ){
-
-    currentStudent =
-      students[id];
-
-  }else{
-
-    /*
-      Demo behavior.
-
-      Later this becomes
-      a SQL/database lookup.
-    */
-
-    currentStudent = {
-
-      id:id,
-
-      name:
-        "Student " + id,
-
-      grade:"—",
-
-      homeroom:"—"
-
-    };
-
-  }
-
-
-  showStudent();
-
-}
-
-
-
-/* SHOW STUDENT */
-
-function showStudent(){
-
-  studentArea.classList.remove(
-    "hidden"
-  );
-
-  movementCard.classList.remove(
-    "hidden"
-  );
-
-  attendanceCard.classList.remove(
-    "hidden"
-  );
-
-  disciplineCard.classList.remove(
-    "hidden"
-  );
-
-  notesCard.classList.remove(
-    "hidden"
-  );
-
-  activityCard.classList.remove(
-    "hidden"
+let records =
+  load(
+    "campusFlowRecords",
+    []
   );
 
 
-  studentRecord.innerHTML = `
-
-    <div class="student-name">
-
-      ${escapeHtml(
-        currentStudent.name
-      )}
-
-    </div>
-
-    <div class="student-meta">
-
-      Student ID:
-      <b>
-        ${escapeHtml(
-          currentStudent.id
-        )}
-      </b>
-
-      <br>
-
-      Grade:
-      <b>
-        ${escapeHtml(
-          currentStudent.grade
-        )}
-      </b>
-
-      <br>
-
-      Homeroom:
-      <b>
-        ${escapeHtml(
-          currentStudent.homeroom
-        )}
-      </b>
-
-    </div>
-
-    <div class="badges">
-
-      <span class="badge">
-        ACTIVE
-      </span>
-
-      <span class="badge">
-        STUDENT
-      </span>
-
-    </div>
-
-  `;
+let audit =
+  load(
+    "campusFlowAudit",
+    []
+  );
 
 
-  renderTimeline();
-
-  updateStatus();
-
-  studentId.blur();
-
-}
+let selectedStudent = null;
 
 
 
-/* ADD EVENT */
+/* ================================================
+   STORAGE
+================================================ */
 
-function addEvent(
-  action,
-  detail = ""
+function load(
+  key,
+  fallback
 ){
 
-  if(!currentStudent){
+  try{
 
-    alert(
-      "Look up a student first."
+    const data =
+      localStorage.getItem(
+        key
+      );
+
+    return data
+      ?
+      JSON.parse(data)
+      :
+      fallback;
+
+  }catch{
+
+    return fallback;
+
+  }
+
+}
+
+
+
+function save(){
+
+  localStorage.setItem(
+    "campusFlowStudents",
+    JSON.stringify(
+      students
+    )
+  );
+
+
+  localStorage.setItem(
+    "campusFlowRecords",
+    JSON.stringify(
+      records
+    )
+  );
+
+
+  localStorage.setItem(
+    "campusFlowAudit",
+    JSON.stringify(
+      audit
+    )
+  );
+
+}
+
+
+
+/* ================================================
+   UTILITIES
+================================================ */
+
+function escapeHtml(
+  value
+){
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
     );
+
+}
+
+
+
+function today(){
+
+  return new Date()
+    .toDateString();
+
+}
+
+
+
+function isToday(
+  timestamp
+){
+
+  return new Date(
+    timestamp
+  ).toDateString()
+    ===
+    today();
+
+}
+
+
+
+function time(
+  timestamp
+){
+
+  return new Date(
+    timestamp
+  ).toLocaleTimeString(
+    [],
+    {
+      hour:"numeric",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+
+/* ================================================
+   AUDIT
+================================================ */
+
+function auditLog(
+  action,
+  student,
+  detail=""
+){
+
+  audit.unshift({
+
+    id:Date.now(),
+
+    action,
+
+    studentId:
+      student
+      ?
+      student.id
+      :
+      "",
+
+    studentName:
+      student
+      ?
+      student.name
+      :
+      "",
+
+    detail,
+
+    timestamp:
+      new Date()
+        .toISOString()
+
+  });
+
+}
+
+
+
+/* ================================================
+   RECORD
+================================================ */
+
+function addRecord(
+  student,
+  category,
+  action,
+  detail=""
+){
+
+  if(!student){
 
     return;
 
   }
 
 
-  events.unshift({
+  const record = {
+
+    id:
+      Date.now(),
 
     studentId:
-      currentStudent.id,
+      student.id,
 
     studentName:
-      currentStudent.name,
+      student.name,
+
+    category,
 
     action,
 
@@ -1244,77 +1501,1069 @@ function addEvent(
 
     timestamp:
       new Date()
+        .toISOString()
 
-  });
+  };
 
 
-  renderTimeline();
+  records.unshift(
+    record
+  );
 
-  updateStatus();
 
-  updateDashboard();
+  auditLog(
+    action,
+    student,
+    detail
+  );
+
+
+  save();
+
+
+  refreshAll();
 
 }
 
 
 
-/* MOVEMENT */
+/* ================================================
+   NAVIGATION
+================================================ */
 
-function recordMovement(){
+document
+  .querySelectorAll(
+    "[data-page]"
+  )
+  .forEach(
+    button => {
 
-  const destination =
+      button.addEventListener(
+        "click",
+        () => {
+
+          showPage(
+            button.dataset.page
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+
+function showPage(
+  page
+){
+
+  document
+    .querySelectorAll(
+      ".page"
+    )
+    .forEach(
+      section =>
+        section.classList.remove(
+          "active"
+        )
+    );
+
+
+  const target =
     document.getElementById(
-      "destination"
-    ).value;
+      page
+    );
 
 
-  addEvent(
-    "Movement",
-    "Student moved to " +
-    destination
+  if(target){
+
+    target.classList.add(
+      "active"
+    );
+
+  }
+
+
+  document
+    .querySelectorAll(
+      "[data-page]"
+    )
+    .forEach(
+      button =>
+        button.classList.toggle(
+          "active",
+          button.dataset.page
+            ===
+            page
+        )
+    );
+
+
+  refreshAll();
+
+}
+
+
+
+/* ================================================
+   FIND STUDENTS
+================================================ */
+
+function findStudents(
+  query
+){
+
+  query =
+    query
+      .trim()
+      .toLowerCase();
+
+
+  if(!query){
+
+    return [];
+
+  }
+
+
+  return students.filter(
+    student =>
+
+      student.id
+        .toLowerCase()
+        .includes(query)
+
+      ||
+
+      student.name
+        .toLowerCase()
+        .includes(query)
+
+      ||
+
+      student.grade
+        .toLowerCase()
+        .includes(query)
+
+      ||
+
+      student.room
+        .toLowerCase()
+        .includes(query)
+
   );
 
 }
 
 
 
-/* ACTION BUTTONS */
+/* ================================================
+   RENDER RESULTS
+================================================ */
 
-document
-  .querySelectorAll(
-    "[data-action]"
-  )
-  .forEach(button => {
+function renderResults(
+container,
+results
+){
 
-    button.addEventListener(
-      "click",
-      () => {
+  if(!results.length){
 
-        addEvent(
-          button.dataset.action
+    container.innerHTML = `
+
+      <div class="empty">
+        No students found.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    results
+      .map(
+        student => `
+
+          <div class="result">
+
+            <div>
+
+              <div class="result-name">
+
+                ${escapeHtml(
+                  student.name
+                )}
+
+              </div>
+
+              <div class="result-info">
+
+                ID:
+                ${escapeHtml(
+                  student.id
+                )}
+
+                · Grade
+                ${escapeHtml(
+                  student.grade
+                )}
+
+                · Room
+                ${escapeHtml(
+                  student.room
+                )}
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="blue"
+              data-select="${escapeHtml(
+                student.id
+              )}"
+            >
+              SELECT
+            </button>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+
+  container
+    .querySelectorAll(
+      "[data-select]"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            selectStudent(
+              button.dataset.select
+            );
+
+          }
         );
 
       }
     );
 
-  });
+}
 
 
 
-/* NOTE */
+/* ================================================
+   SELECT STUDENT
+================================================ */
+
+function selectStudent(
+id
+){
+
+  selectedStudent =
+    students.find(
+      student =>
+        student.id === id
+    );
+
+
+  if(!selectedStudent){
+
+    return;
+
+  }
+
+
+  renderDetail();
+
+
+  showPage(
+    "studentDetail"
+  );
+
+}
+
+
+
+/* ================================================
+   STUDENT DETAIL
+================================================ */
+
+function renderDetail(){
+
+  if(!selectedStudent){
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      "detailStudent"
+    )
+    .innerHTML = `
+
+      <div class="student-name">
+
+        ${escapeHtml(
+          selectedStudent.name
+        )}
+
+      </div>
+
+
+      <div class="student-meta">
+
+        Student ID:
+        <b>
+          ${escapeHtml(
+            selectedStudent.id
+          )}
+        </b>
+
+        <br>
+
+        Grade:
+        <b>
+          ${escapeHtml(
+            selectedStudent.grade
+          )}
+        </b>
+
+        <br>
+
+        Homeroom:
+        <b>
+          ${escapeHtml(
+            selectedStudent.room
+          )}
+        </b>
+
+      </div>
+
+
+      <span class="badge">
+        ${selectedStudent.active
+          ?
+          "ACTIVE"
+          :
+          "INACTIVE"
+        }
+      </span>
+
+    `;
+
+
+  renderDetailTimeline();
+
+}
+
+
+
+/* ================================================
+   DETAIL TIMELINE
+================================================ */
+
+function renderDetailTimeline(){
+
+  const container =
+    document.getElementById(
+      "detailTimeline"
+    );
+
+
+  if(!selectedStudent){
+
+    return;
+
+  }
+
+
+  const list =
+    records.filter(
+      record =>
+        record.studentId
+          ===
+        selectedStudent.id
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+        No activity recorded.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    list
+      .map(
+        record => `
+
+          <div class="event">
+
+            <div class="event-title">
+
+              ${escapeHtml(
+                record.action
+              )}
+
+            </div>
+
+
+            ${
+              record.detail
+              ?
+              `
+              <div class="event-detail">
+
+                ${escapeHtml(
+                  record.detail
+                )}
+
+              </div>
+              `
+              :
+              ""
+            }
+
+
+            <div class="event-time">
+
+              ${time(
+                record.timestamp
+              )}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+
+/* ================================================
+   GLOBAL SEARCH
+================================================ */
+
+const globalSearch =
+  document.getElementById(
+    "globalSearch"
+  );
+
+
+globalSearch.addEventListener(
+  "input",
+  () => {
+
+    renderResults(
+
+      document.getElementById(
+        "searchResults"
+      ),
+
+      findStudents(
+        globalSearch.value
+      )
+
+    );
+
+  }
+);
+
+
+
+/* ================================================
+   STUDENT SEARCH
+================================================ */
+
+const studentSearch =
+  document.getElementById(
+    "studentSearch"
+  );
+
+
+studentSearch.addEventListener(
+  "input",
+  () => {
+
+    renderStudentTable();
+
+  }
+);
+
+
+
+/* ================================================
+   STUDENT TABLE
+================================================ */
+
+function renderStudentTable(){
+
+  const query =
+    studentSearch.value;
+
+
+  const list =
+    query
+    ?
+    findStudents(
+      query
+    )
+    :
+    students;
+
+
+  const container =
+    document.getElementById(
+      "studentTable"
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+        No students found.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML = `
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              ID
+            </th>
+
+            <th>
+              Name
+            </th>
+
+            <th>
+              Grade
+            </th>
+
+            <th>
+              Room
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Action
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          ${list
+            .map(
+              student => `
+
+                <tr>
+
+                  <td>
+                    ${escapeHtml(
+                      student.id
+                    )}
+                  </td>
+
+                  <td>
+                    ${escapeHtml(
+                      student.name
+                    )}
+                  </td>
+
+                  <td>
+                    ${escapeHtml(
+                      student.grade
+                    )}
+                  </td>
+
+                  <td>
+                    ${escapeHtml(
+                      student.room
+                    )}
+                  </td>
+
+                  <td>
+                    ${student.active
+                      ?
+                      "Active"
+                      :
+                      "Inactive"
+                    }
+                  </td>
+
+                  <td>
+
+                    <button
+                      class="blue"
+                      style="width:auto;margin:0"
+                      data-open-student="${escapeHtml(
+                        student.id
+                      )}"
+                    >
+                      OPEN
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              `
+            )
+            .join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+
+  container
+    .querySelectorAll(
+      "[data-open-student]"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            selectStudent(
+              button.dataset.openStudent
+            );
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+
+/* ================================================
+   ADD STUDENT
+================================================ */
 
 document
   .getElementById(
-    "saveNote"
+    "newStudentButton"
   )
   .addEventListener(
     "click",
     () => {
 
+      document
+        .getElementById(
+          "studentFormCard"
+        )
+        .classList.remove(
+          "hidden"
+        );
+
+
+      document
+        .getElementById(
+          "newStudentId"
+        )
+        .focus();
+
+    }
+  );
+
+
+
+document
+  .getElementById(
+    "cancelStudent"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "studentFormCard"
+        )
+        .classList.add(
+          "hidden"
+        );
+
+    }
+  );
+
+
+
+document
+  .getElementById(
+    "saveStudent"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const id =
+        document
+          .getElementById(
+            "newStudentId"
+          )
+          .value
+          .trim();
+
+
+      const name =
+        document
+          .getElementById(
+            "newStudentName"
+          )
+          .value
+          .trim();
+
+
+      const grade =
+        document
+          .getElementById(
+            "newStudentGrade"
+          )
+          .value
+          .trim();
+
+
+      const room =
+        document
+          .getElementById(
+            "newStudentRoom"
+          )
+          .value
+          .trim();
+
+
+      if(
+        !id ||
+        !name
+      ){
+
+        alert(
+          "Student ID and name are required."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        students.some(
+          student =>
+            student.id === id
+        )
+      ){
+
+        alert(
+          "That Student ID already exists."
+        );
+
+        return;
+
+      }
+
+
+      const student = {
+
+        id,
+
+        name,
+
+        grade,
+
+        room,
+
+        active:true
+
+      };
+
+
+      students.push(
+        student
+      );
+
+
+      auditLog(
+        "Student Created",
+        student
+      );
+
+
+      save();
+
+
+      document
+        .getElementById(
+          "newStudentId"
+        )
+        .value = "";
+
+      document
+        .getElementById(
+          "newStudentName"
+        )
+        .value = "";
+
+      document
+        .getElementById(
+          "newStudentGrade"
+        )
+        .value = "";
+
+      document
+        .getElementById(
+          "newStudentRoom"
+        )
+        .value = "";
+
+
+      document
+        .getElementById(
+          "studentFormCard"
+        )
+        .classList.add(
+          "hidden"
+        );
+
+
+      renderStudentTable();
+
+      refreshAll();
+
+    }
+  );
+
+
+
+/* ================================================
+   ATTENDANCE SEARCH
+================================================ */
+
+const attendanceSearch =
+  document.getElementById(
+    "attendanceSearch"
+  );
+
+
+attendanceSearch.addEventListener(
+  "input",
+  () => {
+
+    renderResults(
+
+      document.getElementById(
+        "attendanceResults"
+      ),
+
+      findStudents(
+        attendanceSearch.value
+      )
+
+    );
+
+  }
+);
+
+
+
+/* ================================================
+   MOVEMENT SEARCH
+================================================ */
+
+const movementSearch =
+  document.getElementById(
+    "movementSearch"
+  );
+
+
+movementSearch.addEventListener(
+  "input",
+  () => {
+
+    renderResults(
+
+      document.getElementById(
+        "movementResults"
+      ),
+
+      findStudents(
+        movementSearch.value
+      )
+
+    );
+
+  }
+);
+
+
+
+/* ================================================
+   ATTENDANCE ACTION
+================================================ */
+
+document
+  .querySelectorAll(
+    "[data-attendance]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          if(!selectedStudent){
+
+            return;
+
+          }
+
+
+          addRecord(
+
+            selectedStudent,
+
+            "Attendance",
+
+            button.dataset.attendance
+
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+
+/* ================================================
+   DISCIPLINE ACTION
+================================================ */
+
+document
+  .querySelectorAll(
+    "[data-discipline]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          if(!selectedStudent){
+
+            return;
+
+          }
+
+
+          const reason =
+            prompt(
+              "Reason / details:"
+            );
+
+
+          addRecord(
+
+            selectedStudent,
+
+            "Discipline",
+
+            button.dataset.discipline,
+
+            reason || ""
+
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+
+/* ================================================
+   NOTE
+================================================ */
+
+document
+  .getElementById(
+    "saveDetailNote"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      if(!selectedStudent){
+
+        return;
+
+      }
+
+
       const note =
         document
           .getElementById(
-            "staffNote"
+            "detailNote"
           )
           .value
           .trim();
@@ -1331,15 +2580,22 @@ document
       }
 
 
-      addEvent(
+      addRecord(
+
+        selectedStudent,
+
+        "Note",
+
         "Staff Note",
+
         note
+
       );
 
 
       document
         .getElementById(
-          "staffNote"
+          "detailNote"
         )
         .value = "";
 
@@ -1348,30 +2604,36 @@ document
 
 
 
-/* TIMELINE */
+/* ================================================
+   ATTENDANCE TABLE
+================================================ */
 
-function renderTimeline(){
+function renderAttendance(){
 
-  const studentEvents =
-    events.filter(
-      event =>
-        currentStudent &&
-        event.studentId ===
-        currentStudent.id
+  const list =
+    records.filter(
+      record =>
+        record.category ===
+        "Attendance"
+        &&
+        isToday(
+          record.timestamp
+        )
     );
 
 
-  if(
-    !studentEvents.length
-  ){
+  const container =
+    document.getElementById(
+      "attendanceTable"
+    );
 
-    timeline.innerHTML = `
+
+  if(!list.length){
+
+    container.innerHTML = `
 
       <div class="empty">
-
-        No activity recorded
-        for this student today.
-
+        No attendance records today.
       </div>
 
     `;
@@ -1381,99 +2643,114 @@ function renderTimeline(){
   }
 
 
-  timeline.innerHTML =
-    studentEvents
-      .map(event => {
+  container.innerHTML = `
 
-        const time =
-          event.timestamp
-            .toLocaleTimeString(
-              [],
-              {
-                hour:"numeric",
-                minute:"2-digit"
-              }
-            );
+    <div class="table-wrap">
 
+      <table>
 
-        return `
+        <thead>
 
-          <div class="event">
+          <tr>
 
-            <div class="event-title">
+            <th>
+              Time
+            </th>
 
-              ${escapeHtml(
-                event.action
-              )}
+            <th>
+              Student
+            </th>
 
-            </div>
+            <th>
+              ID
+            </th>
 
+            <th>
+              Status
+            </th>
 
-            ${
-              event.detail
-                ?
-                `
-                <div class="event-detail">
+          </tr>
 
-                  ${escapeHtml(
-                    event.detail
-                  )}
-
-                </div>
-                `
-                :
-                ""
-            }
+        </thead>
 
 
-            <div class="event-time">
+        <tbody>
 
-              ${time}
+          ${list
+            .map(
+              record => `
 
-            </div>
+                <tr>
 
-          </div>
+                  <td>
+                    ${time(
+                      record.timestamp
+                    )}
+                  </td>
 
-        `;
+                  <td>
+                    ${escapeHtml(
+                      record.studentName
+                    )}
+                  </td>
 
-      })
-      .join("");
+                  <td>
+                    ${escapeHtml(
+                      record.studentId
+                    )}
+                  </td>
+
+                  <td>
+                    ${escapeHtml(
+                      record.action
+                    )}
+                  </td>
+
+                </tr>
+
+              `
+            )
+            .join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
 
 }
 
 
 
-/* STATUS */
+/* ================================================
+   MOVEMENT TABLE
+================================================ */
 
-function updateStatus(){
+function renderMovement(){
 
-  if(!currentStudent){
-
-    currentStatus.textContent =
-      "No student selected.";
-
-    return;
-
-  }
-
-
-  const latest =
-    events.find(
-      event =>
-        event.studentId ===
-        currentStudent.id
+  const list =
+    records.filter(
+      record =>
+        record.category ===
+        "Movement"
     );
 
 
-  if(!latest){
+  const container =
+    document.getElementById(
+      "movementTable"
+    );
 
-    currentStatus.innerHTML = `
 
-      <span class="badge">
+  if(!list.length){
 
-        NO ACTIVE STATUS
+    container.innerHTML = `
 
-      </span>
+      <div class="empty">
+        No movement records.
+      </div>
 
     `;
 
@@ -1482,24 +2759,70 @@ function updateStatus(){
   }
 
 
-  let text =
-    latest.action;
+  container.innerHTML = `
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Time
+            </th>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Destination
+            </th>
+
+          </tr>
+
+        </thead>
 
 
-  if(latest.detail){
+        <tbody>
 
-    text +=
-      " — " +
-      latest.detail;
+          ${list
+            .map(
+              record => `
 
-  }
+                <tr>
 
+                  <td>
+                    ${time(
+                      record.timestamp
+                    )}
+                  </td>
 
-  currentStatus.innerHTML = `
+                  <td>
+                    ${escapeHtml(
+                      record.studentName
+                    )}
+                  </td>
 
-    <b>
-      ${escapeHtml(text)}
-    </b>
+                  <td>
+                    ${escapeHtml(
+                      record.detail
+                    )}
+                  </td>
+
+                </tr>
+
+              `
+            )
+            .join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
 
   `;
 
@@ -1507,44 +2830,356 @@ function updateStatus(){
 
 
 
-/* DASHBOARD */
+/* ================================================
+   ACTIVE PASSES
+================================================ */
 
-function updateDashboard(){
+function renderActivePasses(){
 
-  const studentCount =
-    Object.keys(
-      students
-    ).length;
+  const movements =
+    records.filter(
+      record =>
+        record.category ===
+        "Movement"
+    );
 
 
-  const presentCount =
-    events.filter(
-      event =>
-        event.action ===
+  const active = [];
+
+
+  movements.forEach(
+    movement => {
+
+      const returned =
+        records.some(
+          record =>
+
+            record.studentId ===
+              movement.studentId
+
+            &&
+
+            record.action ===
+              "Return to Class"
+
+            &&
+
+            new Date(
+              record.timestamp
+            ) >
+
+            new Date(
+              movement.timestamp
+            )
+
+        );
+
+
+      if(!returned){
+
+        active.push(
+          movement
+        );
+
+      }
+
+    }
+  );
+
+
+  const container =
+    document.getElementById(
+      "activePasses"
+    );
+
+
+  if(!active.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+        No students are currently out.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML = `
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Destination
+            </th>
+
+            <th>
+              Started
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          ${active
+            .map(
+              record => `
+
+                <tr>
+
+                  <td>
+                    ${escapeHtml(
+                      record.studentName
+                    )}
+                  </td>
+
+                  <td>
+                    ${escapeHtml(
+                      record.detail
+                    )}
+                  </td>
+
+                  <td>
+                    ${time(
+                      record.timestamp
+                    )}
+                  </td>
+
+                </tr>
+
+              `
+            )
+            .join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+}
+
+
+
+/* ================================================
+   RECENT ACTIVITY
+================================================ */
+
+function renderRecentActivity(){
+
+  const container =
+    document.getElementById(
+      "recentActivity"
+    );
+
+
+  const list =
+    audit.slice(
+      0,
+      10
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+        No activity yet.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    list
+      .map(
+        item => `
+
+          <div class="event">
+
+            <div class="event-title">
+
+              ${escapeHtml(
+                item.action
+              )}
+
+            </div>
+
+
+            ${
+              item.studentName
+              ?
+              `
+              <div class="event-detail">
+
+                ${escapeHtml(
+                  item.studentName
+                )}
+
+                ${
+                  item.detail
+                  ?
+                  " — " +
+                  escapeHtml(
+                    item.detail
+                  )
+                  :
+                  ""
+                }
+
+              </div>
+              `
+              :
+              ""
+            }
+
+
+            <div class="event-time">
+
+              ${time(
+                item.timestamp
+              )}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+
+/* ================================================
+   DASHBOARD
+================================================ */
+
+function renderDashboard(){
+
+  const todayRecords =
+    records.filter(
+      record =>
+        isToday(
+          record.timestamp
+        )
+    );
+
+
+  const present =
+    todayRecords.filter(
+      record =>
+        record.category ===
+        "Attendance"
+        &&
+        record.action ===
         "Present"
     ).length;
 
 
-  const passCount =
-    events.filter(
-      event =>
-        event.action ===
-        "Movement"
+  const absent =
+    todayRecords.filter(
+      record =>
+        record.category ===
+        "Attendance"
+        &&
+        record.action ===
+        "Absent"
     ).length;
 
 
-  const disciplineCount =
-    events.filter(
-      event =>
-        [
-          "ISS",
-          "OSS",
-          "Detention",
-          "Discipline Note"
-        ]
-        .includes(
-          event.action
-        )
+  const tardy =
+    todayRecords.filter(
+      record =>
+        record.category ===
+        "Attendance"
+        &&
+        record.action ===
+        "Tardy"
+    ).length;
+
+
+  const movements =
+    records.filter(
+      record =>
+        record.category ===
+        "Movement"
+    );
+
+
+  const returns =
+    records.filter(
+      record =>
+        record.action ===
+        "Return to Class"
+    );
+
+
+  let out = 0;
+
+
+  movements.forEach(
+    movement => {
+
+      const returned =
+        returns.some(
+          record =>
+
+            record.studentId ===
+              movement.studentId
+
+            &&
+
+            new Date(
+              record.timestamp
+            ) >
+
+            new Date(
+              movement.timestamp
+            )
+
+        );
+
+
+      if(!returned){
+
+        out++;
+
+      }
+
+    }
+  );
+
+
+  const discipline =
+    todayRecords.filter(
+      record =>
+        record.category ===
+        "Discipline"
     ).length;
 
 
@@ -1553,7 +3188,7 @@ function updateDashboard(){
       "statStudents"
     )
     .textContent =
-      studentCount;
+      students.length;
 
 
   document
@@ -1561,15 +3196,31 @@ function updateDashboard(){
       "statPresent"
     )
     .textContent =
-      presentCount;
+      present;
 
 
   document
     .getElementById(
-      "statPasses"
+      "statAbsent"
     )
     .textContent =
-      passCount;
+      absent;
+
+
+  document
+    .getElementById(
+      "statTardy"
+    )
+    .textContent =
+      tardy;
+
+
+  document
+    .getElementById(
+      "statOut"
+    )
+    .textContent =
+      out;
 
 
   document
@@ -1577,88 +3228,69 @@ function updateDashboard(){
       "statDiscipline"
     )
     .textContent =
-      disciplineCount;
+      discipline;
 
 }
 
 
 
-/* ENTER KEY */
-
-studentId.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key ===
-      "Enter"
-    ){
-
-      event.preventDefault();
-
-      lookupStudent();
-
-    }
-
-  }
-);
-
-
-
-/* BUTTONS */
-
-lookupButton.addEventListener(
-  "click",
-  lookupStudent
-);
-
+/* ================================================
+   BACK
+================================================ */
 
 document
   .getElementById(
-    "movementButton"
+    "backToStudents"
   )
   .addEventListener(
     "click",
-    recordMovement
+    () => {
+
+      showPage(
+        "students"
+      );
+
+    }
   );
 
 
 
-/* HTML SAFETY */
+/* ================================================
+   REFRESH EVERYTHING
+================================================ */
 
-function escapeHtml(value){
+function refreshAll(){
 
-  return String(value)
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+  renderDashboard();
+
+  renderStudentTable();
+
+  renderAttendance();
+
+  renderMovement();
+
+  renderActivePasses();
+
+  renderRecentActivity();
+
+
+  if(selectedStudent){
+
+    renderDetail();
+
+  }
 
 }
 
 
 
-/* START */
+/* ================================================
+   START
+================================================ */
 
-updateDashboard();
+save();
 
-studentId.focus();
+refreshAll();
 
 </script>
 
