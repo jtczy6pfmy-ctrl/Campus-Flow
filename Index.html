@@ -316,6 +316,44 @@ button:active{
   margin-top:8px;
 }
 
+.scan-status{
+  margin-top:8px;
+  min-height:18px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+
+.scan-status.ready{
+  color:var(--success);
+}
+
+.scan-status.error{
+  color:var(--danger);
+}
+
+.student-found{
+  margin-top:10px;
+  padding:12px;
+  border-radius:10px;
+  background:var(--secondary);
+  display:none;
+}
+
+.student-found.show{
+  display:block;
+}
+
+.student-found-name{
+  font-weight:800;
+}
+
+.student-found-info{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:13px;
+}
+
 @media(max-width:600px){
 
   .dashboard{
@@ -444,6 +482,7 @@ button:active{
     <div class="row">
 
       <div>
+
         <label for="studentId">
           Student ID
         </label>
@@ -455,9 +494,33 @@ button:active{
           autocomplete="off"
           placeholder="Scan or enter ID"
         >
+
+        <div
+          id="studentScanStatus"
+          class="scan-status"
+        >
+          Scanner ready
+        </div>
+
+        <div
+          id="studentFound"
+          class="student-found"
+        >
+          <div
+            id="studentFoundName"
+            class="student-found-name"
+          ></div>
+
+          <div
+            id="studentFoundInfo"
+            class="student-found-info"
+          ></div>
+        </div>
+
       </div>
 
       <div>
+
         <label for="studentName">
           Student Name
         </label>
@@ -467,9 +530,11 @@ button:active{
           placeholder="Last, First"
           autocomplete="off"
         >
+
       </div>
 
     </div>
+
 
     <label for="studentGrade">
       Grade
@@ -483,6 +548,7 @@ button:active{
       <option>12</option>
 
     </select>
+
 
     <button id="addStudent">
       ADD STUDENT
@@ -505,8 +571,17 @@ button:active{
       id="movementStudent"
       inputmode="numeric"
       pattern="[0-9]*"
+      autocomplete="off"
       placeholder="Scan or enter ID"
     >
+
+    <div
+      id="movementScanStatus"
+      class="scan-status"
+    >
+      Scanner ready
+    </div>
+
 
     <label for="movementType">
       Movement
@@ -540,6 +615,7 @@ button:active{
 
     </select>
 
+
     <button id="recordMovement">
       RECORD MOVEMENT
     </button>
@@ -561,8 +637,17 @@ button:active{
       id="disciplineStudent"
       inputmode="numeric"
       pattern="[0-9]*"
+      autocomplete="off"
       placeholder="Scan or enter ID"
     >
+
+    <div
+      id="disciplineScanStatus"
+      class="scan-status"
+    >
+      Scanner ready
+    </div>
+
 
     <label for="disciplineType">
       Status
@@ -584,6 +669,7 @@ button:active{
 
     </select>
 
+
     <label for="disciplineNote">
       Note
     </label>
@@ -592,6 +678,7 @@ button:active{
       id="disciplineNote"
       placeholder="Optional note..."
     ></textarea>
+
 
     <button id="recordDiscipline">
       RECORD STATUS
@@ -701,36 +788,85 @@ button:active{
 "use strict";
 
 
-/* DATA */
+/* ================================
+   DATA
+================================ */
 
-let students = [];
-let activity = [];
+let students =
+  JSON.parse(
+    localStorage.getItem(
+      "campusFlowStudents"
+    ) || "[]"
+  );
+
+let activity =
+  JSON.parse(
+    localStorage.getItem(
+      "campusFlowActivity"
+    ) || "[]"
+  );
 
 
-/* DOM */
+/* ================================
+   DOM
+================================ */
 
 const studentId =
-  document.getElementById("studentId");
+  document.getElementById(
+    "studentId"
+  );
 
 const studentName =
-  document.getElementById("studentName");
+  document.getElementById(
+    "studentName"
+  );
 
 const studentGrade =
-  document.getElementById("studentGrade");
+  document.getElementById(
+    "studentGrade"
+  );
 
 const studentList =
-  document.getElementById("studentList");
+  document.getElementById(
+    "studentList"
+  );
 
 const noStudents =
-  document.getElementById("noStudents");
+  document.getElementById(
+    "noStudents"
+  );
 
 const activityList =
-  document.getElementById("activity");
+  document.getElementById(
+    "activity"
+  );
 
 
-/* SCREEN NAVIGATION */
+/* ================================
+   SAVE DATA
+================================ */
 
-function showStudentScreen(){
+function saveData(){
+
+  localStorage.setItem(
+    "campusFlowStudents",
+    JSON.stringify(students)
+  );
+
+  localStorage.setItem(
+    "campusFlowActivity",
+    JSON.stringify(activity)
+  );
+
+}
+
+
+/* ================================
+   SCREEN NAVIGATION
+================================ */
+
+window.showStudentScreen =
+function(){
 
   document.getElementById(
     "studentScreen"
@@ -744,10 +880,15 @@ function showStudentScreen(){
     "disciplineScreen"
   ).classList.add("hidden");
 
-}
+  setTimeout(() => {
+    studentId.focus();
+  },100);
+
+};
 
 
-function showMovementScreen(){
+window.showMovementScreen =
+function(){
 
   document.getElementById(
     "studentScreen"
@@ -761,10 +902,19 @@ function showMovementScreen(){
     "disciplineScreen"
   ).classList.add("hidden");
 
-}
+  setTimeout(() => {
+
+    document.getElementById(
+      "movementStudent"
+    ).focus();
+
+  },100);
+
+};
 
 
-function showDisciplineScreen(){
+window.showDisciplineScreen =
+function(){
 
   document.getElementById(
     "studentScreen"
@@ -778,10 +928,461 @@ function showDisciplineScreen(){
     "disciplineScreen"
   ).classList.remove("hidden");
 
+  setTimeout(() => {
+
+    document.getElementById(
+      "disciplineStudent"
+    ).focus();
+
+  },100);
+
+};
+
+
+/* ================================
+   STUDENT LOOKUP
+================================ */
+
+function lookupStudent(id){
+
+  id = String(id || "").trim();
+
+  if(!id){
+
+    return null;
+
+  }
+
+  return students.find(
+    student =>
+      String(student.id).trim() === id
+  ) || null;
+
 }
 
 
-/* ADD STUDENT */
+/* ================================
+   DISPLAY FOUND STUDENT
+================================ */
+
+function showFoundStudent(
+  student,
+  statusElementId,
+  foundBoxId
+){
+
+  const status =
+    document.getElementById(
+      statusElementId
+    );
+
+  const box =
+    document.getElementById(
+      foundBoxId
+    );
+
+  if(!student){
+
+    status.textContent =
+      "Student not found";
+
+    status.classList.remove(
+      "ready"
+    );
+
+    status.classList.add(
+      "error"
+    );
+
+    if(box){
+
+      box.classList.remove(
+        "show"
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  status.textContent =
+    "Student identified";
+
+  status.classList.remove(
+    "error"
+  );
+
+  status.classList.add(
+    "ready"
+  );
+
+
+  if(foundBoxId === "studentFound"){
+
+    document.getElementById(
+      "studentFoundName"
+    ).textContent =
+      student.name;
+
+    document.getElementById(
+      "studentFoundInfo"
+    ).textContent =
+      "ID: " +
+      student.id +
+      " • Grade " +
+      student.grade +
+      " • " +
+      student.status;
+
+    box.classList.add(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* ================================
+   SCANNER-STYLE ID HANDLING
+================================ */
+
+/*
+   Most USB/Bluetooth barcode scanners
+   behave like a keyboard and finish the
+   scan by sending ENTER.
+
+   This handler also works when the user
+   manually enters an ID and presses ENTER.
+*/
+
+function processStudentScan(){
+
+  const id =
+    studentId.value.trim();
+
+  if(!id){
+
+    return;
+
+  }
+
+
+  const student =
+    lookupStudent(id);
+
+
+  if(student){
+
+    showFoundStudent(
+      student,
+      "studentScanStatus",
+      "studentFound"
+    );
+
+
+    /*
+      Existing student:
+      automatically fill the
+      information instead of
+      creating a duplicate.
+    */
+
+    studentName.value =
+      student.name;
+
+    studentGrade.value =
+      student.grade;
+
+
+    addActivity(
+      "Student scanned: " +
+      student.name +
+      " (" +
+      student.id +
+      ")"
+    );
+
+
+    saveData();
+    render();
+
+  }else{
+
+    document.getElementById(
+      "studentScanStatus"
+    ).textContent =
+      "New student ID";
+
+    document.getElementById(
+      "studentScanStatus"
+    ).classList.remove(
+      "error"
+    );
+
+    document.getElementById(
+      "studentScanStatus"
+    ).classList.add(
+      "ready"
+    );
+
+  }
+
+}
+
+
+studentId.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      processStudentScan();
+
+      if(
+        studentName.value.trim()
+      ){
+
+        studentName.focus();
+
+      }
+
+    }
+
+  }
+);
+
+
+/*
+   Also detect IDs entered manually
+   without requiring ENTER.
+*/
+
+studentId.addEventListener(
+  "input",
+  () => {
+
+    const id =
+      studentId.value.trim();
+
+    if(!id){
+
+      document.getElementById(
+        "studentScanStatus"
+      ).textContent =
+        "Scanner ready";
+
+      document.getElementById(
+        "studentScanStatus"
+      ).classList.remove(
+        "ready",
+        "error"
+      );
+
+      document.getElementById(
+        "studentFound"
+      ).classList.remove(
+        "show"
+      );
+
+      return;
+
+    }
+
+
+    const student =
+      lookupStudent(id);
+
+
+    if(student){
+
+      showFoundStudent(
+        student,
+        "studentScanStatus",
+        "studentFound"
+      );
+
+      studentName.value =
+        student.name;
+
+      studentGrade.value =
+        student.grade;
+
+    }
+
+  }
+);
+
+
+/* ================================
+   MOVEMENT SCANNER
+================================ */
+
+const movementStudent =
+  document.getElementById(
+    "movementStudent"
+  );
+
+
+movementStudent.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key !== "Enter"){
+
+      return;
+
+    }
+
+    event.preventDefault();
+
+
+    const id =
+      movementStudent.value.trim();
+
+    const student =
+      lookupStudent(id);
+
+
+    if(!student){
+
+      document.getElementById(
+        "movementScanStatus"
+      ).textContent =
+        "Student ID was not found.";
+
+      document.getElementById(
+        "movementScanStatus"
+      ).classList.remove(
+        "ready"
+      );
+
+      document.getElementById(
+        "movementScanStatus"
+      ).classList.add(
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "movementScanStatus"
+    ).textContent =
+      "Student identified: " +
+      student.name;
+
+    document.getElementById(
+      "movementScanStatus"
+    ).classList.remove(
+      "error"
+    );
+
+    document.getElementById(
+      "movementScanStatus"
+    ).classList.add(
+      "ready"
+    );
+
+
+    document.getElementById(
+      "movementType"
+    ).focus();
+
+  }
+);
+
+
+/* ================================
+   DISCIPLINE SCANNER
+================================ */
+
+const disciplineStudent =
+  document.getElementById(
+    "disciplineStudent"
+  );
+
+
+disciplineStudent.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key !== "Enter"){
+
+      return;
+
+    }
+
+    event.preventDefault();
+
+
+    const id =
+      disciplineStudent.value.trim();
+
+    const student =
+      lookupStudent(id);
+
+
+    if(!student){
+
+      document.getElementById(
+        "disciplineScanStatus"
+      ).textContent =
+        "Student ID was not found.";
+
+      document.getElementById(
+        "disciplineScanStatus"
+      ).classList.remove(
+        "ready"
+      );
+
+      document.getElementById(
+        "disciplineScanStatus"
+      ).classList.add(
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "disciplineScanStatus"
+    ).textContent =
+      "Student identified: " +
+      student.name;
+
+    document.getElementById(
+      "disciplineScanStatus"
+    ).classList.remove(
+      "error"
+    );
+
+    document.getElementById(
+      "disciplineScanStatus"
+    ).classList.add(
+      "ready"
+    );
+
+
+    document.getElementById(
+      "disciplineType"
+    ).focus();
+
+  }
+);
+
+
+/* ================================
+   ADD STUDENT
+================================ */
 
 document.getElementById(
   "addStudent"
@@ -798,9 +1399,12 @@ document.getElementById(
     const grade =
       studentGrade.value;
 
+
     if(!id){
 
-      alert("Enter or scan a student ID.");
+      alert(
+        "Enter or scan a student ID."
+      );
 
       studentId.focus();
 
@@ -808,9 +1412,12 @@ document.getElementById(
 
     }
 
+
     if(!name){
 
-      alert("Enter the student's name.");
+      alert(
+        "Enter the student's name."
+      );
 
       studentName.focus();
 
@@ -818,9 +1425,11 @@ document.getElementById(
 
     }
 
+
     if(
       students.some(
-        student => student.id === id
+        student =>
+          String(student.id) === id
       )
     ){
 
@@ -834,6 +1443,7 @@ document.getElementById(
 
     }
 
+
     students.push({
 
       id,
@@ -843,6 +1453,7 @@ document.getElementById(
 
     });
 
+
     addActivity(
       "Student added: " +
       name +
@@ -851,8 +1462,31 @@ document.getElementById(
       ")"
     );
 
+
+    saveData();
+
+
     studentId.value = "";
     studentName.value = "";
+
+    document.getElementById(
+      "studentFound"
+    ).classList.remove(
+      "show"
+    );
+
+    document.getElementById(
+      "studentScanStatus"
+    ).textContent =
+      "Scanner ready";
+
+    document.getElementById(
+      "studentScanStatus"
+    ).classList.remove(
+      "ready",
+      "error"
+    );
+
 
     render();
 
@@ -862,7 +1496,9 @@ document.getElementById(
 );
 
 
-/* MOVEMENT */
+/* ================================
+   MOVEMENT
+================================ */
 
 document.getElementById(
   "recordMovement"
@@ -871,9 +1507,7 @@ document.getElementById(
   () => {
 
     const id =
-      document.getElementById(
-        "movementStudent"
-      ).value.trim();
+      movementStudent.value.trim();
 
     const movement =
       document.getElementById(
@@ -881,7 +1515,8 @@ document.getElementById(
       ).value;
 
     const student =
-      findStudent(id);
+      lookupStudent(id);
+
 
     if(!student){
 
@@ -889,30 +1524,41 @@ document.getElementById(
         "Student ID was not found."
       );
 
+      movementStudent.focus();
+
       return;
 
     }
 
+
     const movementNames = {
 
-      ENTRY:"entered the building",
+      ENTRY:
+        "entered the building",
 
-      EXIT:"left the building",
+      EXIT:
+        "left the building",
 
-      CLASSROOM:"entered a classroom",
+      CLASSROOM:
+        "entered a classroom",
 
-      RESTROOM:"went to the restroom",
+      RESTROOM:
+        "went to the restroom",
 
-      LUNCH:"went to lunch",
+      LUNCH:
+        "went to lunch",
 
-      OFFICE:"went to the main office"
+      OFFICE:
+        "went to the main office"
 
     };
+
 
     student.status =
       movement === "EXIT"
         ? "Off Campus"
         : "On Campus";
+
 
     addActivity(
       student.name +
@@ -920,17 +1566,37 @@ document.getElementById(
       movementNames[movement]
     );
 
+
+    saveData();
+
+
+    movementStudent.value = "";
+
+
     document.getElementById(
-      "movementStudent"
-    ).value = "";
+      "movementScanStatus"
+    ).textContent =
+      "Scanner ready";
+
+    document.getElementById(
+      "movementScanStatus"
+    ).classList.remove(
+      "ready",
+      "error"
+    );
+
 
     render();
+
+    movementStudent.focus();
 
   }
 );
 
 
-/* DISCIPLINE */
+/* ================================
+   DISCIPLINE
+================================ */
 
 document.getElementById(
   "recordDiscipline"
@@ -939,9 +1605,7 @@ document.getElementById(
   () => {
 
     const id =
-      document.getElementById(
-        "disciplineStudent"
-      ).value.trim();
+      disciplineStudent.value.trim();
 
     const type =
       document.getElementById(
@@ -954,7 +1618,8 @@ document.getElementById(
       ).value.trim();
 
     const student =
-      findStudent(id);
+      lookupStudent(id);
+
 
     if(!student){
 
@@ -962,62 +1627,81 @@ document.getElementById(
         "Student ID was not found."
       );
 
+      disciplineStudent.focus();
+
       return;
 
     }
 
+
     if(type === "ISS"){
 
-      student.status = "ISS";
+      student.status =
+        "ISS";
 
     }else if(type === "OSS"){
 
-      student.status = "OSS";
+      student.status =
+        "OSS";
 
     }else{
 
-      student.status = "Detention";
+      student.status =
+        "Detention";
 
     }
+
 
     addActivity(
       student.name +
       " — " +
       student.status +
-      (note ? " — " + note : "")
+      (note
+        ? " — " + note
+        : "")
     );
 
-    document.getElementById(
-      "disciplineStudent"
-    ).value = "";
+
+    saveData();
+
+
+    disciplineStudent.value = "";
 
     document.getElementById(
       "disciplineNote"
     ).value = "";
 
+
+    document.getElementById(
+      "disciplineScanStatus"
+    ).textContent =
+      "Scanner ready";
+
+    document.getElementById(
+      "disciplineScanStatus"
+    ).classList.remove(
+      "ready",
+      "error"
+    );
+
+
     render();
+
+    disciplineStudent.focus();
 
   }
 );
 
 
-/* FIND STUDENT */
-
-function findStudent(id){
-
-  return students.find(
-    student => student.id === id
-  );
-
-}
-
-
-/* ACTIVITY */
+/* ================================
+   ACTIVITY
+================================ */
 
 function addActivity(text){
 
   const now =
     new Date();
+
 
   activity.unshift({
 
@@ -1034,6 +1718,7 @@ function addActivity(text){
 
   });
 
+
   if(activity.length > 50){
 
     activity.length = 50;
@@ -1043,11 +1728,14 @@ function addActivity(text){
 }
 
 
-/* RENDER */
+/* ================================
+   RENDER
+================================ */
 
 function render(){
 
   studentList.innerHTML = "";
+
 
   noStudents.style.display =
     students.length
@@ -1055,98 +1743,123 @@ function render(){
       : "block";
 
 
-  students.forEach(student => {
+  students.forEach(
+    student => {
 
-    const item =
-      document.createElement("div");
+      const item =
+        document.createElement(
+          "div"
+        );
 
-    item.className =
-      "student";
-
-
-    const info =
-      document.createElement("div");
-
-    const name =
-      document.createElement("div");
-
-    name.className =
-      "student-name";
-
-    name.textContent =
-      student.name;
-
-    const details =
-      document.createElement("div");
-
-    details.className =
-      "student-info";
-
-    details.textContent =
-      "ID: " +
-      student.id +
-      " • Grade " +
-      student.grade;
+      item.className =
+        "student";
 
 
-    info.appendChild(name);
-    info.appendChild(details);
+      const info =
+        document.createElement(
+          "div"
+        );
 
 
-    const status =
-      document.createElement("div");
+      const name =
+        document.createElement(
+          "div"
+        );
 
-    status.className =
-      "status";
+      name.className =
+        "student-name";
+
+      name.textContent =
+        student.name;
 
 
-    const statusLower =
-      student.status.toLowerCase();
+      const details =
+        document.createElement(
+          "div"
+        );
+
+      details.className =
+        "student-info";
+
+      details.textContent =
+        "ID: " +
+        student.id +
+        " • Grade " +
+        student.grade;
 
 
-    if(statusLower === "on campus"){
+      info.appendChild(name);
+      info.appendChild(details);
 
-      status.classList.add(
-        "onsite"
-      );
+
+      const status =
+        document.createElement(
+          "div"
+        );
+
+      status.className =
+        "status";
+
+
+      const statusLower =
+        student.status.toLowerCase();
+
+
+      if(
+        statusLower === "on campus"
+      ){
+
+        status.classList.add(
+          "onsite"
+        );
+
+      }
+
+
+      if(
+        statusLower === "iss"
+      ){
+
+        status.classList.add(
+          "iss"
+        );
+
+      }
+
+
+      if(
+        statusLower === "oss"
+      ){
+
+        status.classList.add(
+          "oss"
+        );
+
+      }
+
+
+      if(
+        statusLower === "detention"
+      ){
+
+        status.classList.add(
+          "detention"
+        );
+
+      }
+
+
+      status.textContent =
+        student.status;
+
+
+      item.appendChild(info);
+      item.appendChild(status);
+
+      studentList.appendChild(item);
 
     }
-
-    if(statusLower === "iss"){
-
-      status.classList.add(
-        "iss"
-      );
-
-    }
-
-    if(statusLower === "oss"){
-
-      status.classList.add(
-        "oss"
-      );
-
-    }
-
-    if(statusLower === "detention"){
-
-      status.classList.add(
-        "detention"
-      );
-
-    }
-
-
-    status.textContent =
-      student.status;
-
-
-    item.appendChild(info);
-    item.appendChild(status);
-
-    studentList.appendChild(item);
-
-  });
+  );
 
 
   activityList.innerHTML = "";
@@ -1159,41 +1872,49 @@ function render(){
 
   }else{
 
-    activity.forEach(entry => {
+    activity.forEach(
+      entry => {
 
-      const item =
-        document.createElement("div");
+        const item =
+          document.createElement(
+            "div"
+          );
 
-      item.className =
-        "activity-item";
-
-
-      const time =
-        document.createElement("div");
-
-      time.className =
-        "activity-time";
-
-      time.textContent =
-        entry.time;
+        item.className =
+          "activity-item";
 
 
-      const text =
-        document.createElement("div");
+        const time =
+          document.createElement(
+            "div"
+          );
 
-      text.className =
-        "activity-text";
+        time.className =
+          "activity-time";
 
-      text.textContent =
-        entry.text;
+        time.textContent =
+          entry.time;
 
 
-      item.appendChild(time);
-      item.appendChild(text);
+        const text =
+          document.createElement(
+            "div"
+          );
 
-      activityList.appendChild(item);
+        text.className =
+          "activity-text";
 
-    });
+        text.textContent =
+          entry.text;
+
+
+        item.appendChild(time);
+        item.appendChild(text);
+
+        activityList.appendChild(item);
+
+      }
+    );
 
   }
 
@@ -1209,7 +1930,8 @@ function render(){
   ).textContent =
     students.filter(
       student =>
-        student.status === "On Campus"
+        student.status ===
+        "On Campus"
     ).length;
 
 
@@ -1233,7 +1955,9 @@ function render(){
 }
 
 
-/* RESET */
+/* ================================
+   RESET
+================================ */
 
 document.getElementById(
   "resetDay"
@@ -1272,9 +1996,20 @@ document.getElementById(
     students = [];
     activity = [];
 
+
+    localStorage.removeItem(
+      "campusFlowStudents"
+    );
+
+    localStorage.removeItem(
+      "campusFlowActivity"
+    );
+
+
     document.getElementById(
       "confirmModal"
     ).classList.remove("show");
+
 
     render();
 
@@ -1282,23 +2017,9 @@ document.getElementById(
 );
 
 
-/* ENTER KEY */
-
-studentId.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Enter"){
-
-      event.preventDefault();
-
-      studentName.focus();
-
-    }
-
-  }
-);
-
+/* ================================
+   ENTER KEY — STUDENT NAME
+================================ */
 
 studentName.addEventListener(
   "keydown",
@@ -1318,9 +2039,13 @@ studentName.addEventListener(
 );
 
 
-/* START */
+/* ================================
+   START
+================================ */
 
 render();
+
+studentId.focus();
 
 })();
 
