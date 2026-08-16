@@ -2,54 +2,101 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover">
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Campus Flow">
+
 <meta name="theme-color" content="#0b0f14">
 
 <title>Campus Flow</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
 
 :root{
   --bg:#eef1f5;
-  --card:#fff;
+  --card:#ffffff;
   --border:#dfe3e8;
   --text:#17202a;
   --muted:#68727d;
-  --input:#fff;
+  --input:#ffffff;
+  --input-border:#c8ced6;
+
   --accent:#17202a;
-  --accent-text:#fff;
+  --accent-text:#ffffff;
+
   --secondary:#e5e8ec;
+  --secondary-text:#17202a;
+
   --success:#16834b;
+  --success-bg:#e8f6ee;
+
+  --warning:#a66a00;
+  --warning-bg:#fff5dc;
+
   --danger:#b42318;
+  --danger-bg:#fdebea;
+
+  --purple:#6941c6;
+  --purple-bg:#f0eaff;
+
   --shadow:0 4px 18px rgba(15,23,42,.08);
 }
 
-html,body{
+html,
+body{
   margin:0;
   min-height:100%;
   background:var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   -webkit-font-smoothing:antialiased;
 }
 
+body{
+  padding-bottom:30px;
+}
+
+
+/* HEADER */
+
 header{
-  background:linear-gradient(180deg,#15191e,#080a0d);
+  background:
+    linear-gradient(
+      180deg,
+      #15191e 0%,
+      #080a0d 100%
+    );
+
   color:#fff;
-  padding:18px 16px;
+
+  padding:
+    18px
+    16px
+    20px;
+
   text-align:center;
-  box-shadow:0 2px 10px rgba(0,0,0,.18);
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.18);
 }
 
 .header-title{
-  font-size:24px;
-  font-weight:800;
+  font-size:25px;
+  font-weight:850;
+  letter-spacing:-.02em;
 }
 
 .header-subtitle{
@@ -58,11 +105,17 @@ header{
   opacity:.7;
 }
 
+
+/* APP */
+
 .app{
   width:min(900px,100%);
-  margin:auto;
-  padding:16px 12px 50px;
+  margin:0 auto;
+  padding:15px 12px 45px;
 }
+
+
+/* CARDS */
 
 .card{
   background:var(--card);
@@ -77,29 +130,44 @@ header{
   margin:0 0 16px;
   font-size:20px;
   font-weight:800;
+  letter-spacing:-.01em;
 }
 
 .card h2::before{
   content:"";
+
   display:inline-block;
+
   width:4px;
   height:21px;
+
   border-radius:5px;
+
   background:var(--accent);
+
   vertical-align:-3px;
+
   margin-right:9px;
 }
 
+
+/* DASHBOARD */
+
 .dashboard{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:10px;
 }
 
 .stat{
   padding:14px 8px;
+
   border-radius:12px;
+
   background:var(--secondary);
+
   text-align:center;
 }
 
@@ -110,20 +178,33 @@ header{
 
 .stat-label{
   margin-top:3px;
+
   color:var(--muted);
+
   font-size:12px;
-  font-weight:700;
+  font-weight:750;
 }
+
+
+/* INPUTS */
 
 .row{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:12px;
 }
 
 label{
   display:block;
-  margin:13px 0 6px;
+
+  margin:
+    13px
+    0
+    6px;
+
   font-size:14px;
   font-weight:750;
 }
@@ -131,23 +212,39 @@ label{
 input,
 select,
 textarea{
+
   width:100%;
+
   min-height:49px;
-  padding:12px 13px;
-  border:1px solid #c8ced6;
+
+  padding:
+    12px
+    13px;
+
+  border:
+    1px solid
+    var(--input-border);
+
   border-radius:10px;
+
   background:var(--input);
   color:var(--text);
-  font:inherit;
+
+  font-family:inherit;
   font-size:17px;
+
   outline:none;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
+
   border-color:#68727d;
-  box-shadow:0 0 0 3px rgba(104,114,125,.13);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(104,114,125,.13);
 }
 
 textarea{
@@ -155,23 +252,46 @@ textarea{
   resize:vertical;
 }
 
+
+/* BUTTONS */
+
 button{
+
   width:100%;
+
   min-height:50px;
+
   margin-top:15px;
+
   border:0;
+
   border-radius:10px;
+
   background:var(--accent);
   color:var(--accent-text);
-  font:inherit;
+
+  font-family:inherit;
+
   font-size:15px;
   font-weight:800;
+
   cursor:pointer;
+
+  -webkit-tap-highlight-color:
+    transparent;
+
+  transition:
+    transform .08s ease,
+    opacity .15s ease;
+}
+
+button:active{
+  transform:scale(.985);
 }
 
 button.secondary{
   background:var(--secondary);
-  color:var(--text);
+  color:var(--secondary-text);
 }
 
 button.danger{
@@ -179,13 +299,16 @@ button.danger{
   color:#fff;
 }
 
-button:active{
-  transform:scale(.985);
-}
+
+/* QUICK ACTIONS */
 
 .quick-actions{
+
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:10px;
 }
 
@@ -193,94 +316,407 @@ button:active{
   margin:0;
 }
 
-.student-list{
+
+/* STUDENT PROFILE */
+
+.student-profile{
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:14px;
+
+  overflow:hidden;
+
+  margin-top:15px;
+}
+
+.student-profile-header{
+
+  padding:16px;
+
+  background:var(--secondary);
+
   display:flex;
+
+  justify-content:
+    space-between;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+.student-name{
+
+  font-size:21px;
+  font-weight:850;
+}
+
+.student-id{
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+.student-status{
+
+  flex-shrink:0;
+
+  padding:
+    8px
+    10px;
+
+  border-radius:9px;
+
+  font-size:12px;
+  font-weight:850;
+}
+
+.status-on{
+  color:var(--success);
+  background:var(--success-bg);
+}
+
+.status-off{
+  color:var(--danger);
+  background:var(--danger-bg);
+}
+
+.status-iss{
+  color:var(--warning);
+  background:var(--warning-bg);
+}
+
+.status-oss{
+  color:var(--danger);
+  background:var(--danger-bg);
+}
+
+.status-detention{
+  color:var(--purple);
+  background:var(--purple-bg);
+}
+
+.student-details{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:0;
+
+  padding:5px 16px 12px;
+}
+
+.detail{
+
+  padding:
+    9px
+    0;
+
+}
+
+.detail-label{
+
+  color:var(--muted);
+
+  font-size:12px;
+  font-weight:700;
+
+}
+
+.detail-value{
+
+  margin-top:2px;
+
+  font-size:15px;
+  font-weight:750;
+
+}
+
+
+/* CURRENT LOCATION */
+
+.location-box{
+
+  margin-top:14px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:var(--secondary);
+
+  text-align:center;
+}
+
+.location-label{
+
+  color:var(--muted);
+
+  font-size:12px;
+  font-weight:750;
+
+  text-transform:uppercase;
+
+  letter-spacing:.04em;
+}
+
+.location-value{
+
+  margin-top:4px;
+
+  font-size:20px;
+  font-weight:850;
+}
+
+
+/* MOVEMENT BUTTONS */
+
+.movement-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:9px;
+
+  margin-top:14px;
+}
+
+.movement-grid button{
+
+  margin:0;
+
+  min-height:55px;
+
+  font-size:14px;
+
+}
+
+.movement-grid button.active{
+
+  outline:
+    3px solid
+    rgba(22,131,75,.20);
+
+}
+
+
+/* HISTORY */
+
+.history{
+
+  display:flex;
+
   flex-direction:column;
+
+  gap:0;
+
+  margin-top:14px;
+}
+
+.history-item{
+
+  display:grid;
+
+  grid-template-columns:
+    70px 1fr;
+
+  gap:10px;
+
+  padding:
+    11px 0;
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+}
+
+.history-time{
+
+  color:var(--muted);
+
+  font-size:12px;
+  font-weight:750;
+}
+
+.history-event{
+
+  font-size:14px;
+  font-weight:650;
+}
+
+.history-location{
+
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* STUDENT LIST */
+
+.student-list{
+
+  display:flex;
+
+  flex-direction:column;
+
   gap:9px;
 }
 
 .student{
+
   display:grid;
-  grid-template-columns:1fr auto;
+
+  grid-template-columns:
+    1fr auto;
+
   align-items:center;
+
   gap:10px;
+
   padding:13px;
-  border:1px solid var(--border);
+
+  border:
+    1px solid
+    var(--border);
+
   border-radius:12px;
+
+  cursor:pointer;
 }
 
-.student-name{
+.student:active{
+
+  transform:scale(.99);
+
+}
+
+.student-info-name{
+
   font-weight:800;
 }
 
-.student-info{
+.student-info-sub{
+
   margin-top:3px;
+
   color:var(--muted);
+
   font-size:13px;
 }
 
 .status{
-  padding:7px 9px;
+
+  padding:
+    7px
+    9px;
+
   border-radius:8px;
-  background:var(--secondary);
+
   font-size:12px;
   font-weight:800;
 }
 
-.status.onsite{
-  color:var(--success);
-}
 
-.status.iss{
-  color:#9a6700;
-}
-
-.status.oss{
-  color:var(--danger);
-}
-
-.status.detention{
-  color:#6b46c1;
-}
+/* ACTIVITY */
 
 .activity{
+
   display:flex;
+
   flex-direction:column;
-  gap:9px;
+
+  gap:0;
 }
 
 .activity-item{
+
   display:grid;
-  grid-template-columns:70px 1fr;
+
+  grid-template-columns:
+    70px 1fr;
+
   gap:10px;
-  padding:10px 0;
-  border-bottom:1px solid var(--border);
+
+  padding:
+    10px 0;
+
+  border-bottom:
+    1px solid
+    var(--border);
 }
 
 .activity-time{
+
   color:var(--muted);
-  font-size:13px;
+
+  font-size:12px;
   font-weight:700;
 }
 
 .activity-text{
+
   font-size:14px;
 }
+
+
+/* EMPTY */
+
+.empty{
+
+  padding:15px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+
+/* HIDDEN */
 
 .hidden{
   display:none !important;
 }
 
+
+/* MODAL */
+
 .modal-overlay{
+
   position:fixed;
+
   inset:0;
+
   z-index:9999;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:20px;
-  background:rgba(0,0,0,.5);
+
+  background:
+    rgba(0,0,0,.5);
+
   backdrop-filter:blur(5px);
+
+  -webkit-backdrop-filter:blur(5px);
 }
 
 .modal-overlay.show{
@@ -288,27 +724,43 @@ button:active{
 }
 
 .modal{
+
   width:min(430px,100%);
+
   background:var(--card);
+
   color:var(--text);
+
   border-radius:18px;
+
   padding:22px;
-  box-shadow:0 20px 60px rgba(0,0,0,.3);
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.3);
 }
 
 .modal h3{
+
   margin:0 0 8px;
+
   font-size:21px;
 }
 
 .modal p{
+
   color:var(--muted);
+
   line-height:1.5;
 }
 
 .modal-actions{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:10px;
 }
 
@@ -316,346 +768,513 @@ button:active{
   margin-top:8px;
 }
 
+
+/* MOBILE */
+
 @media(max-width:600px){
 
   .dashboard{
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .row{
-    grid-template-columns:1fr;
+
+    grid-template-columns:
+      1fr;
+
     gap:2px;
   }
 
   .quick-actions{
-    grid-template-columns:1fr;
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .movement-grid{
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .student-details{
+
+    grid-template-columns:
+      1fr;
   }
 
   .app{
-    padding:12px 10px 40px;
+
+    padding:
+      12px
+      10px
+      40px;
   }
 
 }
 
+
+/* DARK MODE */
+
 @media(prefers-color-scheme:dark){
 
   :root{
+
     --bg:#0b0f14;
     --card:#171d24;
     --border:#2b333d;
     --text:#f4f6f8;
     --muted:#a7b0ba;
+
     --input:#0f141a;
+    --input-border:#3b4550;
+
     --accent:#f4f6f8;
     --accent-text:#11161c;
-    --secondary:#242c35;
-    --success:#51d98c;
-    --danger:#ff6b6b;
-  }
 
-  input,
-  select,
-  textarea{
-    border-color:#3b4550;
+    --secondary:#242c35;
+    --secondary-text:#f4f6f8;
+
+    --success:#51d98c;
+    --success-bg:#14291f;
+
+    --warning:#e4a72c;
+    --warning-bg:#302711;
+
+    --danger:#ff6b6b;
+    --danger-bg:#321718;
+
+    --purple:#b49aff;
+    --purple-bg:#28203d;
   }
 
   header{
     background:#000;
   }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
-  <div class="header-title">Campus Flow</div>
+
+  <div class="header-title">
+    Campus Flow
+  </div>
+
   <div class="header-subtitle">
     Student Attendance • Security • Movement
   </div>
+
 </header>
+
 
 <main class="app">
 
-  <!-- DASHBOARD -->
 
-  <section class="card">
+<!-- DASHBOARD -->
 
-    <h2>Dashboard</h2>
+<section class="card">
 
-    <div class="dashboard">
+  <h2>Dashboard</h2>
 
-      <div class="stat">
-        <div class="stat-number" id="totalStudents">0</div>
-        <div class="stat-label">Students</div>
-      </div>
+  <div class="dashboard">
 
-      <div class="stat">
-        <div class="stat-number" id="onCampus">0</div>
-        <div class="stat-label">On Campus</div>
-      </div>
+    <div class="stat">
 
-      <div class="stat">
-        <div class="stat-number" id="issCount">0</div>
-        <div class="stat-label">ISS</div>
-      </div>
+      <div
+        class="stat-number"
+        id="totalStudents"
+      >0</div>
 
-      <div class="stat">
-        <div class="stat-number" id="ossCount">0</div>
-        <div class="stat-label">OSS</div>
+      <div class="stat-label">
+        Students
       </div>
 
     </div>
 
-  </section>
 
+    <div class="stat">
 
-  <!-- QUICK ACTIONS -->
+      <div
+        class="stat-number"
+        id="onCampus"
+      >0</div>
 
-  <section class="card">
-
-    <h2>Quick Actions</h2>
-
-    <div class="quick-actions">
-
-      <button onclick="showStudentScreen()">
-        STUDENT
-      </button>
-
-      <button onclick="showMovementScreen()">
-        MOVEMENT
-      </button>
-
-      <button onclick="showDisciplineScreen()">
-        DISCIPLINE
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- STUDENT SCREEN -->
-
-  <section class="card" id="studentScreen">
-
-    <h2>Student</h2>
-
-    <div class="row">
-
-      <div>
-        <label for="studentId">
-          Student ID
-        </label>
-
-        <input
-          id="studentId"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          autocomplete="off"
-          placeholder="Scan or enter ID"
-        >
-      </div>
-
-      <div>
-        <label for="studentName">
-          Student Name
-        </label>
-
-        <input
-          id="studentName"
-          placeholder="Last, First"
-          autocomplete="off"
-        >
+      <div class="stat-label">
+        On Campus
       </div>
 
     </div>
 
-    <label for="studentGrade">
-      Grade
-    </label>
 
-    <select id="studentGrade">
+    <div class="stat">
 
-      <option>9</option>
-      <option>10</option>
-      <option>11</option>
-      <option>12</option>
+      <div
+        class="stat-number"
+        id="issCount"
+      >0</div>
 
-    </select>
-
-    <button id="addStudent">
-      ADD STUDENT
-    </button>
-
-  </section>
-
-
-  <!-- MOVEMENT -->
-
-  <section class="card hidden" id="movementScreen">
-
-    <h2>Student Movement</h2>
-
-    <label for="movementStudent">
-      Student ID
-    </label>
-
-    <input
-      id="movementStudent"
-      inputmode="numeric"
-      pattern="[0-9]*"
-      placeholder="Scan or enter ID"
-    >
-
-    <label for="movementType">
-      Movement
-    </label>
-
-    <select id="movementType">
-
-      <option value="ENTRY">
-        Building Entry
-      </option>
-
-      <option value="EXIT">
-        Building Exit
-      </option>
-
-      <option value="CLASSROOM">
-        Classroom
-      </option>
-
-      <option value="RESTROOM">
-        Restroom
-      </option>
-
-      <option value="LUNCH">
-        Lunch
-      </option>
-
-      <option value="OFFICE">
-        Main Office
-      </option>
-
-    </select>
-
-    <button id="recordMovement">
-      RECORD MOVEMENT
-    </button>
-
-  </section>
-
-
-  <!-- DISCIPLINE -->
-
-  <section class="card hidden" id="disciplineScreen">
-
-    <h2>Discipline / Attendance</h2>
-
-    <label for="disciplineStudent">
-      Student ID
-    </label>
-
-    <input
-      id="disciplineStudent"
-      inputmode="numeric"
-      pattern="[0-9]*"
-      placeholder="Scan or enter ID"
-    >
-
-    <label for="disciplineType">
-      Status
-    </label>
-
-    <select id="disciplineType">
-
-      <option value="ISS">
-        ISS — In-School Suspension
-      </option>
-
-      <option value="OSS">
-        OSS — Out-of-School Suspension
-      </option>
-
-      <option value="DETENTION">
-        Detention
-      </option>
-
-    </select>
-
-    <label for="disciplineNote">
-      Note
-    </label>
-
-    <textarea
-      id="disciplineNote"
-      placeholder="Optional note..."
-    ></textarea>
-
-    <button id="recordDiscipline">
-      RECORD STATUS
-    </button>
-
-  </section>
-
-
-  <!-- STUDENT LIST -->
-
-  <section class="card">
-
-    <h2>Students</h2>
-
-    <div
-      class="student-list"
-      id="studentList"
-    ></div>
-
-    <div
-      id="noStudents"
-      style="color:var(--muted);text-align:center;padding:10px;"
-    >
-      No students added yet.
-    </div>
-
-  </section>
-
-
-  <!-- ACTIVITY -->
-
-  <section class="card">
-
-    <h2>Recent Activity</h2>
-
-    <div
-      class="activity"
-      id="activity"
-    >
-      <div style="color:var(--muted);">
-        No activity recorded.
+      <div class="stat-label">
+        ISS
       </div>
+
     </div>
 
-  </section>
+
+    <div class="stat">
+
+      <div
+        class="stat-number"
+        id="ossCount"
+      >0</div>
+
+      <div class="stat-label">
+        OSS
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
-  <!-- RESET -->
+<!-- QUICK ACTIONS -->
 
-  <section class="card">
+<section class="card">
+
+  <h2>Quick Actions</h2>
+
+  <div class="quick-actions">
 
     <button
-      class="danger"
-      id="resetDay"
+      id="studentAction"
     >
-      RESET DEMO DATA
+      STUDENT
     </button>
 
-  </section>
+    <button
+      id="movementAction"
+    >
+      MOVEMENT
+    </button>
+
+    <button
+      id="disciplineAction"
+    >
+      DISCIPLINE
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- STUDENT LOOKUP -->
+
+<section
+  class="card"
+  id="studentScreen"
+>
+
+  <h2>Student Lookup</h2>
+
+  <label for="studentId">
+    Student ID
+  </label>
+
+  <input
+    id="studentId"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    autocomplete="off"
+    placeholder="Scan or enter Student ID"
+  >
+
+  <button id="lookupStudent">
+    LOOK UP STUDENT
+  </button>
+
+
+  <!-- SELECTED STUDENT -->
+
+  <div
+    id="selectedStudent"
+    class="hidden"
+  >
+
+    <div class="student-profile">
+
+      <div class="student-profile-header">
+
+        <div>
+
+          <div
+            class="student-name"
+            id="profileName"
+          ></div>
+
+          <div
+            class="student-id"
+            id="profileId"
+          ></div>
+
+        </div>
+
+        <div
+          class="student-status"
+          id="profileStatus"
+        ></div>
+
+      </div>
+
+
+      <div class="student-details">
+
+        <div class="detail">
+
+          <div class="detail-label">
+            Grade
+          </div>
+
+          <div
+            class="detail-value"
+            id="profileGrade"
+          ></div>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-label">
+            Student ID
+          </div>
+
+          <div
+            class="detail-value"
+            id="profileId2"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="location-box">
+
+      <div class="location-label">
+        Current Location
+      </div>
+
+      <div
+        class="location-value"
+        id="currentLocation"
+      >
+        Unknown
+      </div>
+
+    </div>
+
+
+    <h2
+      style="
+        margin-top:20px;
+        margin-bottom:8px;
+      "
+    >
+      Record Movement
+    </h2>
+
+
+    <div class="movement-grid">
+
+      <button
+        data-movement="Building Entry"
+      >
+        🏫 Building Entry
+      </button>
+
+      <button
+        data-movement="Building Exit"
+      >
+        🚪 Building Exit
+      </button>
+
+      <button
+        data-movement="Classroom"
+      >
+        📚 Classroom
+      </button>
+
+      <button
+        data-movement="Restroom"
+      >
+        🚻 Restroom
+      </button>
+
+      <button
+        data-movement="Lunch"
+      >
+        🍽 Lunch
+      </button>
+
+      <button
+        data-movement="Main Office"
+      >
+        🏢 Main Office
+      </button>
+
+    </div>
+
+
+    <h2
+      style="
+        margin-top:22px;
+        margin-bottom:8px;
+      "
+    >
+      Student History
+    </h2>
+
+    <div
+      class="history"
+      id="studentHistory"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- DISCIPLINE -->
+
+<section
+  class="card"
+  id="disciplineScreen"
+>
+
+  <h2>Discipline / Attendance</h2>
+
+  <label for="disciplineStudent">
+    Student ID
+  </label>
+
+  <input
+    id="disciplineStudent"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    placeholder="Scan or enter Student ID"
+  >
+
+  <label for="disciplineType">
+    Status
+  </label>
+
+  <select id="disciplineType">
+
+    <option value="ISS">
+      ISS — In-School Suspension
+    </option>
+
+    <option value="OSS">
+      OSS — Out-of-School Suspension
+    </option>
+
+    <option value="Detention">
+      Detention
+    </option>
+
+  </select>
+
+
+  <label for="disciplineNote">
+    Note
+  </label>
+
+  <textarea
+    id="disciplineNote"
+    placeholder="Optional note..."
+  ></textarea>
+
+
+  <button id="recordDiscipline">
+    RECORD STATUS
+  </button>
+
+</section>
+
+
+<!-- STUDENT DIRECTORY -->
+
+<section class="card">
+
+  <h2>Student Directory</h2>
+
+  <div
+    class="student-list"
+    id="studentList"
+  ></div>
+
+  <div
+    class="empty"
+    id="noStudents"
+  >
+    No students added yet.
+  </div>
+
+</section>
+
+
+<!-- ACTIVITY -->
+
+<section class="card">
+
+  <h2>Recent Activity</h2>
+
+  <div
+    class="activity"
+    id="activity"
+  ></div>
+
+</section>
+
+
+<!-- DEMO DATA -->
+
+<section class="card">
+
+  <button
+    class="secondary"
+    id="loadDemo"
+  >
+    LOAD DEMO STUDENTS
+  </button>
+
+  <button
+    class="danger"
+    id="resetDay"
+  >
+    RESET DEMO DATA
+  </button>
+
+</section>
+
 
 </main>
 
 
-<!-- CONFIRMATION -->
+<!-- RESET MODAL -->
 
 <div
   class="modal-overlay"
@@ -664,11 +1283,14 @@ button:active{
 
   <div class="modal">
 
-    <h3>Reset Campus Flow?</h3>
+    <h3>
+      Reset Campus Flow?
+    </h3>
 
     <p>
-      This will remove the current demo students,
-      movements and discipline records.
+      This will remove the current
+      students, movement history and
+      discipline records.
     </p>
 
     <div class="modal-actions">
@@ -701,452 +1323,649 @@ button:active{
 "use strict";
 
 
-/* DATA */
+/* =========================
+   DATA
+========================= */
 
 let students = [];
+
 let activity = [];
 
+let selectedStudentId = null;
 
-/* DOM */
+
+/* =========================
+   DOM
+========================= */
 
 const studentId =
-  document.getElementById("studentId");
+  document.getElementById(
+    "studentId"
+  );
 
-const studentName =
-  document.getElementById("studentName");
-
-const studentGrade =
-  document.getElementById("studentGrade");
+const selectedStudent =
+  document.getElementById(
+    "selectedStudent"
+  );
 
 const studentList =
-  document.getElementById("studentList");
+  document.getElementById(
+    "studentList"
+  );
 
 const noStudents =
-  document.getElementById("noStudents");
+  document.getElementById(
+    "noStudents"
+  );
 
 const activityList =
-  document.getElementById("activity");
-
-
-/* SCREEN NAVIGATION */
-
-function showStudentScreen(){
-
   document.getElementById(
-    "studentScreen"
-  ).classList.remove("hidden");
+    "activity"
+  );
 
-  document.getElementById(
-    "movementScreen"
-  ).classList.add("hidden");
 
-  document.getElementById(
-    "disciplineScreen"
-  ).classList.add("hidden");
-
-}
-
-
-function showMovementScreen(){
-
-  document.getElementById(
-    "studentScreen"
-  ).classList.add("hidden");
-
-  document.getElementById(
-    "movementScreen"
-  ).classList.remove("hidden");
-
-  document.getElementById(
-    "disciplineScreen"
-  ).classList.add("hidden");
-
-}
-
-
-function showDisciplineScreen(){
-
-  document.getElementById(
-    "studentScreen"
-  ).classList.add("hidden");
-
-  document.getElementById(
-    "movementScreen"
-  ).classList.add("hidden");
-
-  document.getElementById(
-    "disciplineScreen"
-  ).classList.remove("hidden");
-
-}
-
-
-/* ADD STUDENT */
-
-document.getElementById(
-  "addStudent"
-).addEventListener(
-  "click",
-  () => {
-
-    const id =
-      studentId.value.trim();
-
-    const name =
-      studentName.value.trim();
-
-    const grade =
-      studentGrade.value;
-
-    if(!id){
-
-      alert("Enter or scan a student ID.");
-
-      studentId.focus();
-
-      return;
-
-    }
-
-    if(!name){
-
-      alert("Enter the student's name.");
-
-      studentName.focus();
-
-      return;
-
-    }
-
-    if(
-      students.some(
-        student => student.id === id
-      )
-    ){
-
-      alert(
-        "That student ID is already in the system."
-      );
-
-      studentId.focus();
-
-      return;
-
-    }
-
-    students.push({
-
-      id,
-      name,
-      grade,
-      status:"On Campus"
-
-    });
-
-    addActivity(
-      "Student added: " +
-      name +
-      " (" +
-      id +
-      ")"
-    );
-
-    studentId.value = "";
-    studentName.value = "";
-
-    render();
-
-    studentId.focus();
-
-  }
-);
-
-
-/* MOVEMENT */
-
-document.getElementById(
-  "recordMovement"
-).addEventListener(
-  "click",
-  () => {
-
-    const id =
-      document.getElementById(
-        "movementStudent"
-      ).value.trim();
-
-    const movement =
-      document.getElementById(
-        "movementType"
-      ).value;
-
-    const student =
-      findStudent(id);
-
-    if(!student){
-
-      alert(
-        "Student ID was not found."
-      );
-
-      return;
-
-    }
-
-    const movementNames = {
-
-      ENTRY:"entered the building",
-
-      EXIT:"left the building",
-
-      CLASSROOM:"entered a classroom",
-
-      RESTROOM:"went to the restroom",
-
-      LUNCH:"went to lunch",
-
-      OFFICE:"went to the main office"
-
-    };
-
-    student.status =
-      movement === "EXIT"
-        ? "Off Campus"
-        : "On Campus";
-
-    addActivity(
-      student.name +
-      " — " +
-      movementNames[movement]
-    );
-
-    document.getElementById(
-      "movementStudent"
-    ).value = "";
-
-    render();
-
-  }
-);
-
-
-/* DISCIPLINE */
-
-document.getElementById(
-  "recordDiscipline"
-).addEventListener(
-  "click",
-  () => {
-
-    const id =
-      document.getElementById(
-        "disciplineStudent"
-      ).value.trim();
-
-    const type =
-      document.getElementById(
-        "disciplineType"
-      ).value;
-
-    const note =
-      document.getElementById(
-        "disciplineNote"
-      ).value.trim();
-
-    const student =
-      findStudent(id);
-
-    if(!student){
-
-      alert(
-        "Student ID was not found."
-      );
-
-      return;
-
-    }
-
-    if(type === "ISS"){
-
-      student.status = "ISS";
-
-    }else if(type === "OSS"){
-
-      student.status = "OSS";
-
-    }else{
-
-      student.status = "Detention";
-
-    }
-
-    addActivity(
-      student.name +
-      " — " +
-      student.status +
-      (note ? " — " + note : "")
-    );
-
-    document.getElementById(
-      "disciplineStudent"
-    ).value = "";
-
-    document.getElementById(
-      "disciplineNote"
-    ).value = "";
-
-    render();
-
-  }
-);
-
-
-/* FIND STUDENT */
+/* =========================
+   FIND STUDENT
+========================= */
 
 function findStudent(id){
 
   return students.find(
-    student => student.id === id
+    student =>
+      student.id === id
   );
 
 }
 
 
-/* ACTIVITY */
+/* =========================
+   CURRENT TIME
+========================= */
 
-function addActivity(text){
+function currentTime(){
 
-  const now =
-    new Date();
+  return new Date()
+    .toLocaleTimeString(
+      [],
+      {
+        hour:"numeric",
+        minute:"2-digit"
+      }
+    );
+
+}
+
+
+/* =========================
+   ADD ACTIVITY
+========================= */
+
+function addActivity(
+  text
+){
 
   activity.unshift({
 
-    time:
-      now.toLocaleTimeString(
-        [],
-        {
-          hour:"numeric",
-          minute:"2-digit"
-        }
-      ),
+    time:currentTime(),
 
     text
 
   });
 
-  if(activity.length > 50){
+  if(activity.length > 100){
 
-    activity.length = 50;
+    activity.length = 100;
 
   }
 
 }
 
 
-/* RENDER */
+/* =========================
+   LOOKUP STUDENT
+========================= */
+
+function lookupStudent(){
+
+  const id =
+    studentId.value.trim();
+
+  if(!id){
+
+    alert(
+      "Scan or enter a Student ID."
+    );
+
+    studentId.focus();
+
+    return;
+
+  }
+
+
+  const student =
+    findStudent(id);
+
+
+  if(!student){
+
+    alert(
+      "Student ID was not found."
+    );
+
+    selectedStudent.classList.add(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+
+  selectedStudentId =
+    student.id;
+
+
+  renderStudentProfile(
+    student
+  );
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function renderStudentProfile(
+  student
+){
+
+  document.getElementById(
+    "profileName"
+  ).textContent =
+    student.name;
+
+  document.getElementById(
+    "profileId"
+  ).textContent =
+    "Student ID: " +
+    student.id;
+
+  document.getElementById(
+    "profileId2"
+  ).textContent =
+    student.id;
+
+  document.getElementById(
+    "profileGrade"
+  ).textContent =
+    student.grade;
+
+
+  const status =
+    document.getElementById(
+      "profileStatus"
+    );
+
+
+  status.textContent =
+    student.status;
+
+
+  status.className =
+    "student-status";
+
+
+  const statusMap = {
+
+    "On Campus":"status-on",
+
+    "Off Campus":"status-off",
+
+    "ISS":"status-iss",
+
+    "OSS":"status-oss",
+
+    "Detention":"status-detention"
+
+  };
+
+
+  status.classList.add(
+    statusMap[
+      student.status
+    ] || "status-on"
+  );
+
+
+  document.getElementById(
+    "currentLocation"
+  ).textContent =
+    student.location ||
+    "Unknown";
+
+
+  renderHistory(
+    student
+  );
+
+
+  selectedStudent.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+/* =========================
+   MOVEMENT
+========================= */
+
+function recordMovement(
+  movement
+){
+
+  if(!selectedStudentId){
+
+    alert(
+      "Look up a student first."
+    );
+
+    return;
+
+  }
+
+
+  const student =
+    findStudent(
+      selectedStudentId
+    );
+
+
+  if(!student){
+
+    return;
+
+  }
+
+
+  let location =
+    movement;
+
+
+  if(
+    movement ===
+    "Building Entry"
+  ){
+
+    student.status =
+      "On Campus";
+
+    location =
+      "Main Entrance";
+
+  }
+
+
+  if(
+    movement ===
+    "Building Exit"
+  ){
+
+    student.status =
+      "Off Campus";
+
+    location =
+      "Off Campus";
+
+  }
+
+
+  if(
+    movement ===
+    "Classroom"
+  ){
+
+    location =
+      "Classroom";
+
+  }
+
+
+  if(
+    movement ===
+    "Restroom"
+  ){
+
+    location =
+      "Restroom";
+
+  }
+
+
+  if(
+    movement ===
+    "Lunch"
+  ){
+
+    location =
+      "Cafeteria";
+
+  }
+
+
+  if(
+    movement ===
+    "Main Office"
+  ){
+
+    location =
+      "Main Office";
+
+  }
+
+
+  student.location =
+    location;
+
+
+  if(
+    movement ===
+    "Building Entry"
+  ){
+
+    addActivity(
+      student.name +
+      " entered the building."
+    );
+
+  }else if(
+    movement ===
+    "Building Exit"
+  ){
+
+    addActivity(
+      student.name +
+      " left the building."
+    );
+
+  }else{
+
+    addActivity(
+      student.name +
+      " → " +
+      location
+    );
+
+  }
+
+
+  render();
+
+  renderStudentProfile(
+    student
+  );
+
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function renderHistory(
+  student
+){
+
+  const container =
+    document.getElementById(
+      "studentHistory"
+    );
+
+
+  container.innerHTML = "";
+
+
+  const history =
+    student.history || [];
+
+
+  if(!history.length){
+
+    container.innerHTML =
+      '<div class="empty">No movement history.</div>';
+
+    return;
+
+  }
+
+
+  history
+    .slice()
+    .reverse()
+    .forEach(
+      entry => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "history-item";
+
+
+        const time =
+          document.createElement(
+            "div"
+          );
+
+        time.className =
+          "history-time";
+
+        time.textContent =
+          entry.time;
+
+
+        const event =
+          document.createElement(
+            "div"
+          );
+
+        event.className =
+          "history-event";
+
+        event.textContent =
+          entry.movement;
+
+
+        const location =
+          document.createElement(
+            "div"
+          );
+
+        location.className =
+          "history-location";
+
+        location.textContent =
+          entry.location;
+
+
+        event.appendChild(
+          location
+        );
+
+        item.appendChild(
+          time
+        );
+
+        item.appendChild(
+          event
+        );
+
+        container.appendChild(
+          item
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
 
 function render(){
 
   studentList.innerHTML = "";
 
-  noStudents.style.display =
-    students.length
-      ? "none"
-      : "block";
+
+  if(!students.length){
+
+    noStudents.style.display =
+      "block";
+
+  }else{
+
+    noStudents.style.display =
+      "none";
+
+  }
 
 
-  students.forEach(student => {
+  students.forEach(
+    student => {
 
-    const item =
-      document.createElement("div");
+      const item =
+        document.createElement(
+          "div"
+        );
 
-    item.className =
-      "student";
-
-
-    const info =
-      document.createElement("div");
-
-    const name =
-      document.createElement("div");
-
-    name.className =
-      "student-name";
-
-    name.textContent =
-      student.name;
-
-    const details =
-      document.createElement("div");
-
-    details.className =
-      "student-info";
-
-    details.textContent =
-      "ID: " +
-      student.id +
-      " • Grade " +
-      student.grade;
+      item.className =
+        "student";
 
 
-    info.appendChild(name);
-    info.appendChild(details);
+      item.addEventListener(
+        "click",
+        () => {
+
+          studentId.value =
+            student.id;
+
+          selectedStudentId =
+            student.id;
+
+          renderStudentProfile(
+            student
+          );
+
+          document.getElementById(
+            "studentScreen"
+          ).scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+        }
+      );
 
 
-    const status =
-      document.createElement("div");
-
-    status.className =
-      "status";
-
-
-    const statusLower =
-      student.status.toLowerCase();
+      const info =
+        document.createElement(
+          "div"
+        );
 
 
-    if(statusLower === "on campus"){
+      const name =
+        document.createElement(
+          "div"
+        );
+
+      name.className =
+        "student-info-name";
+
+      name.textContent =
+        student.name;
+
+
+      const sub =
+        document.createElement(
+          "div"
+        );
+
+      sub.className =
+        "student-info-sub";
+
+      sub.textContent =
+        "ID " +
+        student.id +
+        " • Grade " +
+        student.grade;
+
+
+      info.appendChild(
+        name
+      );
+
+      info.appendChild(
+        sub
+      );
+
+
+      const status =
+        document.createElement(
+          "div"
+        );
+
+      status.className =
+        "status";
+
+
+      status.textContent =
+        student.status;
+
+
+      const statusClasses = {
+
+        "On Campus":"status-on",
+
+        "Off Campus":"status-off",
+
+        "ISS":"status-iss",
+
+        "OSS":"status-oss",
+
+        "Detention":
+          "status-detention"
+
+      };
+
 
       status.classList.add(
-        "onsite"
+        statusClasses[
+          student.status
+        ] || "status-on"
+      );
+
+
+      item.appendChild(
+        info
+      );
+
+      item.appendChild(
+        status
+      );
+
+
+      studentList.appendChild(
+        item
       );
 
     }
-
-    if(statusLower === "iss"){
-
-      status.classList.add(
-        "iss"
-      );
-
-    }
-
-    if(statusLower === "oss"){
-
-      status.classList.add(
-        "oss"
-      );
-
-    }
-
-    if(statusLower === "detention"){
-
-      status.classList.add(
-        "detention"
-      );
-
-    }
-
-
-    status.textContent =
-      student.status;
-
-
-    item.appendChild(info);
-    item.appendChild(status);
-
-    studentList.appendChild(item);
-
-  });
+  );
 
 
   activityList.innerHTML = "";
@@ -1155,45 +1974,63 @@ function render(){
   if(!activity.length){
 
     activityList.innerHTML =
-      '<div style="color:var(--muted);">No activity recorded.</div>';
+      '<div class="empty">No activity recorded.</div>';
 
   }else{
 
-    activity.forEach(entry => {
+    activity
+      .slice(0,30)
+      .forEach(
+        entry => {
 
-      const item =
-        document.createElement("div");
+          const item =
+            document.createElement(
+              "div"
+            );
 
-      item.className =
-        "activity-item";
-
-
-      const time =
-        document.createElement("div");
-
-      time.className =
-        "activity-time";
-
-      time.textContent =
-        entry.time;
+          item.className =
+            "activity-item";
 
 
-      const text =
-        document.createElement("div");
+          const time =
+            document.createElement(
+              "div"
+            );
 
-      text.className =
-        "activity-text";
+          time.className =
+            "activity-time";
 
-      text.textContent =
-        entry.text;
+          time.textContent =
+            entry.time;
 
 
-      item.appendChild(time);
-      item.appendChild(text);
+          const text =
+            document.createElement(
+              "div"
+            );
 
-      activityList.appendChild(item);
+          text.className =
+            "activity-text";
 
-    });
+          text.textContent =
+            entry.text;
+
+
+          item.appendChild(
+            time
+          );
+
+          item.appendChild(
+            text
+          );
+
+
+          activityList.appendChild(
+            item
+          );
+
+        }
+      );
 
   }
 
@@ -1209,7 +2046,8 @@ function render(){
   ).textContent =
     students.filter(
       student =>
-        student.status === "On Campus"
+        student.status ===
+        "On Campus"
     ).length;
 
 
@@ -1233,7 +2071,415 @@ function render(){
 }
 
 
-/* RESET */
+/* =========================
+   DISCIPLINE
+========================= */
+
+document.getElementById(
+  "recordDiscipline"
+).addEventListener(
+  "click",
+  () => {
+
+    const id =
+      document.getElementById(
+        "disciplineStudent"
+      ).value.trim();
+
+
+    const type =
+      document.getElementById(
+        "disciplineType"
+      ).value;
+
+
+    const note =
+      document.getElementById(
+        "disciplineNote"
+      ).value.trim();
+
+
+    const student =
+      findStudent(id);
+
+
+    if(!student){
+
+      alert(
+        "Student ID was not found."
+      );
+
+      return;
+
+    }
+
+
+    student.status =
+      type;
+
+
+    addActivity(
+      student.name +
+      " placed in " +
+      type +
+      (note
+        ? " — " + note
+        : "")
+    );
+
+
+    if(!student.history){
+
+      student.history = [];
+
+    }
+
+
+    student.history.push({
+
+      time:currentTime(),
+
+      movement:
+        "Status: " + type,
+
+      location:
+        note || type
+
+    });
+
+
+    document.getElementById(
+      "disciplineStudent"
+    ).value = "";
+
+
+    document.getElementById(
+      "disciplineNote"
+    ).value = "";
+
+
+    render();
+
+
+    if(
+      selectedStudentId ===
+      student.id
+    ){
+
+      renderStudentProfile(
+        student
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================
+   MOVEMENT BUTTONS
+========================= */
+
+document
+  .querySelectorAll(
+    "[data-movement]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const movement =
+            button.dataset.movement;
+
+
+          if(!selectedStudentId){
+
+            alert(
+              "Look up a student first."
+            );
+
+            return;
+
+          }
+
+
+          const student =
+            findStudent(
+              selectedStudentId
+            );
+
+
+          if(!student){
+
+            return;
+
+          }
+
+
+          let location =
+            movement;
+
+
+          switch(movement){
+
+            case "Building Entry":
+
+              student.status =
+                "On Campus";
+
+              location =
+                "Main Entrance";
+
+              break;
+
+
+            case "Building Exit":
+
+              student.status =
+                "Off Campus";
+
+              location =
+                "Off Campus";
+
+              break;
+
+
+            case "Lunch":
+
+              location =
+                "Cafeteria";
+
+              break;
+
+
+            case "Main Office":
+
+              location =
+                "Main Office";
+
+              break;
+
+
+            default:
+
+              location =
+                movement;
+
+          }
+
+
+          student.location =
+            location;
+
+
+          if(!student.history){
+
+            student.history = [];
+
+          }
+
+
+          student.history.push({
+
+            time:
+              currentTime(),
+
+            movement,
+
+            location
+
+          });
+
+
+          addActivity(
+
+            student.name +
+            " → " +
+            location
+
+          );
+
+
+          render();
+
+
+          renderStudentProfile(
+            student
+          );
+
+        }
+      )
+    }
+  );
+
+
+/* =========================
+   LOOKUP
+========================= */
+
+document.getElementById(
+  "lookupStudent"
+).addEventListener(
+  "click",
+  lookupStudent
+);
+
+
+/* =========================
+   BARCODE-STYLE ENTER
+========================= */
+
+studentId.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      lookupStudent();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+document.getElementById(
+  "studentAction"
+).addEventListener(
+  "click",
+  () => {
+
+    document.getElementById(
+      "studentScreen"
+    ).scrollIntoView({
+      behavior:"smooth"
+    });
+
+    studentId.focus();
+
+  }
+);
+
+
+document.getElementById(
+  "movementAction"
+).addEventListener(
+  "click",
+  () => {
+
+    document.getElementById(
+      "studentScreen"
+    ).scrollIntoView({
+      behavior:"smooth"
+    });
+
+    studentId.focus();
+
+  }
+);
+
+
+document.getElementById(
+  "disciplineAction"
+).addEventListener(
+  "click",
+  () => {
+
+    document.getElementById(
+      "disciplineScreen"
+    ).scrollIntoView({
+      behavior:"smooth"
+    });
+
+    document.getElementById(
+      "disciplineStudent"
+    ).focus();
+
+  }
+);
+
+
+/* =========================
+   DEMO DATA
+========================= */
+
+document.getElementById(
+  "loadDemo"
+).addEventListener(
+  "click",
+  () => {
+
+    students = [
+
+      {
+        id:"100001",
+        name:"Smith, Jordan",
+        grade:"9",
+        status:"On Campus",
+        location:"Classroom",
+        history:[]
+      },
+
+      {
+        id:"100002",
+        name:"Johnson, Taylor",
+        grade:"10",
+        status:"ISS",
+        location:"ISS Room",
+        history:[]
+      },
+
+      {
+        id:"100003",
+        name:"Williams, Casey",
+        grade:"11",
+        status:"On Campus",
+        location:"Cafeteria",
+        history:[]
+      },
+
+      {
+        id:"100004",
+        name:"Brown, Alex",
+        grade:"12",
+        status:"OSS",
+        location:"Off Campus",
+        history:[]
+      }
+
+    ];
+
+
+    activity = [
+
+      {
+        time:currentTime(),
+
+        text:
+          "Demo student records loaded."
+      }
+
+    ];
+
+
+    render();
+
+  }
+);
+
+
+/* =========================
+   RESET
+========================= */
 
 document.getElementById(
   "resetDay"
@@ -1243,7 +2489,9 @@ document.getElementById(
 
     document.getElementById(
       "confirmModal"
-    ).classList.add("show");
+    ).classList.add(
+      "show"
+    );
 
   }
 );
@@ -1257,7 +2505,9 @@ document.getElementById(
 
     document.getElementById(
       "confirmModal"
-    ).classList.remove("show");
+    ).classList.remove(
+      "show"
+    );
 
   }
 );
@@ -1270,11 +2520,24 @@ document.getElementById(
   () => {
 
     students = [];
+
     activity = [];
+
+    selectedStudentId =
+      null;
+
+
+    selectedStudent.classList.add(
+      "hidden"
+    );
+
 
     document.getElementById(
       "confirmModal"
-    ).classList.remove("show");
+    ).classList.remove(
+      "show"
+    );
+
 
     render();
 
@@ -1282,43 +2545,9 @@ document.getElementById(
 );
 
 
-/* ENTER KEY */
-
-studentId.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Enter"){
-
-      event.preventDefault();
-
-      studentName.focus();
-
-    }
-
-  }
-);
-
-
-studentName.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Enter"){
-
-      event.preventDefault();
-
-      document.getElementById(
-        "addStudent"
-      ).click();
-
-    }
-
-  }
-);
-
-
-/* START */
+/* =========================
+   START
+========================= */
 
 render();
 
