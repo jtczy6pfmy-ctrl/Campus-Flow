@@ -944,21 +944,20 @@ button.secondary{
 </main>
 
 
+<!-- STUDENT DATABASE -->
+
+<script src="./students.js"></script>
+
+
+<!-- CAMPUS FLOW APPLICATION -->
+
 <script>
-
-/*
-  CAMPUS FLOW
-  Student ID Card System
-*/
-
 
 const STORAGE_KEY =
   "campusFlowStudents";
 
-
 let students =
   loadStudents();
-
 
 let activeStudentId =
   null;
@@ -968,13 +967,14 @@ let activeStudentId =
    STORAGE
 ------------------------- */
 
-
 function loadStudents(){
 
   try{
 
     const saved =
-      localStorage.getItem(STORAGE_KEY);
+      localStorage.getItem(
+        STORAGE_KEY
+      );
 
     if(!saved){
       return {};
@@ -1005,7 +1005,6 @@ function saveStudents(){
    DASHBOARD
 ------------------------- */
 
-
 function updateDashboard(){
 
   const list =
@@ -1017,16 +1016,23 @@ function updateDashboard(){
   const onCampus =
     list.filter(
       student =>
-        student.status === "ON CAMPUS"
+        student.status ===
+        "ON CAMPUS"
     ).length;
 
   document
-    .getElementById("studentCount")
-    .textContent = total;
+    .getElementById(
+      "studentCount"
+    )
+    .textContent =
+      total;
 
   document
-    .getElementById("campusCount")
-    .textContent = onCampus;
+    .getElementById(
+      "campusCount"
+    )
+    .textContent =
+      onCampus;
 
 }
 
@@ -1034,7 +1040,6 @@ function updateDashboard(){
 /* -------------------------
    ID FIELD
 ------------------------- */
-
 
 function focusStudentId(){
 
@@ -1056,7 +1061,10 @@ document
     "keydown",
     function(event){
 
-      if(event.key === "Enter"){
+      if(
+        event.key ===
+        "Enter"
+      ){
 
         event.preventDefault();
 
@@ -1066,15 +1074,6 @@ document
 
     }
   );
-
-
-/*
-  Scanner support.
-
-  Most ID-card scanners behave
-  like a keyboard and finish
-  with Enter.
-*/
 
 
 document
@@ -1092,7 +1091,6 @@ document
 /* -------------------------
    STUDENT LOOKUP
 ------------------------- */
-
 
 function processStudentId(){
 
@@ -1121,35 +1119,93 @@ function processStudentId(){
 
 
   /*
-    If the student already exists,
-    show their card.
-
-    If they don't exist yet,
-    this first version creates a
-    temporary student record so
-    the ID-card workflow can be
-    tested immediately.
+    Look for the student in
+    the Campus Flow database.
   */
 
+  const databaseStudent =
+    findStudentByCard(id);
+
+
+  /*
+    Unknown ID cards are NOT
+    automatically added anymore.
+  */
+
+  if(!databaseStudent){
+
+    showError(
+      "STUDENT NOT FOUND — This ID card is not in the Campus Flow student database."
+    );
+
+    document
+      .getElementById(
+        "studentCard"
+      )
+      .classList.remove(
+        "show"
+      );
+
+    activeStudentId =
+      null;
+
+    input.select();
+
+    return;
+
+  }
+
+
+  /*
+    If the student has not been
+    scanned today, create the
+    attendance record.
+  */
 
   if(!students[id]){
 
     students[id] = {
 
-      id:id,
+      id:
+        databaseStudent.id,
 
-      name:"Student " + id,
+      name:
+        getStudentName(
+          databaseStudent
+        ),
 
-      grade:"Not Assigned",
+      grade:
+        databaseStudent.grade,
 
-      status:"ON CAMPUS",
+      homeroom:
+        databaseStudent.homeroom,
+
+      status:
+        "ON CAMPUS",
 
       lastScan:
         new Date().toISOString()
 
     };
 
-    saveStudents();
+  }else{
+
+    /*
+      Update the student information
+      from the database in case it
+      has changed.
+    */
+
+    students[id].name =
+      getStudentName(
+        databaseStudent
+      );
+
+    students[id].grade =
+      databaseStudent.grade;
+
+    students[id].homeroom =
+      databaseStudent.homeroom;
 
   }
 
@@ -1163,14 +1219,12 @@ function processStudentId(){
   );
 
 
+  saveStudents();
+
   updateDashboard();
 
   renderRoster();
 
-
-  /*
-    Prepare for the next scan.
-  */
 
   setTimeout(
     function(){
@@ -1188,7 +1242,6 @@ function processStudentId(){
    DISPLAY STUDENT
 ------------------------- */
 
-
 function displayStudent(
   student
 ){
@@ -1198,6 +1251,7 @@ function displayStudent(
       "studentCard"
     );
 
+
   document
     .getElementById(
       "studentName"
@@ -1205,12 +1259,15 @@ function displayStudent(
     .textContent =
       student.name;
 
+
   document
     .getElementById(
       "studentIdDisplay"
     )
     .textContent =
-      "ID: " + student.id;
+      "ID: " +
+      student.id;
+
 
   document
     .getElementById(
@@ -1218,6 +1275,7 @@ function displayStudent(
     )
     .textContent =
       student.grade;
+
 
   document
     .getElementById(
@@ -1231,6 +1289,7 @@ function displayStudent(
     getInitials(
       student.name
     );
+
 
   document
     .getElementById(
@@ -1246,7 +1305,10 @@ function displayStudent(
     );
 
 
-  if(student.status === "ON CAMPUS"){
+  if(
+    student.status ===
+    "ON CAMPUS"
+  ){
 
     status.textContent =
       "● ON CAMPUS";
@@ -1265,7 +1327,9 @@ function displayStudent(
   }
 
 
-  card.classList.add("show");
+  card.classList.add(
+    "show"
+  );
 
   hideError();
 
@@ -1276,7 +1340,6 @@ function displayStudent(
    STATUS
 ------------------------- */
 
-
 function toggleStudentStatus(){
 
   if(!activeStudentId){
@@ -1285,7 +1348,9 @@ function toggleStudentStatus(){
 
 
   const student =
-    students[activeStudentId];
+    students[
+      activeStudentId
+    ];
 
 
   if(!student){
@@ -1315,7 +1380,6 @@ function toggleStudentStatus(){
 
   saveStudents();
 
-
   displayStudent(
     student
   );
@@ -1331,7 +1395,6 @@ function toggleStudentStatus(){
    ROSTER
 ------------------------- */
 
-
 function renderRoster(){
 
   const list =
@@ -1345,14 +1408,18 @@ function renderRoster(){
     );
 
 
-  list.innerHTML = "";
+  list.innerHTML =
+    "";
 
 
   const roster =
     Object.values(students);
 
 
-  if(roster.length === 0){
+  if(
+    roster.length ===
+    0
+  ){
 
     empty.style.display =
       "block";
@@ -1410,9 +1477,13 @@ function renderRoster(){
         student.grade;
 
 
-      left.appendChild(name);
+      left.appendChild(
+        name
+      );
 
-      left.appendChild(meta);
+      left.appendChild(
+        meta
+      );
 
 
       const status =
@@ -1433,9 +1504,13 @@ function renderRoster(){
         student.status;
 
 
-      item.appendChild(left);
+      item.appendChild(
+        left
+      );
 
-      item.appendChild(status);
+      item.appendChild(
+        status
+      );
 
 
       item.addEventListener(
@@ -1465,7 +1540,9 @@ function renderRoster(){
       );
 
 
-      list.appendChild(item);
+      list.appendChild(
+        item
+      );
 
     }
   );
@@ -1476,7 +1553,6 @@ function renderRoster(){
 /* -------------------------
    ROSTER BUTTON
 ------------------------- */
-
 
 function showRoster(){
 
@@ -1496,7 +1572,6 @@ function showRoster(){
 /* -------------------------
    HELPERS
 ------------------------- */
-
 
 function getInitials(
   name
@@ -1528,7 +1603,9 @@ function showError(
   box.textContent =
     message;
 
-  box.classList.add("show");
+  box.classList.add(
+    "show"
+  );
 
 }
 
@@ -1539,7 +1616,9 @@ function hideError(){
     .getElementById(
       "errorMessage"
     )
-    .classList.remove("show");
+    .classList.remove(
+      "show"
+    );
 
 }
 
@@ -1548,17 +1627,10 @@ function hideError(){
    STARTUP
 ------------------------- */
 
-
 updateDashboard();
 
 renderRoster();
 
-
-/*
-  Automatically place the cursor
-  in the ID field when Campus Flow
-  opens.
-*/
 
 window.addEventListener(
   "load",
