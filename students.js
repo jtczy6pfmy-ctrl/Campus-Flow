@@ -1,152 +1,49 @@
-/*
-  CAMPUS FLOW
-  Student Database
-*/
+// Campus Flow - Student Data
 
-const CAMPUS_FLOW_STUDENTS = {
-
-  "100001": {
+const students = [
+  {
     id: "100001",
     firstName: "John",
     lastName: "Doe",
     grade: "9",
-    homeroom: "101",
-    cardNumber: "100001",
-    active: true
-  },
-
-  "100002": {
-    id: "100002",
-    firstName: "Jane",
-    lastName: "Smith",
-    grade: "10",
-    homeroom: "204",
-    cardNumber: "100002",
-    active: true
-  },
-
-  "100003": {
-    id: "100003",
-    firstName: "Michael",
-    lastName: "Johnson",
-    grade: "11",
-    homeroom: "305",
-    cardNumber: "100003",
-    active: true
+    status: "ON CAMPUS"
   }
+];
 
-};
+let movementCount = 0;
 
+function findStudent(studentId) {
+  return students.find(student => student.id === studentId);
+}
 
-/*
-  Find a student using
-  the ID-card number.
-*/
-
-function findStudentByCard(cardNumber) {
-
-  const id =
-    String(cardNumber)
-      .trim()
-      .toUpperCase();
-
-  const student =
-    CAMPUS_FLOW_STUDENTS[id];
+function changeStudentStatus(studentId) {
+  const student = findStudent(studentId);
 
   if (!student) {
     return null;
   }
 
-  if (!student.active) {
-    return null;
+  if (student.status === "ON CAMPUS") {
+    student.status = "OFF CAMPUS";
+  } else {
+    student.status = "ON CAMPUS";
   }
+
+  movementCount++;
 
   return student;
-
 }
 
-
-/*
-  Return the student's
-  full name.
-*/
-
-function getStudentName(student) {
-
-  if (!student) {
-    return "";
-  }
-
-  return (
-    student.firstName +
-    " " +
-    student.lastName
-  );
-
+function getStudentCount() {
+  return students.length;
 }
 
-
-/*
-  Return a formatted
-  student record.
-*/
-
-function formatStudent(student) {
-
-  if (!student) {
-    return null;
-  }
-
-  return {
-
-    id: student.id,
-
-    name:
-      getStudentName(student),
-
-    grade:
-      student.grade,
-
-    homeroom:
-      student.homeroom,
-
-    cardNumber:
-      student.cardNumber,
-
-    active:
-      student.active
-
-  };
-
-}
-
-
-/*
-  Check whether an ID
-  exists in the database.
-*/
-
-function studentExists(cardNumber) {
-
-  return (
-    findStudentByCard(cardNumber)
-    !== null
-  );
-
-}
-
-
-/*
-  Count active students.
-*/
-
-function getStudentDatabaseCount() {
-
-  return Object.values(
-    CAMPUS_FLOW_STUDENTS
-  ).filter(
-    student =>
-      student.active === true
+function getOnCampusCount() {
+  return students.filter(
+    student => student.status === "ON CAMPUS"
   ).length;
+}
 
+function getMovementCount() {
+  return movementCount;
 }
