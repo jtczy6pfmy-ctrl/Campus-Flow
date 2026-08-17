@@ -18,755 +18,465 @@
   content="default"
 >
 
-<meta
-  name="apple-mobile-web-app-title"
-  content="Campus Flow"
->
-
-<meta
-  name="theme-color"
-  content="#eef1f5"
-  media="(prefers-color-scheme: light)"
->
-
-<meta
-  name="theme-color"
-  content="#0b0f14"
-  media="(prefers-color-scheme: dark)"
->
+<meta name="theme-color" content="#090d12">
 
 <title>Campus Flow</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
+:root {
+  --bg: #090d12;
+  --card: #171d24;
+  --card2: #232a33;
+  --border: #2d3743;
+  --text: #f4f6f8;
+  --muted: #a5aeb9;
+  --green: #42dc8c;
+  --green-dark: #0c3825;
+  --white-button: #f4f5f6;
+  --button-text: #151a20;
 }
 
-:root{
-  color-scheme:light dark;
-
-  --bg:#eef1f5;
-  --card:#ffffff;
-  --border:#dfe3e8;
-  --text:#17202a;
-  --muted:#68727d;
-
-  --input:#ffffff;
-  --input-border:#c8ced6;
-
-  --accent:#17202a;
-  --accent-text:#ffffff;
-
-  --secondary:#e5e8ec;
-  --secondary-text:#17202a;
-
-  --success:#16834b;
-  --success-bg:#e8f6ee;
-  --success-border:#bfe5ce;
-
-  --danger:#c62828;
-  --danger-bg:#fff0f0;
-  --danger-border:#e3aaaa;
-
-  --shadow:0 4px 18px rgba(15,23,42,.08);
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-html{
-  background:var(--bg);
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
     sans-serif;
-
-  background:var(--bg);
-  color:var(--text);
-
-  -webkit-font-smoothing:antialiased;
 }
 
-header{
-  background:linear-gradient(
-    180deg,
-    #15191e 0%,
-    #0b0d10 100%
-  );
+body {
+  padding-bottom: 40px;
+}
 
-  color:#fff;
-
+.header {
+  background: #000;
   padding:
     calc(18px + env(safe-area-inset-top))
-    18px
-    18px;
-
-  text-align:center;
-
-  font-size:23px;
-  font-weight:800;
-
-  box-shadow:
-    0 2px 10px rgba(0,0,0,.18);
+    20px
+    20px;
+  text-align: center;
+  border-bottom: 1px solid #151a20;
 }
 
-.app{
-  width:min(760px,100%);
-  margin:0 auto;
-
-  padding:
-    14px
-    12px
-    calc(45px + env(safe-area-inset-bottom));
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
-/* DASHBOARD */
-
-.dashboard{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:10px;
-
-  margin-bottom:16px;
+.app {
+  width: min(920px, calc(100% - 32px));
+  margin: 18px auto 0;
 }
 
-.stat{
-  background:var(--card);
-
-  border:
-    1px solid var(--border);
-
-  border-radius:15px;
-
-  padding:15px 10px;
-
-  text-align:center;
-
-  box-shadow:var(--shadow);
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.stat-number{
-  display:block;
-
-  font-size:27px;
-  font-weight:850;
-
-  line-height:1;
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px 10px 16px;
+  text-align: center;
 }
 
-.stat-label{
-  display:block;
-
-  margin-top:7px;
-
-  color:var(--muted);
-
-  font-size:12px;
-  font-weight:700;
-
-  text-transform:uppercase;
+.stat-number {
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 800;
+  margin-bottom: 8px;
 }
 
-/* CARDS */
-
-.card{
-  background:var(--card);
-
-  border:
-    1px solid var(--border);
-
-  border-radius:16px;
-
-  padding:19px;
-
-  margin-bottom:16px;
-
-  box-shadow:var(--shadow);
+.stat-label {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .5px;
 }
 
-.card h2{
-  display:flex;
-  align-items:center;
-
-  gap:10px;
-
-  margin:
-    0
-    0
-    18px;
-
-  font-size:20px;
-  font-weight:800;
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 20px;
 }
 
-.card h2::before{
-  content:"";
-
-  width:4px;
-  height:22px;
-
-  border-radius:4px;
-
-  background:var(--accent);
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  font-size: 25px;
+  font-weight: 800;
 }
 
-/* QUICK ACTIONS */
-
-.quick-actions{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:10px;
+.section-title::before {
+  content: "";
+  width: 5px;
+  height: 28px;
+  background: var(--text);
+  border-radius: 4px;
+  flex: 0 0 auto;
 }
 
-.quick-button{
-  margin:0;
-
-  min-height:56px;
-
-  font-size:15px;
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-/* FORM */
-
-label{
-  display:block;
-
-  margin:
-    14px
-    0
-    7px;
-
-  font-size:14px;
-  font-weight:750;
-}
-
-input,
-select{
-  width:100%;
-
-  min-height:50px;
-
-  padding:
-    13px
-    14px;
-
-  border:
-    1px solid var(--input-border);
-
-  border-radius:10px;
-
-  background:var(--input);
-
-  color:var(--text);
-
-  font-family:inherit;
-  font-size:17px;
-
-  outline:none;
-}
-
-input:focus,
-select:focus{
-  border-color:#6b7280;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(107,114,128,.14);
-}
-
-input::placeholder{
-  color:#8a939e;
-}
-
-/* SCANNER */
-
-.id-entry{
-  position:relative;
-}
-
-.id-entry input{
-  padding-right:54px;
-}
-
-.scan-icon{
-  position:absolute;
-
-  right:14px;
-  bottom:13px;
-
-  font-size:22px;
-
-  pointer-events:none;
-}
-
-.scan-hint{
-  margin-top:8px;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.4;
-}
-
-/* BUTTONS */
-
-button{
-  width:100%;
-
-  border:0;
-
-  border-radius:10px;
-
-  min-height:50px;
-
-  padding:
-    13px
-    16px;
-
-  margin-top:17px;
-
-  font-family:inherit;
-
-  font-size:16px;
-  font-weight:800;
-
-  letter-spacing:.01em;
-
-  cursor:pointer;
-
-  background:var(--accent);
-  color:var(--accent-text);
-
-  box-shadow:
-    0 2px 5px rgba(0,0,0,.12);
-
-  -webkit-tap-highlight-color:
-    transparent;
-
+button {
+  appearance: none;
+  border: 0;
+  border-radius: 13px;
+  min-height: 62px;
+  padding: 14px 18px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  cursor: pointer;
   transition:
-    transform .08s ease,
-    opacity .15s ease;
+    transform .12s ease,
+    opacity .12s ease;
 }
 
-button:active{
-  transform:scale(.985);
+button:active {
+  transform: scale(.98);
 }
 
-button.secondary{
-  background:var(--secondary);
-  color:var(--secondary-text);
-
-  box-shadow:none;
+.primary {
+  background: var(--white-button);
+  color: var(--button-text);
 }
 
-/* STUDENT CARD */
-
-.student-card{
-  display:none;
-
-  border:
-    1px solid var(--success-border);
-
-  background:var(--success-bg);
-
-  border-radius:15px;
-
-  padding:17px;
-
-  margin-top:17px;
+.secondary {
+  background: var(--card2);
+  color: var(--text);
 }
 
-.student-card.show{
-  display:block;
-
-  animation:
-    cardIn .2s ease-out;
+label {
+  display: block;
+  font-size: 18px;
+  font-weight: 750;
+  margin-bottom: 8px;
 }
 
-@keyframes cardIn{
+.help {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 9px 0 20px;
+}
 
-  from{
-    opacity:0;
-    transform:translateY(6px);
+.input-wrap {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  height: 66px;
+  border-radius: 14px;
+  border: 2px solid #45505e;
+  background: #0e1319;
+  color: var(--text);
+  padding: 0 54px 0 18px;
+  font-size: 22px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #697787;
+}
+
+.scan-icon {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text);
+  pointer-events: none;
+}
+
+.scan-icon::before,
+.scan-icon::after {
+  content: "";
+  position: absolute;
+  background: var(--text);
+}
+
+.scan-icon::before {
+  width: 10px;
+  height: 2px;
+  left: 3px;
+  top: 7px;
+}
+
+.scan-icon::after {
+  width: 2px;
+  height: 10px;
+  left: 7px;
+  top: 3px;
+}
+
+.lookup {
+  width: 100%;
+  margin-top: 0;
+}
+
+.student-result {
+  margin-top: 20px;
+  background: #0d2c1f;
+  border: 1px solid #1d7249;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.student-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 62px;
+  height: 62px;
+  flex: 0 0 62px;
+  border-radius: 50%;
+  background: #f4f5f6;
+  color: #1a2027;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 850;
+}
+
+.student-name {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.student-id {
+  color: var(--muted);
+  font-size: 17px;
+  margin-top: 3px;
+  font-weight: 600;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.detail {
+  border: 1px solid #216d49;
+  border-radius: 13px;
+  padding: 14px;
+}
+
+.detail-label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .7px;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--green);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.student-result.off-campus {
+  background: #241518;
+  border-color: #71343b;
+}
+
+.student-result.off-campus .detail {
+  border-color: #71343b;
+}
+
+.student-result.off-campus .status-pill {
+  background: #d94c59;
+}
+
+.roster-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card2);
+  border: 1px solid #2b3541;
+  border-radius: 13px;
+  padding: 17px;
+}
+
+.roster-name {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.roster-meta {
+  color: var(--muted);
+  font-size: 16px;
+  margin-top: 3px;
+}
+
+.roster-status {
+  background: var(--green-dark);
+  color: var(--green);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.roster-status.off {
+  background: #3a171b;
+  color: #ff7883;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 650px) {
+  .app {
+    width: min(100% - 20px, 920px);
+    margin-top: 12px;
   }
 
-  to{
-    opacity:1;
-    transform:translateY(0);
+  .stats {
+    gap: 8px;
   }
 
-}
-
-.student-card-top{
-  display:flex;
-
-  align-items:center;
-
-  gap:13px;
-}
-
-.student-avatar{
-  width:50px;
-  height:50px;
-
-  flex:0 0 50px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:var(--accent);
-  color:var(--accent-text);
-
-  font-size:19px;
-  font-weight:850;
-}
-
-.student-name{
-  font-size:19px;
-  font-weight:850;
-}
-
-.student-id{
-  margin-top:3px;
-
-  color:var(--muted);
-
-  font-size:13px;
-  font-weight:650;
-}
-
-.student-details{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:10px;
-
-  margin-top:15px;
-}
-
-.detail{
-  background:rgba(255,255,255,.45);
-
-  border:
-    1px solid var(--success-border);
-
-  border-radius:10px;
-
-  padding:11px;
-}
-
-.detail-label{
-  display:block;
-
-  color:var(--muted);
-
-  font-size:11px;
-
-  font-weight:750;
-
-  text-transform:uppercase;
-}
-
-.detail-value{
-  display:block;
-
-  margin-top:4px;
-
-  font-size:16px;
-
-  font-weight:800;
-}
-
-.status{
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:6px;
-
-  margin-top:14px;
-
-  padding:
-    7px
-    11px;
-
-  border-radius:999px;
-
-  background:var(--success);
-
-  color:#fff;
-
-  font-size:13px;
-  font-weight:800;
-}
-
-/* UNKNOWN */
-
-.message{
-  display:none;
-
-  margin-top:14px;
-
-  padding:13px;
-
-  border-radius:10px;
-
-  font-size:14px;
-  font-weight:700;
-
-  line-height:1.4;
-}
-
-.message.show{
-  display:block;
-}
-
-.message.error{
-  background:var(--danger-bg);
-
-  border:
-    1px solid var(--danger-border);
-
-  color:var(--danger);
-}
-
-/* ROSTER */
-
-.roster-empty{
-  color:var(--muted);
-
-  text-align:center;
-
-  padding:12px 5px;
-
-  font-size:14px;
-}
-
-.roster-list{
-  display:flex;
-
-  flex-direction:column;
-
-  gap:9px;
-}
-
-.roster-item{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:10px;
-
-  padding:12px;
-
-  border:
-    1px solid var(--border);
-
-  border-radius:11px;
-
-  background:var(--secondary);
-}
-
-.roster-name{
-  font-weight:800;
-  font-size:15px;
-}
-
-.roster-meta{
-  margin-top:3px;
-
-  color:var(--muted);
-
-  font-size:12px;
-}
-
-.roster-status{
-  flex:0 0 auto;
-
-  padding:
-    6px
-    9px;
-
-  border-radius:999px;
-
-  font-size:11px;
-
-  font-weight:800;
-}
-
-.roster-status.in{
-  background:var(--success-bg);
-  color:var(--success);
-}
-
-.roster-status.out{
-  background:var(--secondary);
-  color:var(--muted);
-}
-
-/* DARK MODE */
-
-@media(prefers-color-scheme:dark){
-
-  :root{
-    --bg:#0b0f14;
-    --card:#171d24;
-    --border:#2b333d;
-
-    --text:#f4f6f8;
-    --muted:#a7b0ba;
-
-    --input:#0f141a;
-    --input-border:#3b4550;
-
-    --accent:#f4f6f8;
-    --accent-text:#11161c;
-
-    --secondary:#242c35;
-    --secondary-text:#f4f6f8;
-
-    --success:#51d98c;
-    --success-bg:#14291f;
-    --success-border:#245b3c;
-
-    --danger:#ff7474;
-    --danger-bg:#321919;
-    --danger-border:#693434;
+  .stat-card {
+    border-radius: 15px;
+    padding: 15px 6px;
   }
 
-  html,
-  body{
-    background:#0b0f14;
+  .stat-number {
+    font-size: 31px;
   }
 
-  header{
-    background:#000;
+  .stat-label {
+    font-size: 13px;
   }
 
-  .detail{
-    background:#18251e;
+  .card {
+    padding: 18px;
+    border-radius: 16px;
   }
 
+  .quick-actions,
+  .details {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    min-height: 60px;
+  }
+
+  .section-title {
+    font-size: 23px;
+  }
 }
-
-/* MOBILE */
-
-@media(max-width:520px){
-
-  .dashboard{
-    gap:7px;
-  }
-
-  .stat{
-    padding:
-      14px
-      7px;
-  }
-
-  .stat-number{
-    font-size:24px;
-  }
-
-  .stat-label{
-    font-size:10px;
-  }
-
-  .card{
-    padding:17px;
-  }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
-  Campus Flow
+<header class="header">
+  <h1>Campus Flow</h1>
 </header>
 
 <main class="app">
 
   <!-- DASHBOARD -->
+  <section class="stats">
 
-  <section class="dashboard">
-
-    <div class="stat">
-      <span
-        class="stat-number"
-        id="studentCount"
-      >0</span>
-
-      <span class="stat-label">
-        Students
-      </span>
+    <div class="stat-card">
+      <div class="stat-number" id="studentCount">0</div>
+      <div class="stat-label">STUDENTS</div>
     </div>
 
-    <div class="stat">
-      <span
-        class="stat-number"
-        id="campusCount"
-      >0</span>
-
-      <span class="stat-label">
-        On Campus
-      </span>
+    <div class="stat-card">
+      <div class="stat-number" id="onCampusCount">0</div>
+      <div class="stat-label">ON CAMPUS</div>
     </div>
 
-    <div class="stat">
-      <span
-        class="stat-number"
-        id="movementCount"
-      >0</span>
-
-      <span class="stat-label">
-        Movement
-      </span>
+    <div class="stat-card">
+      <div class="stat-number" id="movementCount">0</div>
+      <div class="stat-label">MOVEMENT</div>
     </div>
 
   </section>
 
-
   <!-- QUICK ACTIONS -->
-
   <section class="card">
 
-    <h2>
-      Quick Actions
-    </h2>
+    <h2 class="section-title">Quick Actions</h2>
 
     <div class="quick-actions">
 
       <button
-        class="quick-button"
+        class="primary"
+        type="button"
         onclick="focusStudentId()"
       >
         SCAN ID CARD
       </button>
 
       <button
-        class="quick-button secondary"
-        onclick="showRoster()"
+        class="secondary"
+        type="button"
+        onclick="focusRoster()"
       >
         STUDENT ROSTER
       </button>
@@ -775,871 +485,385 @@ button.secondary{
 
   </section>
 
-
-  <!-- STUDENT ID CARD -->
-
+  <!-- STUDENT ID -->
   <section class="card">
 
-    <h2>
-      Student ID
-    </h2>
+    <h2 class="section-title">Student ID</h2>
 
-    <div class="id-entry">
+    <label for="studentId">
+      Scan or Enter Student ID
+    </label>
 
-      <label for="studentId">
-        Scan or Enter Student ID
-      </label>
+    <div class="input-wrap">
 
       <input
         id="studentId"
         type="text"
         inputmode="numeric"
         autocomplete="off"
-        autocapitalize="characters"
-        spellcheck="false"
-        placeholder="Scan ID card..."
-        enterkeyhint="done"
+        placeholder="Enter student ID"
+        value="100001"
       >
 
-      <span class="scan-icon">
-        ▣
-      </span>
+      <span class="scan-icon"></span>
 
     </div>
 
-    <div class="scan-hint">
+    <div class="help">
       Scan the student's ID card or enter the ID manually.
     </div>
 
     <button
-      onclick="processStudentId()"
+      id="lookupStudent"
+      class="primary lookup"
+      type="button"
     >
       LOOK UP STUDENT
     </button>
 
-
     <!-- STUDENT RESULT -->
-
     <div
-      class="student-card"
-      id="studentCard"
+      id="studentResult"
+      class="student-result"
     >
 
-      <div class="student-card-top">
+      <div class="student-heading">
 
         <div
-          class="student-avatar"
           id="studentAvatar"
+          class="avatar"
         >
-          ?
+          JD
         </div>
 
         <div>
-
           <div
-            class="student-name"
             id="studentName"
+            class="student-name"
           >
-            Student
+            John Doe
           </div>
 
           <div
-            class="student-id"
             id="studentIdDisplay"
+            class="student-id"
           >
-            ID
+            ID: 100001
+          </div>
+        </div>
+
+      </div>
+
+      <div class="details">
+
+        <div class="detail">
+
+          <div class="detail-label">
+            GRADE
+          </div>
+
+          <div
+            id="studentGrade"
+            class="detail-value"
+          >
+            9
+          </div>
+
+        </div>
+
+        <div class="detail">
+
+          <div class="detail-label">
+            STATUS
+          </div>
+
+          <div
+            id="studentStatus"
+            class="detail-value"
+          >
+            ON CAMPUS
           </div>
 
         </div>
 
       </div>
-
-
-      <div class="student-details">
-
-        <div class="detail">
-
-          <span class="detail-label">
-            Grade
-          </span>
-
-          <span
-            class="detail-value"
-            id="studentGrade"
-          >
-            —
-          </span>
-
-        </div>
-
-        <div class="detail">
-
-          <span class="detail-label">
-            Status
-          </span>
-
-          <span
-            class="detail-value"
-            id="studentStatusText"
-          >
-            —
-          </span>
-
-        </div>
-
-      </div>
-
 
       <div
-        class="status"
-        id="studentStatus"
+        id="statusPill"
+        class="status-pill"
       >
-        ● ON CAMPUS
+        <span class="status-dot"></span>
+        <span id="statusPillText">
+          ON CAMPUS
+        </span>
       </div>
 
-
       <button
-        onclick="toggleStudentStatus()"
+        id="changeStatus"
+        class="primary lookup"
+        type="button"
       >
         CHANGE STATUS
       </button>
 
     </div>
 
-
-    <div
-      class="message error"
-      id="errorMessage"
-    >
-    </div>
-
   </section>
 
-
-  <!-- ROSTER -->
-
+  <!-- STUDENT ROSTER -->
   <section
+    id="rosterSection"
     class="card"
-    id="rosterCard"
   >
 
-    <h2>
+    <h2 class="section-title">
       Student Roster
     </h2>
 
-    <div
-      class="roster-empty"
-      id="rosterEmpty"
-    >
-      No students have been scanned yet.
-    </div>
-
-    <div
-      class="roster-list"
-      id="rosterList"
-    ></div>
+    <div id="roster"></div>
 
   </section>
 
 </main>
 
-
-<!-- STUDENT DATABASE -->
-
+<!-- STUDENT DATA -->
 <script src="./students.js"></script>
 
-
-<!-- CAMPUS FLOW APPLICATION -->
-
+<!-- CAMPUS FLOW APP -->
 <script>
 
-const STORAGE_KEY =
-  "campusFlowStudents";
+let currentStudentId = null;
 
-let students =
-  loadStudents();
+function $(id) {
+  return document.getElementById(id);
+}
 
-let activeStudentId =
-  null;
+function initials(student) {
+  const first =
+    student.firstName
+      ? student.firstName.charAt(0)
+      : "";
 
+  const last =
+    student.lastName
+      ? student.lastName.charAt(0)
+      : "";
 
-/* -------------------------
-   STORAGE
-------------------------- */
+  return (first + last).toUpperCase();
+}
 
-function loadStudents(){
+function updateDashboard() {
 
-  try{
+  $("studentCount").textContent =
+    getStudentCount();
 
-    const saved =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
+  $("onCampusCount").textContent =
+    getOnCampusCount();
 
-    if(!saved){
-      return {};
-    }
+  $("movementCount").textContent =
+    getMovementCount();
+}
 
-    return JSON.parse(saved);
+function updateStudentDisplay(student) {
 
-  }catch(error){
+  currentStudentId = student.id;
 
-    return {};
+  $("studentAvatar").textContent =
+    initials(student);
 
+  $("studentName").textContent =
+    `${student.firstName} ${student.lastName}`;
+
+  $("studentIdDisplay").textContent =
+    `ID: ${student.id}`;
+
+  $("studentGrade").textContent =
+    student.grade;
+
+  $("studentStatus").textContent =
+    student.status;
+
+  $("statusPillText").textContent =
+    student.status;
+
+  const result = $("studentResult");
+
+  if (student.status === "ON CAMPUS") {
+    result.classList.remove("off-campus");
+  } else {
+    result.classList.add("off-campus");
   }
 
+  renderRoster();
+  updateDashboard();
 }
 
-
-function saveStudents(){
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(students)
-  );
-
-}
-
-
-/* -------------------------
-   DASHBOARD
-------------------------- */
-
-function updateDashboard(){
-
-  const list =
-    Object.values(students);
-
-  const total =
-    list.length;
-
-  const onCampus =
-    list.filter(
-      student =>
-        student.status ===
-        "ON CAMPUS"
-    ).length;
-
-  document
-    .getElementById(
-      "studentCount"
-    )
-    .textContent =
-      total;
-
-  document
-    .getElementById(
-      "campusCount"
-    )
-    .textContent =
-      onCampus;
-
-}
-
-
-/* -------------------------
-   ID FIELD
-------------------------- */
-
-function focusStudentId(){
-
-  const input =
-    document.getElementById(
-      "studentId"
-    );
-
-  input.focus();
-
-  input.select();
-
-}
-
-
-document
-  .getElementById("studentId")
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key ===
-        "Enter"
-      ){
-
-        event.preventDefault();
-
-        processStudentId();
-
-      }
-
-    }
-  );
-
-
-document
-  .getElementById("studentId")
-  .addEventListener(
-    "input",
-    function(){
-
-      hideError();
-
-    }
-  );
-
-
-/* -------------------------
-   STUDENT LOOKUP
-------------------------- */
-
-function processStudentId(){
-
-  const input =
-    document.getElementById(
-      "studentId"
-    );
+function lookupStudent() {
 
   const id =
-    input.value
-      .trim()
-      .toUpperCase();
-
-
-  if(!id){
-
-    showError(
-      "Please scan a student ID card or enter a student ID."
-    );
-
-    input.focus();
-
-    return;
-
-  }
-
-
-  /*
-    Look for the student in
-    the Campus Flow database.
-  */
-
-  const databaseStudent =
-    findStudentByCard(id);
-
-
-  /*
-    Unknown ID cards are NOT
-    automatically added anymore.
-  */
-
-  if(!databaseStudent){
-
-    showError(
-      "STUDENT NOT FOUND — This ID card is not in the Campus Flow student database."
-    );
-
-    document
-      .getElementById(
-        "studentCard"
-      )
-      .classList.remove(
-        "show"
-      );
-
-    activeStudentId =
-      null;
-
-    input.select();
-
-    return;
-
-  }
-
-
-  /*
-    If the student has not been
-    scanned today, create the
-    attendance record.
-  */
-
-  if(!students[id]){
-
-    students[id] = {
-
-      id:
-        databaseStudent.id,
-
-      name:
-        getStudentName(
-          databaseStudent
-        ),
-
-      grade:
-        databaseStudent.grade,
-
-      homeroom:
-        databaseStudent.homeroom,
-
-      status:
-        "ON CAMPUS",
-
-      lastScan:
-        new Date().toISOString()
-
-    };
-
-  }else{
-
-    /*
-      Update the student information
-      from the database in case it
-      has changed.
-    */
-
-    students[id].name =
-      getStudentName(
-        databaseStudent
-      );
-
-    students[id].grade =
-      databaseStudent.grade;
-
-    students[id].homeroom =
-      databaseStudent.homeroom;
-
-  }
-
-
-  activeStudentId =
-    id;
-
-
-  displayStudent(
-    students[id]
-  );
-
-
-  saveStudents();
-
-  updateDashboard();
-
-  renderRoster();
-
-
-  setTimeout(
-    function(){
-
-      input.select();
-
-    },
-    100
-  );
-
-}
-
-
-/* -------------------------
-   DISPLAY STUDENT
-------------------------- */
-
-function displayStudent(
-  student
-){
-
-  const card =
-    document.getElementById(
-      "studentCard"
-    );
-
-
-  document
-    .getElementById(
-      "studentName"
-    )
-    .textContent =
-      student.name;
-
-
-  document
-    .getElementById(
-      "studentIdDisplay"
-    )
-    .textContent =
-      "ID: " +
-      student.id;
-
-
-  document
-    .getElementById(
-      "studentGrade"
-    )
-    .textContent =
-      student.grade;
-
-
-  document
-    .getElementById(
-      "studentStatusText"
-    )
-    .textContent =
-      student.status;
-
-
-  const initials =
-    getInitials(
-      student.name
-    );
-
-
-  document
-    .getElementById(
-      "studentAvatar"
-    )
-    .textContent =
-      initials;
-
-
-  const status =
-    document.getElementById(
-      "studentStatus"
-    );
-
-
-  if(
-    student.status ===
-    "ON CAMPUS"
-  ){
-
-    status.textContent =
-      "● ON CAMPUS";
-
-    status.style.background =
-      "var(--success)";
-
-  }else{
-
-    status.textContent =
-      "● OFF CAMPUS";
-
-    status.style.background =
-      "var(--muted)";
-
-  }
-
-
-  card.classList.add(
-    "show"
-  );
-
-  hideError();
-
-}
-
-
-/* -------------------------
-   STATUS
-------------------------- */
-
-function toggleStudentStatus(){
-
-  if(!activeStudentId){
-    return;
-  }
-
+    $("studentId").value.trim();
 
   const student =
-    students[
-      activeStudentId
-    ];
+    findStudent(id);
 
+  if (!student) {
 
-  if(!student){
+    alert("Student not found.");
+
+    $("studentId").focus();
+
     return;
   }
 
-
-  if(
-    student.status ===
-    "ON CAMPUS"
-  ){
-
-    student.status =
-      "OFF CAMPUS";
-
-  }else{
-
-    student.status =
-      "ON CAMPUS";
-
-  }
-
-
-  student.lastScan =
-    new Date().toISOString();
-
-
-  saveStudents();
-
-  displayStudent(
-    student
-  );
-
-  updateDashboard();
-
-  renderRoster();
-
+  updateStudentDisplay(student);
 }
 
+function changeCurrentStudentStatus() {
 
-/* -------------------------
-   ROSTER
-------------------------- */
+  if (!currentStudentId) {
 
-function renderRoster(){
+    const id =
+      $("studentId").value.trim();
 
-  const list =
-    document.getElementById(
-      "rosterList"
-    );
+    const student =
+      findStudent(id);
 
-  const empty =
-    document.getElementById(
-      "rosterEmpty"
-    );
-
-
-  list.innerHTML =
-    "";
-
-
-  const roster =
-    Object.values(students);
-
-
-  if(
-    roster.length ===
-    0
-  ){
-
-    empty.style.display =
-      "block";
-
-    return;
-
-  }
-
-
-  empty.style.display =
-    "none";
-
-
-  roster.forEach(
-    student => {
-
-      const item =
-        document.createElement(
-          "div"
-        );
-
-      item.className =
-        "roster-item";
-
-
-      const left =
-        document.createElement(
-          "div"
-        );
-
-
-      const name =
-        document.createElement(
-          "div"
-        );
-
-      name.className =
-        "roster-name";
-
-      name.textContent =
-        student.name;
-
-
-      const meta =
-        document.createElement(
-          "div"
-        );
-
-      meta.className =
-        "roster-meta";
-
-      meta.textContent =
-        student.id +
-        " • Grade " +
-        student.grade;
-
-
-      left.appendChild(
-        name
-      );
-
-      left.appendChild(
-        meta
-      );
-
-
-      const status =
-        document.createElement(
-          "div"
-        );
-
-      status.className =
-        "roster-status " +
-        (
-          student.status ===
-          "ON CAMPUS"
-            ? "in"
-            : "out"
-        );
-
-      status.textContent =
-        student.status;
-
-
-      item.appendChild(
-        left
-      );
-
-      item.appendChild(
-        status
-      );
-
-
-      item.addEventListener(
-        "click",
-        function(){
-
-          activeStudentId =
-            student.id;
-
-          displayStudent(
-            student
-          );
-
-          document
-            .getElementById(
-              "studentId"
-            )
-            .value =
-              student.id;
-
-          window.scrollTo({
-            top:0,
-            behavior:"smooth"
-          });
-
-        }
-      );
-
-
-      list.appendChild(
-        item
-      );
-
+    if (!student) {
+      alert("Look up a student first.");
+      return;
     }
-  );
 
+    currentStudentId = student.id;
+  }
+
+  const student =
+    changeStudentStatus(currentStudentId);
+
+  if (!student) {
+    alert("Student not found.");
+    return;
+  }
+
+  updateStudentDisplay(student);
 }
 
-
-/* -------------------------
-   ROSTER BUTTON
-------------------------- */
-
-function showRoster(){
+function renderRoster() {
 
   const roster =
-    document.getElementById(
-      "rosterCard"
-    );
+    $("roster");
 
-  roster.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
+  roster.innerHTML = "";
+
+  students.forEach(student => {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "roster-item";
+
+    const statusClass =
+      student.status === "ON CAMPUS"
+        ? ""
+        : "off";
+
+    item.innerHTML = `
+
+      <div>
+
+        <div class="roster-name">
+          ${student.firstName} ${student.lastName}
+        </div>
+
+        <div class="roster-meta">
+          ${student.id} · Grade ${student.grade}
+        </div>
+
+      </div>
+
+      <div class="roster-status ${statusClass}">
+        ${student.status}
+      </div>
+
+    `;
+
+    item.addEventListener("click", () => {
+
+      $("studentId").value =
+        student.id;
+
+      updateStudentDisplay(student);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+    roster.appendChild(item);
+
   });
 
 }
 
+function focusStudentId() {
 
-/* -------------------------
-   HELPERS
-------------------------- */
+  $("studentId").focus();
 
-function getInitials(
-  name
-){
-
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0,2)
-    .map(
-      part =>
-        part.charAt(0)
-    )
-    .join("")
-    .toUpperCase();
+  $("studentId").select();
 
 }
 
+function focusRoster() {
 
-function showError(
-  message
-){
-
-  const box =
-    document.getElementById(
-      "errorMessage"
-    );
-
-  box.textContent =
-    message;
-
-  box.classList.add(
-    "show"
-  );
+  $("rosterSection").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 
 }
 
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
 
-function hideError(){
+    updateDashboard();
 
-  document
-    .getElementById(
-      "errorMessage"
-    )
-    .classList.remove(
-      "show"
-    );
+    renderRoster();
 
-}
+    const startingStudent =
+      findStudent(
+        $("studentId").value.trim()
+      );
 
+    if (startingStudent) {
+      updateStudentDisplay(startingStudent);
+    }
 
-/* -------------------------
-   STARTUP
-------------------------- */
+    $("lookupStudent")
+      .addEventListener(
+        "click",
+        lookupStudent
+      );
 
-updateDashboard();
+    $("changeStatus")
+      .addEventListener(
+        "click",
+        changeCurrentStudentStatus
+      );
 
-renderRoster();
+    $("studentId")
+      .addEventListener(
+        "keydown",
+        event => {
 
+          if (event.key === "Enter") {
+            lookupStudent();
+          }
 
-window.addEventListener(
-  "load",
-  function(){
-
-    setTimeout(
-      focusStudentId,
-      250
-    );
+        }
+      );
 
   }
 );
