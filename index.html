@@ -130,20 +130,26 @@
         <h2><span aria-hidden="true">🔍</span> Student ID Scanner & Check-In</h2>
       </div>
 
-      <div class="scanner-box">
+      <form id="scanner-form" onsubmit="return false;" class="scanner-box">
         <p class="scanner-instructions">
           Scan a student ID card using a barcode/RFID reader, or enter an ID manually below.
         </p>
         
         <div class="scanner-input-group">
           <input type="text" id="scanner-input" placeholder="Scan or enter Student ID..." class="search-input" autofocus>
-          <button id="btn-scanner-submit" class="btn btn-primary">Check In / Out</button>
+          <button id="btn-scanner-submit" type="button" class="btn btn-primary">Check In / Out</button>
         </div>
 
         <div id="scanner-result-card" class="scanner-result-area">
           <!-- Scan confirmation card rendered here by js/scanner.js -->
         </div>
-      </div>
+
+        <!-- Mad Martian Studios Branding Footer -->
+        <div class="form-logo-footer" style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color, #e2e8f0);">
+          <img src="assets/Mad-Martian.PNG" alt="Mad Martian Studios Logo" style="height: 38px; width: auto; border-radius: 4px; vertical-align: middle; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.35rem; letter-spacing: 0.5px;">DESIGN • CODE • BUILD • HARRISBURG, PA</div>
+        </div>
+      </form>
     </section>
 
   </main>
@@ -177,10 +183,16 @@
         <button type="button" id="modal-cancel" class="btn btn-secondary">Cancel</button>
         <button type="submit" class="btn btn-primary">Save Student</button>
       </menu>
+
+      <!-- Mad Martian Studios Modal Footer -->
+      <div class="form-logo-footer" style="text-align: center; margin-top: 1.25rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color, #e2e8f0);">
+        <img src="assets/Mad-Martian.PNG" alt="Mad Martian Studios Logo" style="height: 32px; width: auto; border-radius: 4px; vertical-align: middle;">
+        <div style="font-size: 0.7rem; color: #64748b; margin-top: 0.25rem;">POWERED BY MAD MARTIAN STUDIOS • HARRISBURG, PA</div>
+      </div>
     </form>
   </dialog>
 
-  <!-- JavaScript Modules (All paths resolved to js/ subfolder) -->
+  <!-- JavaScript Modules -->
   <script src="js/students.js"></script>
   <script src="js/archive.js"></script>
   <script src="js/scanner.js"></script>
