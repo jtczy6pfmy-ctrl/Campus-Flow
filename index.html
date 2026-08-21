@@ -48,7 +48,7 @@
         <span class="card-icon" aria-hidden="true">👥</span>
         <div>
           <h3 id="total-students-count">0</h3>
-          <p>Total Students</p>
+          <p>Total Active Students</p>
         </div>
       </div>
 
@@ -56,7 +56,7 @@
         <span class="card-icon" aria-hidden="true">✓</span>
         <div>
           <h3 id="on-campus-count">0</h3>
-          <p>On Campus</p>
+          <p>Currently On Campus</p>
         </div>
       </div>
 
@@ -101,19 +101,64 @@
       </table>
     </section>
 
+    <!-- Archives & Transcripts Section -->
+    <section id="archives" class="archives-section" style="display: none;">
+      <div class="section-header">
+        <h2><span aria-hidden="true">📜</span> Alumni & Graduate Archives</h2>
+        <input type="search" id="archive-search" placeholder="Search graduates by name or ID..." class="search-input">
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Graduation Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="archive-roster-body">
+          <!-- Dynamically populated via js/archive.js -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ID Check-In & Scanner Section -->
+    <section id="scanner" class="scanner-section" style="display: none;">
+      <div class="section-header">
+        <h2><span aria-hidden="true">🔍</span> Student ID Scanner & Check-In</h2>
+      </div>
+
+      <div class="scanner-box">
+        <p class="scanner-instructions">
+          Scan a student ID card using a barcode/RFID reader, or enter an ID manually below.
+        </p>
+        
+        <div class="scanner-input-group">
+          <input type="text" id="scanner-input" placeholder="Scan or enter Student ID..." class="search-input" autofocus>
+          <button id="btn-scanner-submit" class="btn btn-primary">Check In / Out</button>
+        </div>
+
+        <div id="scanner-result-card" class="scanner-result-area">
+          <!-- Scan confirmation card rendered here by js/scanner.js -->
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Add Student Modal -->
+  <!-- Add Student Modal Dialog -->
   <dialog id="add-student-modal" class="app-modal">
     <form id="add-student-form" method="dialog">
       <h2>Add New Student</h2>
       <label>
         Full Name
-        <input type="text" id="student-name" required>
+        <input type="text" id="student-name" required placeholder="e.g., Jane Smith">
       </label>
       <label>
         Student ID
-        <input type="text" id="student-id" required>
+        <input type="text" id="student-id" required placeholder="e.g., 100003">
       </label>
       <label>
         Grade Level
@@ -126,7 +171,7 @@
       </label>
       <menu class="modal-actions">
         <button type="button" id="modal-cancel" class="btn btn-secondary">Cancel</button>
-        <button type="submit" value="default" class="btn btn-primary">Save Student</button>
+        <button type="submit" class="btn btn-primary">Save Student</button>
       </menu>
     </form>
   </dialog>
