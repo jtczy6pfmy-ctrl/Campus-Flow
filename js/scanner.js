@@ -104,7 +104,7 @@ function processScannedId(studentId) {
 }
 
 /**
- * Renders the scan result card on the screen
+ * Renders the scan result card with the student's photo on the screen
  */
 function renderScannerResult(student, scannedId, previousStatus = '') {
   const resultContainer = document.getElementById('scanner-result-card');
@@ -124,10 +124,11 @@ function renderScannerResult(student, scannedId, previousStatus = '') {
   }
 
   const isNowOnCampus = student.status === 'ON CAMPUS';
+  const photoUrl = student.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(student.name)}&background=3b82f6&color=fff`;
 
   resultContainer.innerHTML = `
     <div class="scan-card scan-success ${isNowOnCampus ? 'border-checkin' : 'border-checkout'}">
-      <div class="scan-avatar">${student.name.charAt(0)}</div>
+      <img src="${photoUrl}" alt="${student.name}" class="scan-avatar-img" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color);" />
       <div class="scan-details">
         <h3>${student.name}</h3>
         <p>ID: <strong>${student.id}</strong> | Grade ${student.grade}</p>
