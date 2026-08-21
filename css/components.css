@@ -1,1 +1,190 @@
+/* ==========================================================================
+   Campus Flow - UI Components (Tables, Modals, Badges, Transcript Paper)
+   File: css/components.css
+   ========================================================================== */
 
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  color: #fff;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary { background-color: var(--color-primary); }
+.btn-primary:hover { background-color: var(--color-primary-hover); }
+
+.btn-secondary { background-color: var(--bg-surface-elevated); border-color: var(--border-color); color: var(--text-primary); }
+.btn-secondary:hover { background-color: var(--border-color); }
+
+.btn-warning { background-color: var(--color-warning); color: #000; }
+.btn-sm { padding: 0.25rem 0.6rem; font-size: 0.825rem; }
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.badge-online { background-color: rgba(16, 185, 129, 0.2); color: var(--color-success); border: 1px solid var(--color-success); }
+.badge-offline { background-color: rgba(239, 68, 68, 0.2); color: var(--color-danger); border: 1px solid var(--color-danger); }
+.badge-graduated { background-color: rgba(59, 130, 246, 0.2); color: var(--color-primary); border: 1px solid var(--color-primary); }
+
+/* Data Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.data-table th, .data-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.data-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Inputs & Forms */
+.search-input, select, input[type="text"] {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  width: 100%;
+}
+
+.search-input:focus, select:focus, input[type="text"]:focus {
+  border-color: var(--color-primary);
+}
+
+/* Native Modal Dialogs */
+.app-modal {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+  box-shadow: var(--shadow-main);
+}
+
+.app-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.app-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Official Transcript Paper View */
+.transcript-dialog {
+  max-width: 750px;
+  padding: 1.5rem;
+  background-color: #f1f5f9;
+}
+
+.transcript-paper {
+  background-color: #ffffff;
+  color: #0f172a;
+  padding: 2.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-family: Georgia, serif;
+}
+
+.transcript-header {
+  text-align: center;
+  border-bottom: 2px solid #0f172a;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.transcript-header h2 {
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.student-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-family: var(--font-family);
+  margin-bottom: 1.5rem;
+}
+
+.transcript-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-family: var(--font-family);
+}
+
+.transcript-table th, .transcript-table td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #cbd5e1;
+  text-align: left;
+  color: #334155;
+}
+
+.transcript-table th {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.transcript-summary {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-family);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid #0f172a;
+}
+
+.transcript-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #64748b;
+}
