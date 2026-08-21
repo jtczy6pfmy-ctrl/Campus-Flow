@@ -7,12 +7,57 @@
 const ACTIVE_STUDENTS_KEY = 'campus_flow_active_students';
 const ARCHIVED_STUDENTS_KEY = 'campus_flow_archived_students';
 
-// Initialize data storage with defaults if empty
-let activeStudents = JSON.parse(localStorage.getItem(ACTIVE_STUDENTS_KEY)) || [
-  { id: '100001', name: 'John Doe', grade: '9', status: 'ON CAMPUS', isActive: true },
-  { id: '100002', name: 'Jane Smith', grade: '12', status: 'OFF CAMPUS', isActive: true }
+// Default mockup dataset with photos
+const MOCKUP_STUDENTS = [
+  { 
+    id: '100001', 
+    name: 'Marcus Chen', 
+    grade: '11', 
+    status: 'ON CAMPUS', 
+    isActive: true, 
+    photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
+    enrolledDate: '2023-08-25'
+  },
+  { 
+    id: '100002', 
+    name: 'Sarah Jenkins', 
+    grade: '12', 
+    status: 'OFF CAMPUS', 
+    isActive: true, 
+    photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    enrolledDate: '2022-08-20'
+  },
+  { 
+    id: '100003', 
+    name: 'Amara Patel', 
+    grade: '10', 
+    status: 'ON CAMPUS', 
+    isActive: true, 
+    photo: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
+    enrolledDate: '2024-08-22'
+  },
+  { 
+    id: '100004', 
+    name: 'David Rodriguez', 
+    grade: '12', 
+    status: 'ON CAMPUS', 
+    isActive: true, 
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    enrolledDate: '2022-08-20'
+  },
+  { 
+    id: '100005', 
+    name: 'Elena Rostova', 
+    grade: '9', 
+    status: 'OFF CAMPUS', 
+    isActive: true, 
+    photo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80',
+    enrolledDate: '2025-08-28'
+  }
 ];
 
+// Initialize data storage with defaults if empty
+let activeStudents = JSON.parse(localStorage.getItem(ACTIVE_STUDENTS_KEY)) || MOCKUP_STUDENTS;
 let archivedStudents = JSON.parse(localStorage.getItem(ARCHIVED_STUDENTS_KEY)) || [];
 
 // Save current arrays to localStorage
@@ -24,7 +69,7 @@ function persistData() {
 }
 
 /**
- * Renders active students to the UI table
+ * Renders active students to the UI table with avatar photos
  */
 function renderRoster() {
   const tableBody = document.getElementById('active-roster-body');
@@ -41,10 +86,18 @@ function renderRoster() {
   }
 
   visibleStudents.forEach(student => {
+    // Generate fallback initial avatar if photo is missing
+    const photoUrl = student.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(student.name)}&background=3b82f6&color=fff`;
+
     const row = document.createElement('tr');
     row.innerHTML = `
       <td><strong>${student.id}</strong></td>
-      <td>${student.name}</td>
+      <td>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <img src="${photoUrl}" alt="${student.name}" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-color);" />
+          <span>${student.name}</span>
+        </div>
+      </td>
       <td>Grade ${student.grade}</td>
       <td>
         <span class="status-badge ${student.status === 'ON CAMPUS' ? 'badge-online' : 'badge-offline'}">
@@ -78,7 +131,7 @@ function updateMetrics() {
 /**
  * Adds a new student from modal form
  */
-function addStudent(id, name, grade) {
+function addStudent(id, name, grade, photo) {
   // Prevent duplicate ID entry
   const exists = activeStudents.some(s => s.id === id);
   if (exists) {
@@ -90,6 +143,7 @@ function addStudent(id, name, grade) {
     id,
     name,
     grade,
+    photo: photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=3b82f6&color=fff`,
     status: 'OFF CAMPUS',
     isActive: true,
     enrolledDate: new Date().toISOString()
@@ -192,8 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = document.getElementById('student-name').value.trim();
       const id = document.getElementById('student-id').value.trim();
       const grade = document.getElementById('student-grade').value;
+      const photo = document.getElementById('student-photo').value.trim();
 
-      if (addStudent(id, name, grade)) {
+      if (addStudent(id, name, grade, photo)) {
         formAdd.reset();
         modal.close();
       }
