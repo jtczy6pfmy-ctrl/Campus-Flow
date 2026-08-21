@@ -1,49 +1,207 @@
-// Campus Flow - Student Data
+/**
+ * Campus Flow - Active Student Roster Management
+ * File: students.js
+ */
 
-const students = [
-  {
-    id: "100001",
-    firstName: "John",
-    lastName: "Doe",
-    grade: "9",
-    status: "ON CAMPUS"
-  }
+// Global state keys for LocalStorage
+const ACTIVE_STUDENTS_KEY = 'campus_flow_active_students';
+const ARCHIVED_STUDENTS_KEY = 'campus_flow_archived_students';
+
+// Initialize data storage with defaults if empty
+let activeStudents = JSON.parse(localStorage.getItem(ACTIVE_STUDENTS_KEY)) || [
+  { id: '100001', name: 'John Doe', grade: '9', status: 'ON CAMPUS', isActive: true },
+  { id: '100002', name: 'Jane Smith', grade: '12', status: 'OFF CAMPUS', isActive: true }
 ];
 
-let movementCount = 0;
+let archivedStudents = JSON.parse(localStorage.getItem(ARCHIVED_STUDENTS_KEY)) || [];
 
-function findStudent(studentId) {
-  return students.find(student => student.id === studentId);
+// Save current arrays to localStorage
+function persistData() {
+  localStorage.setItem(ACTIVE_STUDENTS_KEY, JSON.stringify(activeStudents));
+  localStorage.setItem(ARCHIVED_STUDENTS_KEY, JSON.stringify(archivedStudents));
+  renderRoster();
+  updateMetrics();
 }
 
-function changeStudentStatus(studentId) {
-  const student = findStudent(studentId);
+/**
+ * Renders active students to the UI table
+ */
+function renderRoster() {
+  const tableBody = document.getElementById('active-roster-body');
+  if (!tableBody) return;
 
-  if (!student) {
-    return null;
+  tableBody.innerHTML = '';
+
+  // Filter out soft-deleted/withdrawn students from primary view
+  const visibleStudents = activeStudents.filter(student => student.isActive);
+
+  if (visibleStudents.length === 0) {
+    tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No active students found.</td></tr>`;
+    return;
   }
 
-  if (student.status === "ON CAMPUS") {
-    student.status = "OFF CAMPUS";
-  } else {
-    student.status = "ON CAMPUS";
+  visibleStudents.forEach(student => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><strong>${student.id}</strong></td>
+      <td>${student.name}</td>
+      <td>Grade ${student.grade}</td>
+      <td>
+        <span class="status-badge ${student.status === 'ON CAMPUS' ? 'badge-online' : 'badge-offline'}">
+          ${student.status}
+        </span>
+      </td>
+      <td>
+        <button class="btn btn-sm" onclick="toggleStudentStatus('${student.id}')">Toggle Status</button>
+        <button class="btn btn-sm btn-warning" onclick="withdrawStudent('${student.id}')">Withdraw</button>
+        ${student.grade === '12' ? `<button class="btn btn-sm btn-primary" onclick="graduateStudent('${student.id}')">Graduate</button>` : ''}
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+/**
+ * Updates dashboard metric counters
+ */
+function updateMetrics() {
+  const totalCountEl = document.getElementById('total-students-count');
+  const onCampusCountEl = document.getElementById('on-campus-count');
+
+  const activeOnly = activeStudents.filter(s => s.isActive);
+  const onCampusOnly = activeOnly.filter(s => s.status === 'ON CAMPUS');
+
+  if (totalCountEl) totalCountEl.textContent = activeOnly.length;
+  if (onCampusCountEl) onCampusCountEl.textContent = onCampusOnly.length;
+}
+
+/**
+ * Adds a new student from modal form
+ */
+function addStudent(id, name, grade) {
+  // Prevent duplicate ID entry
+  const exists = activeStudents.some(s => s.id === id);
+  if (exists) {
+    alert(`Student ID ${id} already exists!`);
+    return false;
   }
 
-  movementCount++;
+  const newStudent = {
+    id,
+    name,
+    grade,
+    status: 'OFF CAMPUS',
+    isActive: true,
+    enrolledDate: new Date().toISOString()
+  };
 
-  return student;
+  activeStudents.push(newStudent);
+  persistData();
+  return true;
 }
 
-function getStudentCount() {
-  return students.length;
+/**
+ * Toggles ON CAMPUS / OFF CAMPUS status
+ */
+function toggleStudentStatus(id) {
+  const student = activeStudents.find(s => s.id === id);
+  if (student) {
+    student.status = student.status === 'ON CAMPUS' ? 'OFF CAMPUS' : 'ON CAMPUS';
+    persistData();
+  }
 }
 
-function getOnCampusCount() {
-  return students.filter(
-    student => student.status === "ON CAMPUS"
-  ).length;
+/**
+ * Soft-deletes / withdraws a student (preserves audit record)
+ */
+function withdrawStudent(id) {
+  if (confirm(`Are you sure you want to withdraw student ID: ${id}?`)) {
+    const student = activeStudents.find(s => s.id === id);
+    if (student) {
+      student.isActive = false;
+      student.status = 'WITHDRAWN';
+      student.withdrawnDate = new Date().toISOString();
+      persistData();
+    }
+  }
 }
 
-function getMovementCount() {
-  return movementCount;
+/**
+ * Moves an individual student from active roster to archived database
+ */
+function graduateStudent(id) {
+  const index = activeStudents.findIndex(s => s.id === id);
+  if (index !== -1) {
+    const [student] = activeStudents.splice(index, 1);
+    
+    // Convert to archived record format
+    const graduatedRecord = {
+      ...student,
+      status: 'GRADUATED',
+      isActive: false,
+      graduationDate: new Date().toISOString().split('T')[0],
+      transcriptAvailable: true
+    };
+
+    archivedStudents.push(graduatedRecord);
+    persistData();
+  }
 }
+
+/**
+ * Batch graduates all Grade 12 seniors
+ */
+function batchGraduateSeniors() {
+  const seniors = activeStudents.filter(s => s.grade === '12' && s.isActive);
+  if (seniors.length === 0) {
+    alert("No eligible Grade 12 seniors found on active roster.");
+    return;
+  }
+
+  if (confirm(`Graduate and archive ${seniors.length} senior(s)?`)) {
+    seniors.forEach(senior => graduateStudent(senior.id));
+  }
+}
+
+// Event Listeners Initialization
+document.addEventListener('DOMContentLoaded', () => {
+  renderRoster();
+  updateMetrics();
+
+  // Modal elements
+  const modal = document.getElementById('add-student-modal');
+  const btnAdd = document.getElementById('btn-add-student');
+  const btnCancel = document.getElementById('modal-cancel');
+  const formAdd = document.getElementById('add-student-form');
+  const btnGraduateBatch = document.getElementById('btn-batch-graduate');
+
+  // Open Add Student Modal
+  if (btnAdd && modal) {
+    btnAdd.addEventListener('click', () => modal.showModal());
+  }
+
+  // Close Modal
+  if (btnCancel && modal) {
+    btnCancel.addEventListener('click', () => modal.close());
+  }
+
+  // Handle Add Student Form Submit
+  if (formAdd) {
+    formAdd.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('student-name').value.trim();
+      const id = document.getElementById('student-id').value.trim();
+      const grade = document.getElementById('student-grade').value;
+
+      if (addStudent(id, name, grade)) {
+        formAdd.reset();
+        modal.close();
+      }
+    });
+  }
+
+  // Batch Graduate Button
+  if (btnGraduateBatch) {
+    btnGraduateBatch.addEventListener('click', batchGraduateSeniors);
+  }
+});
