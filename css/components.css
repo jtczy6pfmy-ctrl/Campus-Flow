@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Campus Flow - UI Components (Tables, Modals, Badges, Transcript Paper)
+   Campus Flow - UI Components (Tables, Modals, Badges, Transcript Paper, Scanner)
    File: css/components.css
    ========================================================================== */
 
@@ -187,4 +187,120 @@
   text-align: center;
   font-size: 0.8rem;
   color: #64748b;
+}
+
+/* Scanner & Check-In Components */
+.scanner-section {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.scanner-box {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-main);
+}
+
+.scanner-instructions {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.scanner-input-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.scanner-input-group input {
+  font-size: 1.1rem;
+  padding: 0.75rem 1rem;
+}
+
+.scanner-input-group button {
+  white-space: nowrap;
+  padding: 0.75rem 1.5rem;
+}
+
+.scanner-result-area {
+  margin-top: 0.5rem;
+}
+
+.scan-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-main);
+  border: 2px solid var(--border-color);
+  animation: scanPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.scan-card.border-checkin {
+  border-color: var(--color-success);
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+.scan-card.border-checkout {
+  border-color: var(--color-danger);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.scan-error {
+  border-color: var(--color-warning);
+  background-color: rgba(245, 158, 11, 0.05);
+}
+
+.scan-icon {
+  font-size: 2rem;
+}
+
+.scan-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.scan-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.scan-details p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.scan-status-change {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.text-success { color: var(--color-success); }
+.text-danger { color: var(--color-danger); }
+
+@keyframes scanPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
